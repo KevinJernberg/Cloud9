@@ -400,6 +400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _turnSpeed: 1
+  _jumpForce: 5
 --- !u!136 &814276482
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -544,6 +545,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fd2be41c-e5df-451f-a59d-8cf935fca3d2
     m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 814276481}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 801ab1d9-67f9-4186-9154-6c602e2c2059
+    m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -577,7 +594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7832c74cc4bf3e44ea63a5f4c9b576af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnSpeed: 1
+  _turnSensitivity: 1
+  _rotationMin: -85
+  _rotationMax: 85
 --- !u!114 &814276486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0f988097b2595449694c411ffaf3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _reachDistance: 2
 --- !u!1 &1575541985
 GameObject:
   m_ObjectHideFlags: 0

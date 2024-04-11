@@ -3,28 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+/// <summary>
+/// Handles how the camera rotates in order to look up and down. - Linnéa
+/// </summary>
 public class PlayerLook : MonoBehaviour
 {
+    [Tooltip("How fast you can look up and down.")]
     [SerializeField] private float _turnSensitivity = 1;
+    [Tooltip("How far up you can look.")]
     [SerializeField] private float _rotationMin = -85f;
+    [Tooltip("How far down you can look.")]
     [SerializeField] private float _rotationMax = 85f;
     private float _turnDirection;
     private float _cameraRotation;
-    private Camera mainCamera;
+    private Camera _mainCamera;
 
     private void Awake()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
     }
 
     public void OnTurn(InputAction.CallbackContext context)
     {
-        //The player should turn based on where the mouse is positioned
+        //The player should look up or down based on where the mouse is positioned
         _cameraRotation += context.ReadValue<float>() * _turnSensitivity / 10;
         _cameraRotation = Mathf.Clamp(_cameraRotation, _rotationMin, _rotationMax);
-        mainCamera.transform.localEulerAngles = new Vector3(_cameraRotation, mainCamera.transform.localEulerAngles.y,
-            mainCamera.transform.localEulerAngles.z);
-        //mainCamera.transform.Rotate(_turnDirection * _turnSpeed/10, 0, 0);
+        _mainCamera.transform.localEulerAngles = new Vector3(_cameraRotation, _mainCamera.transform.localEulerAngles.y,
+            _mainCamera.transform.localEulerAngles.z);
     }
 }
