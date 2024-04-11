@@ -158,7 +158,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""837d6284-c686-49ad-87c2-0ff800017861"",
-                    ""path"": ""<Mouse>/delta/down"",
+                    ""path"": ""<Mouse>/delta/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -169,7 +169,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""e8df2d13-b615-4b7b-b210-e87e5e82509a"",
-                    ""path"": ""<Mouse>/delta/up"",
+                    ""path"": ""<Mouse>/delta/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -19,6 +19,6 @@ public class PlayerLook : MonoBehaviour
     {
         //The player should turn based on where the mouse is positioned
         _turnDirection = context.ReadValue<float>();
-        mainCamera.transform.Rotate(0, _turnDirection * _turnSpeed/10, 0);
+        mainCamera.transform.Rotate(_turnDirection * _turnSpeed/10, 0, 0);
     }
 }
