@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
+    [Tooltip("How far you can reach.")]
+    [SerializeField] private float _reachDistance;
     private Camera mainCamera;
 
     private void Awake()
@@ -17,10 +19,10 @@ public class PlayerInteract : MonoBehaviour
     {
         if (context.started)
         {
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out RaycastHit HitInfo, 2f))
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out RaycastHit HitInfo, _reachDistance))
             {
-                if(HitInfo.transform.gameObject.GetComponent<IInteract>() != null) Debug.Log($"Interacting with: {HitInfo.transform.gameObject.name}");
-                Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 2.0f, Color.yellow);
+                HitInfo.transform.GetComponent<IInteract>()?.Interact();
+                Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * _reachDistance, Color.yellow);
             }
         }
     }
