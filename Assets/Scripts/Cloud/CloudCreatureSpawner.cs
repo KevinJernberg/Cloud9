@@ -102,7 +102,7 @@ public class CloudCreatureSpawner : MonoBehaviour
             transform.position + Random.insideUnitSphere.ProjectOntoPlane(Vector3.up) * spawnSphereRadius, // ProjectOntoPlane makes every creature spawn on same y level.
             Quaternion.identity);
         
-        creature.GetComponent<CloudCreatureTemporary>().SetSpawner(this);
+        creature.GetComponent<CreatureBehaviour>().SetSpawner(this);
         _spawnedCreatures.Add(creature);
     }
     

@@ -46,6 +46,8 @@ public class CreatureBehaviour : MonoBehaviour
     private float maxSpeed;
     private Rigidbody rb;
     private Vector3 startpos;
+    
+    private CloudCreatureSpawner connectedSpawner;
 
     public void Awake(){
         detectionRadius = GetComponent<SphereCollider>();
@@ -162,8 +164,13 @@ public class CreatureBehaviour : MonoBehaviour
         yield return null;
     }
     
+    public void SetSpawner(CloudCreatureSpawner spawner)
+    {
+        connectedSpawner = spawner;
+    }
+	
+	#endregion
 
-    #endregion
 
     #region States
     private abstract class CreatureState: IStateNode<CreatureState> {

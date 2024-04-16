@@ -50,18 +50,18 @@ MonoBehaviour:
   minSpawnDelay: 0.5
   maxSpawnDelay: 2
   maxCreatures: 5
-  commonCreature: {fileID: 1661549554362956513, guid: 587b8fe4109f59e47ab37124e99d5b4d,
+  commonCreature: {fileID: 685900271876219346, guid: 8d78f8cf825c1154ea06dde0abd24970,
     type: 3}
-  commonSpawnChance: 0.73991
+  commonSpawnChance: 1
   rareCreature: {fileID: 1661549554362956513, guid: 8eea9f1d4bcc8904080c5f4465cd5913,
     type: 3}
-  rareSpawnChance: 0.20129436
+  rareSpawnChance: 0
   epicCreature: {fileID: 1661549554362956513, guid: 338ae75dbb3634a419f0761c1a29eb78,
     type: 3}
-  epicSpawnChance: 0.050003257
+  epicSpawnChance: 0
   legendaryCreature: {fileID: 1661549554362956513, guid: 82d51cb2b37e1a041aea216a5cd9601d,
     type: 3}
-  legendarySpawnChance: 0.008792345
+  legendarySpawnChance: 0
 --- !u!1 &2064888710146231891
 GameObject:
   m_ObjectHideFlags: 0
