@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 ///
@@ -25,19 +27,28 @@ public class CreatureBehaviour : MonoBehaviour
     private float despawntimer;
     [SerializeField] private float delayTillFlee;
     [SerializeField] private float delayTillDespawn;
-    [SerializeField] private float speed;
+    [Tooltip("värdet som används vid multiplikation av hastigheter")][SerializeField] private float speed;
+    [Tooltip("maximala hastigheten rigidbodyn kan ha vid idle")][SerializeField] private float idlemaxSpeed;
+    [Tooltip("maximala hastigheten rigidbodyn kan ha vid flee")][SerializeField] private float fleemaxSpeed;
+    [Tooltip("Distansen varelsen kan gå från där den spawna innan den börjar röra sig tillbaka")][SerializeField] private float maxDistance;
     private SphereCollider detectionRadius;
     private MeshRenderer meshRenderer;
     [SerializeField] private Material normal;
     [SerializeField] private Material alert;
     [SerializeField] private Material flee;
-    public LayerMask LookingFor;
+    [Tooltip("Ifall något med detta layer kommer inom triggern kommer det hända saker, för denna går den in i alert")]public LayerMask LookingFor;
     private Transform enemy;
     private Vector3 direction;
-    private bool setPos;
+    private bool BeginFlee;
+    private bool idle;
+    private bool move;
+    private float maxSpeed;
+    private Rigidbody rb;
+    private Vector3 startpos;
 
     public void Awake(){
         detectionRadius = GetComponent<SphereCollider>();
+        rb = GetComponent<Rigidbody>();
         detectionRadius.isTrigger = true;
         meshRenderer = GetComponent<MeshRenderer>();
         rootCreatureState = new RootState(this, null);
@@ -46,7 +57,7 @@ public class CreatureBehaviour : MonoBehaviour
         fleeCreatureState = new FleeState(this, rootCreatureState);
         _stateMachine = new StateMachine<CreatureState>();
         _stateMachine.InitializeMachine(idleCreatureState);
-        
+        startpos = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,12 +92,14 @@ public class CreatureBehaviour : MonoBehaviour
     {
         startTimer = false;
     }
-    
+    /// <summary>
+    /// hämtar vad som gjorde den alerts position, sätter riktingen åt motsatt håll och sätter bool för att börja röra på sig
+    /// </summary>
     public void SetPos()
     {
         Vector3 enemyPos = enemy.position;
         direction = new Vector3(transform.position.x -enemyPos.x, transform.position.y -enemyPos.y, transform.position.z -enemyPos.z).normalized;
-        setPos = true;
+        BeginFlee = true;
     }
 
     private void Update()
@@ -100,22 +113,52 @@ public class CreatureBehaviour : MonoBehaviour
             Flee();
         }
 
-        if (setPos)
+        if (BeginFlee)
         {
-            transform.position += direction * (speed * Time.deltaTime);
+            rb.AddForce(direction * (speed * 5), ForceMode.Force);
             despawntimer+= Time.deltaTime;
             if (despawntimer >= delayTillDespawn)
             {
                 Destroy(gameObject);
             }
         }
-        
+
+        if (idle)
+        {
+            if (!move)
+            {
+                move = true;
+                StartCoroutine(Move());
+            }
+        }
+
+        if (rb.velocity.magnitude > maxSpeed)
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
     public void Flee(){
         _stateMachine.currentState.Flee();
     }
 
+    IEnumerator Move()
+    {
+        //var force = Vector3.zero;
+        var dir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized* (speed);
+        var distance = Vector3.Distance(transform.position, startpos);
+        var dirToStart = new Vector3(startpos.x - transform.position.x , 0, startpos.x - transform.position.z).normalized;
+        //force = new Vector3(dir.x * (dirToStart.x), dir.y * dirToStart.y, dir.z * dirToStart.z);
+        rb.AddForce(dir , ForceMode.Force);
+        if (distance >= maxDistance)
+        {
+            Debug.Log("now goes mid");
+            rb.AddForce(dirToStart * ((distance/50)*speed) , ForceMode.Force);
+        }
+        
+        //yield return new WaitForSeconds(1);
+        move = false;
+        yield return null;
+    }
+    
     IEnumerator TimerForFlee()
     {
         CreatureState current= _stateMachine.currentState;
@@ -143,7 +186,7 @@ public class CreatureBehaviour : MonoBehaviour
     }
     private class RootState : CreatureState{      
         public RootState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
-        public override void Enter(){Debug.Log("RootState: Enter()");}
+        public override void Enter(){Debug.Log("RootState: Enter()"); Creature.maxSpeed=Creature.idlemaxSpeed;}
         public override void Exit(){Debug.Log("RootState: Exit()");}
         public override void Range(){}
         public override void Flee(){}
@@ -157,6 +200,7 @@ public class CreatureBehaviour : MonoBehaviour
         {
             Debug.Log("IdleState: Enter()");
             Creature.meshRenderer.material = Creature.normal;
+            Creature.idle = true;
         }
 
         public override void Range()
@@ -164,7 +208,7 @@ public class CreatureBehaviour : MonoBehaviour
             Creature._stateMachine.Transit(Creature.alertCreatureState);
         }
 
-        public override void Exit(){Debug.Log("IdleState: Exit()");}
+        public override void Exit(){Debug.Log("IdleState: Exit()"); Creature.idle = false; }
     }
 
     private class AlertState : CreatureState{      
@@ -173,6 +217,7 @@ public class CreatureBehaviour : MonoBehaviour
         public override void Enter(){
             Debug.Log("AlertState: Enter()");
             Creature.meshRenderer.material = Creature.alert;
+            Creature.rb.velocity = Vector3.zero;
             Creature.StartTimer();
         }
 
@@ -200,11 +245,19 @@ public class CreatureBehaviour : MonoBehaviour
         {
             Debug.Log("FleeState: Enter()");
             Creature.meshRenderer.material = Creature.flee;
+            Creature.maxSpeed = Creature.fleemaxSpeed;
             Creature.SetPos();
         }
         public override void Exit(){Debug.Log("FleeState: Exit()");}
     }
     #endregion
+    
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(startpos,maxDistance);
+
+    }
 }
 
 
