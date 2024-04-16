@@ -14,6 +14,7 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(Rigidbody))]
 public class CreatureBehaviour : MonoBehaviour
 {
     private CreatureState rootCreatureState = null;
@@ -62,6 +63,8 @@ public class CreatureBehaviour : MonoBehaviour
         startpos = transform.position;
     }
 
+    #region Triggers
+
     private void OnTriggerEnter(Collider other)
     {
         if (LookingFor == (LookingFor | (1 << other.transform.gameObject.layer)))
@@ -70,9 +73,6 @@ public class CreatureBehaviour : MonoBehaviour
             Range();
         }
     }
-
-
-
     private void OnTriggerExit(Collider other)
     {
         if (LookingFor == (LookingFor | (1 << other.transform.gameObject.layer)))
@@ -80,6 +80,9 @@ public class CreatureBehaviour : MonoBehaviour
             Range();
         }
     }
+    #endregion
+
+    #region Funktions
 
     public void Range(){
         _stateMachine.currentState.Range();
@@ -161,18 +164,13 @@ public class CreatureBehaviour : MonoBehaviour
         yield return null;
     }
     
-    IEnumerator TimerForFlee()
-    {
-        CreatureState current= _stateMachine.currentState;
-        yield return new WaitForSeconds(delayTillFlee);
-        
-        yield return null;
-    }
-    
     public void SetSpawner(CloudCreatureSpawner spawner)
     {
         connectedSpawner = spawner;
     }
+	
+	#endregion
+
 
     #region States
     private abstract class CreatureState: IStateNode<CreatureState> {
@@ -265,6 +263,3 @@ public class CreatureBehaviour : MonoBehaviour
 
     }
 }
-
-
-
