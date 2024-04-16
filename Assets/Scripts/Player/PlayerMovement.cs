@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Controls the players movement such as jumping, walking and changing direction. - Linnéa
+/// Controls the players movement such as jumping, walking and changing direction. The input is triggered from unity
+/// events in the playerInput component, should prbly be the player obj.- Linnéa
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -31,17 +32,26 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        if(_shouldMove)_rb.velocity = transform.TransformDirection(_direction) * _speed;
-        //if(!_shouldMove && IsGrounded()) _rb.velocity = Vector3.zero;
+        if(_shouldMove)
+        {
+            _direction.y = _rb.velocity.y;
+            _rb.velocity =
+                transform.TransformDirection(new Vector3(_direction.x * _speed, _direction.y, _direction.z * _speed));
+        }
     }
 
+    /// <summary>
+    /// Sets the players movement direction when a button is pushed. _shouldMove is triggered for as long as the button
+    /// is pushed.
+    /// </summary>
+    /// <param name="context">Read from the unity event.</param>
     public void OnMove(InputAction.CallbackContext context)
     {
         _direction = context.ReadValue<Vector3>();
         if(_direction.magnitude > 1) _direction.Normalize();
         _shouldMove = context.performed;
     }
-
+    
     public void OnTurn(InputAction.CallbackContext context)
     {
         //The player should turn based on where the mouse is positioned
