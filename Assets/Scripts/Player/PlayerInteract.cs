@@ -13,16 +13,19 @@ public class PlayerInteract : MonoBehaviour
     {
         _mainCamera = Camera.main;
     }
-
+    /// <summary>
+    /// Input function called by the PlayerInput component. Raycast to see if there is something you should be able to
+    /// interact with in front of you. (Stuff with IInteract on.) If yes, it triggers interact on obj.
+    /// </summary>
+    /// <param name="context">Read from the unity event.</param>
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!context.started) return;
+        
+        if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out RaycastHit HitInfo, _reachDistance))
         {
-            if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out RaycastHit HitInfo, _reachDistance))
-            {
-                HitInfo.transform.GetComponent<IInteract>()?.Interact();
-                Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward * _reachDistance, Color.yellow);
-            }
+            HitInfo.transform.GetComponent<IInteract>()?.Interact();
+            Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward * _reachDistance, Color.yellow);
         }
     }
 }

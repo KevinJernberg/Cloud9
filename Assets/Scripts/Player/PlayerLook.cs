@@ -23,9 +23,12 @@ public class PlayerLook : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
+    /// <summary>
+    /// Input function called by the PlayerInput component. Rotates the camera to make the player look up and down.
+    /// </summary>
+    /// <param name="context">Read from the unity event.</param>
     public void OnTurn(InputAction.CallbackContext context)
     {
-        //The player should look up or down based on where the mouse is positioned
         _cameraRotation += context.ReadValue<float>() * _turnSensitivity / 10;
         _cameraRotation = Mathf.Clamp(_cameraRotation, _rotationMin, _rotationMax);
         _mainCamera.transform.localEulerAngles = new Vector3(_cameraRotation, _mainCamera.transform.localEulerAngles.y,
