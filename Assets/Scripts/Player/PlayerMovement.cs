@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     }
     #region InputRelated
     /// <summary>
-    /// Sets the players movement direction when a button is pushed. _shouldMove is triggered for as long as the button
+    /// Input function called by the PlayerInput component. Sets the players movement direction when a button is pushed. _shouldMove is triggered for as long as the button
     /// is pushed.
     /// </summary>
     /// <param name="context">Read from the unity event.</param>
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// The player turns based on where the mouse is positioned. Rotates the whole player object to make raycasts and so
+    /// Input function called by the PlayerInput component. The player turns based on where the mouse is positioned. Rotates the whole player object to make raycasts and so
     /// on still accurate.
     /// </summary>
     /// <param name="context">Read from the unity event.</param>
@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0, _turnDirection * _turnSpeed/10, 0);
     }
     /// <summary>
-    /// Adds a force upwards to make the player jump.
+    /// Input function called by the PlayerInput component. Adds a force upwards to make the player jump.
     /// </summary>
     /// <param name="context">Read from the unity event.</param>
     public void OnJump(InputAction.CallbackContext context)
