@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Cinemachine.Utility;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -97,7 +98,9 @@ public class CloudCreatureSpawner : MonoBehaviour
     /// </summary>
     private void SpawnCreature()
     {
-        GameObject creature = Instantiate(RandomizeCreature(), transform.position + Random.insideUnitSphere * spawnSphereRadius, Quaternion.identity);
+        GameObject creature = Instantiate(RandomizeCreature(), 
+            transform.position + Random.insideUnitSphere.ProjectOntoPlane(Vector3.up) * spawnSphereRadius, // ProjectOntoPlane makes every creature spawn on same y level.
+            Quaternion.identity);
         
         creature.GetComponent<CloudCreatureTemporary>().SetSpawner(this);
         _spawnedCreatures.Add(creature);
@@ -111,7 +114,7 @@ public class CloudCreatureSpawner : MonoBehaviour
     #endregion
     
     
-    #region GUI functions
+    #region GUI Functions
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
