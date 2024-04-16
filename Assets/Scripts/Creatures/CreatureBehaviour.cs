@@ -143,9 +143,9 @@ public class CreatureBehaviour : MonoBehaviour
     IEnumerator Move()
     {
         //var force = Vector3.zero;
-        var dir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized* (speed);
+        var dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized* (speed);
         var distance = Vector3.Distance(transform.position, startpos);
-        var dirToStart = new Vector3(startpos.x - transform.position.x , 0, startpos.x - transform.position.z).normalized;
+        var dirToStart = new Vector3(startpos.x - transform.position.x , startpos.y - transform.position.y, startpos.x - transform.position.z).normalized;
         //force = new Vector3(dir.x * (dirToStart.x), dir.y * dirToStart.y, dir.z * dirToStart.z);
         rb.AddForce(dir , ForceMode.Force);
         if (distance >= maxDistance)
