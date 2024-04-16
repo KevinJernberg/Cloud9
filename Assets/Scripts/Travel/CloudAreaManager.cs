@@ -16,7 +16,7 @@ public class CloudAreaManager : MonoBehaviour
 
     [SerializeField, Tooltip("The area where cloud can spawn, represented by a cyan box gizmo")] private bool showCloudSpawnArea;
     [SerializeField] private Vector2 cloudSpawnAreaSize;
-    private Rect _cloudSpawnArea;
+    private Rect _cloudSpawnArea = new Rect();
     
     private CloudSceneStats _cloudData;
 
@@ -30,6 +30,9 @@ public class CloudAreaManager : MonoBehaviour
     private void Start()
     {
         _cloudData = AreaCache.CloudSpawnData; // Get the stats for the current scene.
+        
+        SetNewCloudArea();
+        
         if (_cloudData != null)
             SpawnClouds();
         else
@@ -58,15 +61,21 @@ public class CloudAreaManager : MonoBehaviour
         return new Vector3(randomPosition.x, CLOUD_SPAWN_HEIGHT, randomPosition.y);
     }
     
+    private void SetNewCloudArea()
+    {
+        _cloudSpawnArea = new Rect(new Vector2(-cloudSpawnAreaSize.x, -cloudSpawnAreaSize.y) / 2, 
+            new Vector2(cloudSpawnAreaSize.x, cloudSpawnAreaSize.y)); // Sets the area to be centered at x = 0 & z = 0
+    }
+    
     #endregion
     
     
     #region GUI Functions
-
+    
+#if UNITY_EDITOR    
     private void OnValidate()
     {
-        _cloudSpawnArea = new Rect(new Vector2(-cloudSpawnAreaSize.x, -cloudSpawnAreaSize.y) / 2, 
-            new Vector2(cloudSpawnAreaSize.x, cloudSpawnAreaSize.y)); // Sets the area to be centered at x = 0 & z = 0
+        SetNewCloudArea();
     }
 
     private void OnDrawGizmos()
@@ -75,6 +84,7 @@ public class CloudAreaManager : MonoBehaviour
         if (showCloudSpawnArea)
             Gizmos.DrawCube(Vector3.up * CLOUD_SPAWN_HEIGHT, new Vector3(cloudSpawnAreaSize.x, 4, cloudSpawnAreaSize.y));
     }
-
+#endif
+    
     #endregion
 }
