@@ -20,10 +20,13 @@ public class ShipMovement : MonoBehaviour
 
     private void Update()
     {
-        if(_moving)_rb.AddForce(transform.TransformDirection(_direction )*10, ForceMode.Acceleration);
+        if (_moving)
+        {
+            _rb.AddForce(transform.TransformDirection(_direction)*0.2f, ForceMode.Force);
+        }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMoveShip(InputAction.CallbackContext context)
     {
         _direction = context.ReadValue<Vector3>();
         _moving = context.performed;
