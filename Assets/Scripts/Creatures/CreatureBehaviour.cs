@@ -53,6 +53,7 @@ public class CreatureBehaviour : MonoBehaviour
         detectionRadius = GetComponent<SphereCollider>();
         rb = GetComponent<Rigidbody>();
         detectionRadius.isTrigger = true;
+        startpos = transform.position;
         meshRenderer = GetComponent<MeshRenderer>();
         rootCreatureState = new RootState(this, null);
         idleCreatureState = new IdleState(this, rootCreatureState);
@@ -60,7 +61,7 @@ public class CreatureBehaviour : MonoBehaviour
         fleeCreatureState = new FleeState(this, rootCreatureState);
         _stateMachine = new StateMachine<CreatureState>();
         _stateMachine.InitializeMachine(idleCreatureState);
-        startpos = transform.position;
+        
     }
 
     #region Triggers
@@ -130,11 +131,7 @@ public class CreatureBehaviour : MonoBehaviour
 
         if (idle)
         {
-            if (!move)
-            {
-                move = true;
-                StartCoroutine(Move());
-            }
+            StartCoroutine(Move());
         }
 
         if (rb.velocity.magnitude > maxSpeed)
@@ -150,9 +147,9 @@ public class CreatureBehaviour : MonoBehaviour
         //var force = Vector3.zero;
         var dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized* (speed);
         var distance = Vector3.Distance(transform.position, startpos);
-        var dirToStart = new Vector3(startpos.x - transform.position.x , startpos.y - transform.position.y, startpos.x - transform.position.z).normalized;
+        var dirToStart = new Vector3(startpos.x - transform.position.x , startpos.y - transform.position.y, startpos.z - transform.position.z).normalized;
         //force = new Vector3(dir.x * (dirToStart.x), dir.y * dirToStart.y, dir.z * dirToStart.z);
-        rb.AddForce(dir , ForceMode.Force);
+        rb.AddForce(dir *speed , ForceMode.Force);
         if (distance >= maxDistance)
         {
             Debug.Log("now goes mid");
@@ -160,7 +157,6 @@ public class CreatureBehaviour : MonoBehaviour
         }
         
         //yield return new WaitForSeconds(1);
-        move = false;
         yield return null;
     }
     
