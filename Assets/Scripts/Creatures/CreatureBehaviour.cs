@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 /// Creature class where the creature becomes alert if something comes too close and flees if it doesn't leave in time - William
 /// 
 /// </summary>
-/// <typeparam name="TState"></typeparam>
+/// <typeparam name="TState"></typeparam> TState is a name for a random state that fulfills the conditions of IStateNode
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(MeshRenderer))]
@@ -41,7 +41,7 @@ public class CreatureBehaviour : MonoBehaviour
     private SphereCollider detectionRadius;
     private MeshRenderer meshRenderer;
     
-    [Header("Creature Materials For States")]
+    [Header("Creature Materials For States (Temporary)")]
     [SerializeField] private Material normal;
     [SerializeField] private Material alert;
     [SerializeField] private Material flee;
@@ -74,6 +74,11 @@ public class CreatureBehaviour : MonoBehaviour
 
     #region Triggers
 
+    
+    /// <summary>
+    /// Checks if the thing that entered its collier has a layer that is in "LookingFor". If it does, saves the transform and calls the functions "Range"
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (LookingFor == (LookingFor | (1 << other.transform.gameObject.layer)))
@@ -82,6 +87,10 @@ public class CreatureBehaviour : MonoBehaviour
             Range();
         }
     }
+    /// <summary>
+    /// Checks if the thing that entered its collier has a layer that is in "LookingFor". If it does, calls the functions "Range"
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (LookingFor == (LookingFor | (1 << other.transform.gameObject.layer)))
@@ -96,12 +105,17 @@ public class CreatureBehaviour : MonoBehaviour
     public void Range(){
         _stateMachine.currentState.Range();
     }
-
+    /// <summary>
+    /// Starts the timer that counts down until the creature should flee 
+    /// </summary>
     public void StartTimer()
     {
         timer = 0f;
         startTimer = true;
     }
+    /// <summary>
+    /// Stops the timer that counts down until the creature should flee 
+    /// </summary>
     public void StopTimer()
     {
         startTimer = false;
@@ -121,12 +135,12 @@ public class CreatureBehaviour : MonoBehaviour
         if (startTimer)
         {
             timer += Time.deltaTime;
+            if (timer >= delayTillFlee)
+            {
+                Flee();
+            }
         }
-        if (timer >= delayTillFlee)
-        {
-            Flee();
-        }
-
+        
         if (BeginFlee)
         {
             rb.AddForce(direction * (speed * 5), ForceMode.Force);
@@ -174,6 +188,13 @@ public class CreatureBehaviour : MonoBehaviour
 
 
     #region States
+    
+    /// <summary>
+    /// The basestate for this script, holds all the valid functions in it and the basic logic that all children from it
+    /// inherits, such as "Creature" that allows all children to have access to other variables in the "CreatureBehaviour" class.
+    /// It also holds the functions such as "Flee" which the children inherit and can override if it should do different things in
+    /// different states.
+    /// </summary>
     private abstract class CreatureState: IStateNode<CreatureState> {
         public CreatureBehaviour Creature;
         public CreatureState ParentState { get; }
@@ -189,14 +210,21 @@ public class CreatureBehaviour : MonoBehaviour
         public virtual void Range(){ParentState.Range();}
         public virtual void Flee(){ParentState.Flee();}
     }
+    
+    /// <summary>
+    /// The rootstate, is the state highest up in the hierarchy. If "Flee" or "Range" is called in any state and neither it or its parents
+    /// overrides it the functions goes here which isn't the plan 
+    /// </summary>
     private class RootState : CreatureState{      
         public RootState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
-        public override void Enter(){Debug.Log("RootState: Enter()"); Creature.maxSpeed=Creature.idlemaxSpeed;}
+        public override void Enter(){Debug.Log("RootState: Enter()");}
         public override void Exit(){Debug.Log("RootState: Exit()");}
-        public override void Range(){}
-        public override void Flee(){}
+        public override void Range(){Debug.LogError("Range ha reached RootState");}
+        public override void Flee(){Debug.LogError("Flee ha reached RootState");}
     }
-    
+    /// <summary>
+    /// The IdleState: Sets the creatures behaviour to its idle state and transitions to alert if "Range" is called when in this state
+    /// </summary>
     private class IdleState : CreatureState{
         
         public IdleState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
@@ -205,6 +233,7 @@ public class CreatureBehaviour : MonoBehaviour
         {
             Debug.Log("IdleState: Enter()");
             Creature.meshRenderer.material = Creature.normal;
+            Creature.maxSpeed=Creature.idlemaxSpeed;
             Creature.idle = true;
         }
 
@@ -215,7 +244,10 @@ public class CreatureBehaviour : MonoBehaviour
 
         public override void Exit(){Debug.Log("IdleState: Exit()"); Creature.idle = false; }
     }
-
+    /// <summary>
+    /// The AlertState: Sets the creatures behaviour to its alert state. Transitions to idle if range is called when in this state
+    /// and to flee if "Flee" is called when in this state. It also starts a timer when its entered and stops it when it leaves it
+    /// </summary>
     private class AlertState : CreatureState{      
         public AlertState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
 
@@ -242,6 +274,9 @@ public class CreatureBehaviour : MonoBehaviour
             Creature._stateMachine.Transit(Creature.fleeCreatureState);
         }
     }
+    /// <summary>
+    /// The FleeState: Sets the creatures behaviour to its alert state.
+    /// </summary>
     private class FleeState : CreatureState{
         
         public FleeState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
