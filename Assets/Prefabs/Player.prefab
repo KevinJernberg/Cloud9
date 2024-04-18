@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783641899510187568}
   m_LocalRotation: {x: 0.0007854348, y: 0, z: 0, w: 0.9999997}
-  m_LocalPosition: {x: 0.568, y: -0.61, z: 1.925}
+  m_LocalPosition: {x: 0.915, y: -0.61, z: 2.197}
   m_LocalScale: {x: 1, y: 1, z: 1.438}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97beedbe1babbb441a2dc78a5c97bda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmountOfCreatures: 0
+  maxAmountOfCreatures: 5
   _suckForce: 20
 --- !u!1 &783641899586264583
 GameObject:
@@ -474,7 +474,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b88d2da9255ca424c87070c87b401fd5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.403
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b88d2da9255ca424c87070c87b401fd5,
         type: 3}
