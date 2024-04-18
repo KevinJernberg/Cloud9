@@ -22,6 +22,7 @@ public static class CreatureInventory
         {
             _collectedCreatures += toAdd;
             Debug.Log($"Added to inventory. Inventory now contains: {_collectedCreatures}");
+            SmallSuckInventoryGUI.updateInventoryCount?.Invoke(_collectedCreatures, _maxInventorySpace);
             return true;
         }
 
