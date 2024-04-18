@@ -754,6 +754,78 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Ship"",
+            ""id"": ""e2d952cb-3ccc-4982-9426-d56cdc2a5aa2"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""6fb8d039-8767-4082-af0e-57d9ae6e67a4"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""3D Vector"",
+                    ""id"": ""103a6a6d-65cd-4eca-b674-3c88ca9b865e"",
+                    ""path"": ""3DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3f0355dd-726d-4473-88b0-2c86fa208aee"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""69801216-2744-4810-a4a3-f5053181e48f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""forward"",
+                    ""id"": ""5d7363fa-25d2-497a-b8f0-ad2186fd36a2"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""backward"",
+                    ""id"": ""ade7171e-3915-4ffd-af5d-4db73ab2464c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -839,6 +911,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Ship
+        m_Ship = asset.FindActionMap("Ship", throwIfNotFound: true);
+        m_Ship_Move = m_Ship.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1100,6 +1175,52 @@ public partial class @Input: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Ship
+    private readonly InputActionMap m_Ship;
+    private List<IShipActions> m_ShipActionsCallbackInterfaces = new List<IShipActions>();
+    private readonly InputAction m_Ship_Move;
+    public struct ShipActions
+    {
+        private @Input m_Wrapper;
+        public ShipActions(@Input wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Ship_Move;
+        public InputActionMap Get() { return m_Wrapper.m_Ship; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ShipActions set) { return set.Get(); }
+        public void AddCallbacks(IShipActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ShipActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ShipActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+        }
+
+        private void UnregisterCallbacks(IShipActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+        }
+
+        public void RemoveCallbacks(IShipActions instance)
+        {
+            if (m_Wrapper.m_ShipActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IShipActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ShipActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ShipActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ShipActions @Ship => new ShipActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1166,5 +1287,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IShipActions
+    {
+        void OnMove(InputAction.CallbackContext context);
     }
 }
