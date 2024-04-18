@@ -114,6 +114,7 @@ MonoBehaviour:
   delayTillFlee: 2
   delayTillDespawn: 5
   speed: 3
+  damper: 50
   idlemaxSpeed: 4
   fleemaxSpeed: 7
   maxDistance: 10

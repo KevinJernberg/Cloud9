@@ -26,18 +26,26 @@ public class CreatureBehaviour : MonoBehaviour
     private bool startTimer;
     private float timer;
     private float despawntimer;
+    [Header("Gizmos")]
+    [SerializeField]private bool showMaxDistance;
+    
+    [Header("Creature Behaviour Values")]
     [SerializeField] private float delayTillFlee;
     [SerializeField] private float delayTillDespawn;
     [Tooltip("The value that is used in multiplication of movement")][SerializeField] private float speed;
+    [Tooltip("How aggressively it should drag the creature back when it further away then MaxDistance from where it spawned. Lower number = More aggressive")][SerializeField] private float damper;
     [Tooltip("The maximum speed the rigidbody can have when idle")][SerializeField] private float idlemaxSpeed;
     [Tooltip("The maximum speed the rigidbody can have when fleeing")][SerializeField] private float fleemaxSpeed;
     [Tooltip("The Distance the creature can go from its spawnpoint before its dragged backwards")][SerializeField] private float maxDistance;
+    [Tooltip("The Layer that the creature is looking for within its trigger collider, this creature goes to alert if it detects something with it")]public LayerMask LookingFor;
     private SphereCollider detectionRadius;
     private MeshRenderer meshRenderer;
+    
+    [Header("Creature Materials For States")]
     [SerializeField] private Material normal;
     [SerializeField] private Material alert;
     [SerializeField] private Material flee;
-    [Tooltip("The Layer that the creature is looking for within its trigger collider, this creature goes to alert if it detects something with it")]public LayerMask LookingFor;
+    
     private Transform enemy;
     private Vector3 direction;
     private bool BeginFlee;
@@ -99,7 +107,7 @@ public class CreatureBehaviour : MonoBehaviour
         startTimer = false;
     }
     /// <summary>
-    /// hämtar vad som gjorde den alerts position, sätter riktingen åt motsatt håll och sätter bool för att börja röra på sig
+    /// Sets the direction in the opposite direction to the thing that made it alerted and sets the bool for it to flee
     /// </summary>
     public void SetPos()
     {
@@ -133,7 +141,7 @@ public class CreatureBehaviour : MonoBehaviour
         {
             StartCoroutine(Move());
         }
-
+        
         if (rb.velocity.magnitude > maxSpeed)
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
     }
@@ -141,22 +149,19 @@ public class CreatureBehaviour : MonoBehaviour
     public void Flee(){
         _stateMachine.currentState.Flee();
     }
-
+    /// <summary>
+    /// Moves in a random direction and if its too far from where it spawned it begins to move back to the allowed range 
+    /// </summary>
     IEnumerator Move()
     {
-        //var force = Vector3.zero;
         var dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized* (speed);
         var distance = Vector3.Distance(transform.position, startpos);
-        var dirToStart = new Vector3(startpos.x - transform.position.x , startpos.y - transform.position.y, startpos.z - transform.position.z).normalized;
-        //force = new Vector3(dir.x * (dirToStart.x), dir.y * dirToStart.y, dir.z * dirToStart.z);
         rb.AddForce(dir *speed , ForceMode.Force);
         if (distance >= maxDistance)
         {
-            Debug.Log("now goes mid");
-            rb.AddForce(dirToStart * ((distance/50)*speed) , ForceMode.Force);
+            var dirToStart = new Vector3(startpos.x - transform.position.x , startpos.y - transform.position.y, startpos.z - transform.position.z).normalized;
+            rb.AddForce(dirToStart * ((distance/damper)*speed) , ForceMode.Force);
         }
-        
-        //yield return new WaitForSeconds(1);
         yield return null;
     }
     
@@ -255,7 +260,11 @@ public class CreatureBehaviour : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(startpos,maxDistance);
+        if (showMaxDistance)
+        {
+            Gizmos.DrawSphere(startpos,maxDistance);
+        }
+        
 
     }
 }
