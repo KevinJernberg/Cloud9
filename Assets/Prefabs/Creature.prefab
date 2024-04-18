@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 685900271876220460}
   m_Layer: 6
   m_Name: Creature
-  m_TagString: Untagged
+  m_TagString: Creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d2d7fc391837d458012ecd88c23c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showMaxDistance: 0
   delayTillFlee: 2
   delayTillDespawn: 5
   speed: 3
@@ -118,12 +119,12 @@ MonoBehaviour:
   idlemaxSpeed: 4
   fleemaxSpeed: 7
   maxDistance: 10
-  normal: {fileID: 2100000, guid: 9e7b190e654e7d645bda077f3c3549ed, type: 2}
-  alert: {fileID: 2100000, guid: e3ff232d36f310c49ba91923cc249375, type: 2}
-  flee: {fileID: 2100000, guid: a3cd5a55a9af6ed4a8bec893dc6472de, type: 2}
   LookingFor:
     serializedVersion: 2
     m_Bits: 16
+  normal: {fileID: 2100000, guid: 9e7b190e654e7d645bda077f3c3549ed, type: 2}
+  alert: {fileID: 2100000, guid: e3ff232d36f310c49ba91923cc249375, type: 2}
+  flee: {fileID: 2100000, guid: a3cd5a55a9af6ed4a8bec893dc6472de, type: 2}
 --- !u!54 &685900271876220460
 Rigidbody:
   m_ObjectHideFlags: 0
