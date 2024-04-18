@@ -11,15 +11,16 @@ public class SuckEffect : MonoBehaviour
     [SerializeField]private GameObject endSuck;
     [SerializeField]private GameObject activeSuck;
 
-    private float startSuckDuration;
+    private bool canStartSuck=true;
+    
 
     public void OnSuck(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && canStartSuck)
         {
             StartSuck();
         }
-        if (context.canceled)
+        if (context.canceled && canStartSuck)
         {
             EndSuck();
         }
@@ -36,6 +37,7 @@ public class SuckEffect : MonoBehaviour
         startSuck.SetActive(false);
         activeSuck.SetActive(false);
         endSuck.SetActive(true);
+        canStartSuck = false;
         StartCoroutine(DisableEndSuckAfterDuration());
     }
     IEnumerator WaitForActive()
@@ -47,8 +49,9 @@ public class SuckEffect : MonoBehaviour
     }
     IEnumerator DisableEndSuckAfterDuration()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.7f);
         endSuck.SetActive(false);
+        canStartSuck = true;
         yield return null;
     }
 }
