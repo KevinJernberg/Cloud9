@@ -49,7 +49,7 @@ MonoBehaviour:
   spawnSphereRadius: 2
   minSpawnDelay: 0.5
   maxSpawnDelay: 2
-  maxCreatures: 5
+  maxCreatures: 3
   commonCreature: {fileID: 8159911081057059332, guid: fd2577f26714b08428a6e5d4b81772a0,
     type: 3}
   commonSpawnChance: 0.55483323

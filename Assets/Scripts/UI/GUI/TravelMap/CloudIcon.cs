@@ -14,7 +14,7 @@ public class CloudIcon : MonoBehaviour
 {
     #region Variable Declaration
 
-    private const string CLOUD_AREA_SCENE_NAME = "KevinCloudArea";
+    private const string CLOUD_AREA_SCENE_NAME = "CloudArena";
     
     private CloudSceneStats _areaData;
     
