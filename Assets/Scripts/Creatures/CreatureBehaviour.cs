@@ -28,6 +28,8 @@ public class CreatureBehaviour : MonoBehaviour
     private float despawntimer;
     [Header("Gizmos")]
     [SerializeField]private bool showMaxDistance;
+
+    [SerializeField] private bool showAvoidRange;
     
     [Header("Creature Behaviour Values")]
     [SerializeField] private float delayTillFlee;
@@ -38,6 +40,9 @@ public class CreatureBehaviour : MonoBehaviour
     [Tooltip("The maximum speed the rigidbody can have when fleeing")][SerializeField] private float fleemaxSpeed;
     [Tooltip("The Distance the creature can go from its spawnpoint before its dragged backwards")][SerializeField] private float maxDistance;
     [Tooltip("The Layer that the creature is looking for within its trigger collider, this creature goes to alert if it detects something with it")]public LayerMask LookingFor;
+    [Tooltip("The Layers that the creature is avoiding")][SerializeField]private LayerMask Avoiding;
+    [Tooltip("The radius it will keep between it self and other objects with the layer of 'Avoiding'")] [SerializeField] private float avoidanceRange;
+    
     private SphereCollider detectionRadius;
     private MeshRenderer meshRenderer;
     
@@ -54,7 +59,8 @@ public class CreatureBehaviour : MonoBehaviour
     private float maxSpeed;
     private Rigidbody rb;
     private Vector3 startpos;
-    
+    private List<Transform> Avoid;
+
     private CloudCreatureSpawner connectedSpawner;
 
     public void Awake(){
@@ -63,6 +69,7 @@ public class CreatureBehaviour : MonoBehaviour
         detectionRadius.isTrigger = true;
         startpos = transform.position;
         meshRenderer = GetComponent<MeshRenderer>();
+        Avoid = new List<Transform>();
         rootCreatureState = new RootState(this, null);
         idleCreatureState = new IdleState(this, rootCreatureState);
         alertCreatureState = new AlertState(this, rootCreatureState);
@@ -86,6 +93,10 @@ public class CreatureBehaviour : MonoBehaviour
             enemy= other.transform;
             Range();
         }
+        if (Avoiding == (Avoiding | (1 << other.transform.gameObject.layer)))
+        {
+            Avoid.Add(other.transform);
+        }
     }
     /// <summary>
     /// Checks if the thing that entered its collier has a layer that is in "LookingFor". If it does, calls the functions "Range"
@@ -96,6 +107,10 @@ public class CreatureBehaviour : MonoBehaviour
         if (LookingFor == (LookingFor | (1 << other.transform.gameObject.layer)))
         {
             Range();
+        }
+        if (Avoiding == (Avoiding | (1 << other.transform.gameObject.layer)) && Avoid.Contains(other.transform))
+        {
+            Avoid.Remove(other.transform);
         }
     }
     #endregion
@@ -176,6 +191,19 @@ public class CreatureBehaviour : MonoBehaviour
             var dirToStart = new Vector3(startpos.x - transform.position.x , startpos.y - transform.position.y, startpos.z - transform.position.z).normalized;
             rb.AddForce(dirToStart * ((distance/damper)*speed) , ForceMode.Force);
         }
+
+        if (Avoid.Count > 0 && _stateMachine.currentState!=alertCreatureState)
+        {
+            for (int i = 0; i < Avoid.Count; i++)
+            {
+                var distancefromobject = Vector3.Distance(transform.position, Avoid[i].position);
+                if (distancefromobject <= avoidanceRange)
+                {
+                    var diraway = new Vector3(transform.position.x -Avoid[i].position.x, transform.position.y-Avoid[i].position.y, transform.position.z-Avoid[i].position.z).normalized;
+                    rb.AddForce(diraway * ((distancefromobject/damper)*speed) , ForceMode.Force);
+                }
+            }
+        }
         yield return null;
     }
     
@@ -217,8 +245,16 @@ public class CreatureBehaviour : MonoBehaviour
     /// </summary>
     private class RootState : CreatureState{      
         public RootState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
-        public override void Enter(){Debug.Log("RootState: Enter()");}
-        public override void Exit(){Debug.Log("RootState: Exit()");}
+
+        public override void Enter()
+        {
+            //Debug.Log("RootState: Enter()");
+        }
+
+        public override void Exit()
+        {
+            //Debug.Log("RootState: Exit()");
+        }
         public override void Range(){Debug.LogError("Range ha reached RootState");}
         public override void Flee(){Debug.LogError("Flee ha reached RootState");}
     }
@@ -231,7 +267,7 @@ public class CreatureBehaviour : MonoBehaviour
 
         public override void Enter()
         {
-            Debug.Log("IdleState: Enter()");
+            //Debug.Log("IdleState: Enter()");
             Creature.meshRenderer.material = Creature.normal;
             Creature.maxSpeed=Creature.idlemaxSpeed;
             Creature.idle = true;
@@ -242,7 +278,11 @@ public class CreatureBehaviour : MonoBehaviour
             Creature._stateMachine.Transit(Creature.alertCreatureState);
         }
 
-        public override void Exit(){Debug.Log("IdleState: Exit()"); Creature.idle = false; }
+        public override void Exit()
+        {
+            //Debug.Log("IdleState: Exit()"); 
+            Creature.idle = false;
+        }
     }
     /// <summary>
     /// The AlertState: Sets the creatures behaviour to its alert state. Transitions to idle if range is called when in this state
@@ -252,7 +292,7 @@ public class CreatureBehaviour : MonoBehaviour
         public AlertState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
 
         public override void Enter(){
-            Debug.Log("AlertState: Enter()");
+            //Debug.Log("AlertState: Enter()");
             Creature.meshRenderer.material = Creature.alert;
             Creature.rb.velocity = Vector3.zero;
             Creature.StartTimer();
@@ -260,7 +300,7 @@ public class CreatureBehaviour : MonoBehaviour
 
         public override void Exit()
         {
-            Debug.Log("AlertState: Exit()");
+            //Debug.Log("AlertState: Exit()");
             Creature.StopTimer();
         }
 
@@ -283,12 +323,20 @@ public class CreatureBehaviour : MonoBehaviour
 
         public override void Enter()
         {
-            Debug.Log("FleeState: Enter()");
+            //Debug.Log("FleeState: Enter()");
             Creature.meshRenderer.material = Creature.flee;
             Creature.maxSpeed = Creature.fleemaxSpeed;
             Creature.SetPos();
         }
-        public override void Exit(){Debug.Log("FleeState: Exit()");}
+
+        public override void Exit()
+        {
+            //Debug.Log("FleeState: Exit()");
+        }
+        public override void Range()
+        {
+        }
+        
     }
     #endregion
     
@@ -298,6 +346,12 @@ public class CreatureBehaviour : MonoBehaviour
         if (showMaxDistance)
         {
             Gizmos.DrawSphere(startpos,maxDistance);
+        }
+
+        if (showAvoidRange)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(transform.position,avoidanceRange);
         }
         
 
