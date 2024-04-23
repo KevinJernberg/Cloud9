@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97beedbe1babbb441a2dc78a5c97bda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmountOfCreatures: 5
+  maxAmountOfCreatures: 8
   _suckForce: 20
 --- !u!1 &783641899586264583
 GameObject:
@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c89d8b178f194e841d8ffa59de129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
-  _turnSpeed: 1
+  _speed: 4
+  _turnSpeed: 0.37
   _jumpForce: 4
   _extraFeetReach: 0.02
 --- !u!114 &783641899586264829
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7832c74cc4bf3e44ea63a5f4c9b576af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnSensitivity: 1
+  _turnSensitivity: 0.35
   _rotationMin: -85
   _rotationMax: 85
 --- !u!114 &783641899586264830
@@ -424,7 +424,19 @@ MonoBehaviour:
     m_ActionId: 94731411-d5c3-43f6-bed2-6cdb8e29088a
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MapPedistal, Assembly-CSharp
+        m_MethodName: OnCloseMap
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e9698574-f2f7-4be7-960d-0cb10bd96455
     m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
