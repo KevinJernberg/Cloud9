@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Main Menu.unity
     guid: d1ea04cf452e18641b3314cb34a7e598
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScenes/Kevin Test/KevinMapMainMenu.unity
     guid: c52225ba6fd88314880d005b006d660f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScenes/Kevin Test/KevinCloudArea.unity
     guid: 299581ea16116904da19646d870adbc7
   - enabled: 1
