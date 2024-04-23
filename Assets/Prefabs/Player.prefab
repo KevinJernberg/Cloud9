@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487985757070434148}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.0000029111243, y: 0.48164153, z: 0.0007546954, w: 0.8763679}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4525857511153624886}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.041, y: 57.585, z: 0.076}
 --- !u!2083052967 &3456280372757090058
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 783641899586264827}
   - component: {fileID: 783641899586264828}
   - component: {fileID: 1312083301}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,9 +576,85 @@ MonoBehaviour:
     m_ActionId: 964cbbbf-c50a-44a9-9c60-e02bef16f1ec
     m_ActionName: Player/Suck[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ShipMovement, Assembly-CSharp
+        m_MethodName: OnMoveShip
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6fb8d039-8767-4082-af0e-57d9ae6e67a4
     m_ActionName: Ship/Move[/Keyboard/a,/Keyboard/d,/Keyboard/w,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783641899586264825}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnTurn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f211615b-4961-4ba6-959d-6d14992dede8
+    m_ActionName: Ship/Turn[/Mouse/delta/left,/Mouse/delta/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783641899586264829}
+        m_TargetAssemblyTypeName: PlayerLook, Assembly-CSharp
+        m_MethodName: OnTurn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6023ba16-4dbf-405b-82f4-ef32ec316458
+    m_ActionName: Ship/OnLookUpDown[/Mouse/delta/up,/Mouse/delta/down]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783641899586264830}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 51e3dab6-16d4-4444-8dc2-aa4809e98ba1
+    m_ActionName: Ship/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ExitShip, Assembly-CSharp
+        m_MethodName: OnExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 610c6442-e784-4a1b-a105-e4eddb7df030
+    m_ActionName: Ship/ExitShip[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -626,7 +702,7 @@ GameObject:
   - component: {fileID: 2669333265837022715}
   - component: {fileID: 3267685910842315661}
   - component: {fileID: 2285813217645946763}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CollectedAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +837,7 @@ GameObject:
   - component: {fileID: 7723052325441886656}
   - component: {fileID: 6138212539998934603}
   - component: {fileID: 9032634818654058719}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InventoryFullIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +1007,7 @@ GameObject:
   - component: {fileID: 6988539622783707742}
   - component: {fileID: 2585576148522320989}
   - component: {fileID: 7072285035566025412}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,14 +1121,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4503388713643698166}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.0000029111243, y: 0.48164153, z: 0.0007546954, w: 0.8763679}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4525857511153624886}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.041, y: 57.585, z: 0.076}
 --- !u!2083052967 &451598449699627660
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -1140,7 +1216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 266931919057948463}
   - component: {fileID: 624833357104084697}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SmallSuckInventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,14 +1284,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8019231391217264081}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.0000029111243, y: 0.48164153, z: 0.0007546954, w: 0.8763679}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4525857511153624886}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.041, y: 57.585, z: 0.076}
 --- !u!2083052967 &180360435252129136
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -1370,6 +1446,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 012ab63bffd424b40b557e4b0b5ebdf4, type: 2}
+    - target: {fileID: -4153317027444488892, guid: b88d2da9255ca424c87070c87b401fd5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 236216658851537685, guid: b88d2da9255ca424c87070c87b401fd5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1379,6 +1460,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small SuckModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b88d2da9255ca424c87070c87b401fd5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6619225641134156614, guid: b88d2da9255ca424c87070c87b401fd5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620263758391487001, guid: b88d2da9255ca424c87070c87b401fd5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b88d2da9255ca424c87070c87b401fd5, type: 3}

@@ -97,7 +97,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &685900271876219345
 MonoBehaviour:
@@ -117,11 +117,11 @@ MonoBehaviour:
   speed: 3
   damper: 50
   idlemaxSpeed: 4
-  fleemaxSpeed: 7
+  fleemaxSpeed: 5
   maxDistance: 10
   LookingFor:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 128
   normal: {fileID: 2100000, guid: 9e7b190e654e7d645bda077f3c3549ed, type: 2}
   alert: {fileID: 2100000, guid: e3ff232d36f310c49ba91923cc249375, type: 2}
   flee: {fileID: 2100000, guid: a3cd5a55a9af6ed4a8bec893dc6472de, type: 2}
