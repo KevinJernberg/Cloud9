@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScenes/Kevin Test/KevinCloudArea.unity
     guid: 299581ea16116904da19646d870adbc7
+  - enabled: 1
+    path: Assets/Scenes/Game/Hub.unity
+    guid: 3ef4bc1b8b61c6f45bf4394b9dcfab5f
+  - enabled: 1
+    path: Assets/Scenes/Game/CloudArena.unity
+    guid: fc0c5cad0e1f2dc4f9c13c4e97bb9d7f
   m_configObjects: {}
