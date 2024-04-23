@@ -767,6 +767,42 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""51e3dab6-16d4-4444-8dc2-aa4809e98ba1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExitShip"",
+                    ""type"": ""Button"",
+                    ""id"": ""610c6442-e784-4a1b-a105-e4eddb7df030"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OnLookUpDown"",
+                    ""type"": ""Value"",
+                    ""id"": ""6023ba16-4dbf-405b-82f4-ef32ec316458"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Turn"",
+                    ""type"": ""Value"",
+                    ""id"": ""f211615b-4961-4ba6-959d-6d14992dede8"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -824,6 +860,94 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a1a7a506-8891-411e-9618-7603170a10d3"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""088f74e0-1113-4b42-a85f-840fc70851c4"",
+                    ""path"": ""<Mouse>/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6d0137c6-7d7a-4558-b344-fc51e61306ce"",
+                    ""path"": ""<Mouse>/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""03a61813-3069-437d-a4e0-5942f64cc539"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OnLookUpDown"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""8f196d2e-a8a1-4644-896d-541e627f1f01"",
+                    ""path"": ""<Mouse>/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OnLookUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""02c62aa4-32fc-4097-b9f6-81c3f9fee5bb"",
+                    ""path"": ""<Mouse>/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OnLookUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""599df127-685d-47f6-95e9-157beb8c9a22"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0df5c694-a92c-4ab5-b901-a1bbd2392592"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExitShip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -914,6 +1038,10 @@ public partial class @Input: IInputActionCollection2, IDisposable
         // Ship
         m_Ship = asset.FindActionMap("Ship", throwIfNotFound: true);
         m_Ship_Move = m_Ship.FindAction("Move", throwIfNotFound: true);
+        m_Ship_Interact = m_Ship.FindAction("Interact", throwIfNotFound: true);
+        m_Ship_ExitShip = m_Ship.FindAction("ExitShip", throwIfNotFound: true);
+        m_Ship_OnLookUpDown = m_Ship.FindAction("OnLookUpDown", throwIfNotFound: true);
+        m_Ship_Turn = m_Ship.FindAction("Turn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1180,11 +1308,19 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Ship;
     private List<IShipActions> m_ShipActionsCallbackInterfaces = new List<IShipActions>();
     private readonly InputAction m_Ship_Move;
+    private readonly InputAction m_Ship_Interact;
+    private readonly InputAction m_Ship_ExitShip;
+    private readonly InputAction m_Ship_OnLookUpDown;
+    private readonly InputAction m_Ship_Turn;
     public struct ShipActions
     {
         private @Input m_Wrapper;
         public ShipActions(@Input wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Ship_Move;
+        public InputAction @Interact => m_Wrapper.m_Ship_Interact;
+        public InputAction @ExitShip => m_Wrapper.m_Ship_ExitShip;
+        public InputAction @OnLookUpDown => m_Wrapper.m_Ship_OnLookUpDown;
+        public InputAction @Turn => m_Wrapper.m_Ship_Turn;
         public InputActionMap Get() { return m_Wrapper.m_Ship; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1197,6 +1333,18 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @ExitShip.started += instance.OnExitShip;
+            @ExitShip.performed += instance.OnExitShip;
+            @ExitShip.canceled += instance.OnExitShip;
+            @OnLookUpDown.started += instance.OnOnLookUpDown;
+            @OnLookUpDown.performed += instance.OnOnLookUpDown;
+            @OnLookUpDown.canceled += instance.OnOnLookUpDown;
+            @Turn.started += instance.OnTurn;
+            @Turn.performed += instance.OnTurn;
+            @Turn.canceled += instance.OnTurn;
         }
 
         private void UnregisterCallbacks(IShipActions instance)
@@ -1204,6 +1352,18 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @ExitShip.started -= instance.OnExitShip;
+            @ExitShip.performed -= instance.OnExitShip;
+            @ExitShip.canceled -= instance.OnExitShip;
+            @OnLookUpDown.started -= instance.OnOnLookUpDown;
+            @OnLookUpDown.performed -= instance.OnOnLookUpDown;
+            @OnLookUpDown.canceled -= instance.OnOnLookUpDown;
+            @Turn.started -= instance.OnTurn;
+            @Turn.performed -= instance.OnTurn;
+            @Turn.canceled -= instance.OnTurn;
         }
 
         public void RemoveCallbacks(IShipActions instance)
@@ -1291,5 +1451,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
     public interface IShipActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnExitShip(InputAction.CallbackContext context);
+        void OnOnLookUpDown(InputAction.CallbackContext context);
+        void OnTurn(InputAction.CallbackContext context);
     }
 }

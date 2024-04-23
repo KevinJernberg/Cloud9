@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context">Read from the unity event.</param>
     public void OnTurn(InputAction.CallbackContext context)
     {
-        
         _turnDirection = context.ReadValue<float>();
         transform.Rotate(0, _turnDirection * _turnSpeed/10, 0);
     }

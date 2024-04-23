@@ -6,18 +6,33 @@ using UnityEngine.InputSystem;
 
 public class RudderController : MonoBehaviour, IInteract
 {
-    [SerializeField] private PlayerInput _playerInput;
-    [SerializeField] private Transform player;
+    [SerializeField] public PlayerInput _playerInput;
+    [SerializeField] public Transform player;
     [SerializeField] private Transform ship;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private Rigidbody playerrb;
+    [SerializeField] public Rigidbody rb;
+    [SerializeField] public Rigidbody playerrb;
+    [HideInInspector]public bool InteractedWith;
 
     public void Interact()
     {
-        _playerInput.SwitchCurrentActionMap("Ship");
-        player.SetParent(ship);
-        playerrb.isKinematic = true;
-        rb.isKinematic = false;
-        Debug.Log("Interact");
+        if (!InteractedWith)
+        {
+            _playerInput.SwitchCurrentActionMap("Ship");
+            player.SetParent(ship);
+            playerrb.isKinematic = true;
+            rb.isKinematic = false;
+            InteractedWith = true;
+            Debug.Log("Interact enter");
+        }
+        else
+        {
+            _playerInput.SwitchCurrentActionMap("Player");
+            player.SetParent(null);
+            playerrb.isKinematic = false;
+            rb.isKinematic = true;
+            InteractedWith = false;
+            Debug.Log("Interact exit");
+        }
+        
     }
 }
