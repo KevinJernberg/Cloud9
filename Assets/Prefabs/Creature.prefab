@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showMaxDistance: 0
+  showAvoidRange: 0
   delayTillFlee: 2
   delayTillDespawn: 5
   speed: 3
@@ -122,6 +123,10 @@ MonoBehaviour:
   LookingFor:
     serializedVersion: 2
     m_Bits: 128
+  Avoiding:
+    serializedVersion: 2
+    m_Bits: 81
+  avoidanceRange: 2
   normal: {fileID: 2100000, guid: 9e7b190e654e7d645bda077f3c3549ed, type: 2}
   alert: {fileID: 2100000, guid: e3ff232d36f310c49ba91923cc249375, type: 2}
   flee: {fileID: 2100000, guid: a3cd5a55a9af6ed4a8bec893dc6472de, type: 2}
