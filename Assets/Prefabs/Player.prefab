@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97beedbe1babbb441a2dc78a5c97bda8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmountOfCreatures: 5
+  maxAmountOfCreatures: 8
   _suckForce: 20
 --- !u!1 &783641899586264583
 GameObject:
@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c89d8b178f194e841d8ffa59de129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
-  _turnSpeed: 1
+  _speed: 4
+  _turnSpeed: 0.2
   _jumpForce: 4
   _extraFeetReach: 0.02
 --- !u!114 &783641899586264829
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7832c74cc4bf3e44ea63a5f4c9b576af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnSensitivity: 1
+  _turnSensitivity: 0.2
   _rotationMin: -85
   _rotationMax: 85
 --- !u!114 &783641899586264830

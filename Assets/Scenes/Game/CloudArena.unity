@@ -434,6 +434,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 783641899510187573, guid: f62c1b74012d54e42bcd5546ace6be07,
+        type: 3}
+      propertyPath: maxAmountOfCreatures
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 783641899586264583, guid: f62c1b74012d54e42bcd5546ace6be07,
         type: 3}
       propertyPath: m_Name
@@ -493,6 +498,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 783641899586264825, guid: f62c1b74012d54e42bcd5546ace6be07,
+        type: 3}
+      propertyPath: _turnSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 783641899586264829, guid: f62c1b74012d54e42bcd5546ace6be07,
+        type: 3}
+      propertyPath: _turnSensitivity
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f62c1b74012d54e42bcd5546ace6be07, type: 3}
