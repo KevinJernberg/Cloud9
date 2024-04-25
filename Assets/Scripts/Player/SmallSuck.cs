@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +61,7 @@ public class SmallSuck : MonoBehaviour
     {
         Vector3 diff = Vector3.Normalize(creature.transform.position - transform.position);
         float dot = Vector3.Dot(diff, transform.forward);
-        if (Physics.Raycast(transform.position, diff*dot, out RaycastHit HitInfo, 0.15f))
+        if (Physics.Raycast(transform.position, diff*dot, out RaycastHit HitInfo, 0.2f))
         {
             if(HitInfo.transform == creature.transform)
             {
@@ -91,7 +91,7 @@ public class SmallSuck : MonoBehaviour
         if(CreatureInventory.AddToInventory(1))
         {
             _currentlySuckedCreatures.Remove(creature);
-            Destroy(creature.gameObject);
+            creature.gameObject.SetActive(false);
         }
     }
     /// <summary>
