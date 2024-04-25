@@ -179,7 +179,8 @@ public class CreatureBehaviour : MonoBehaviour
         _stateMachine.currentState.Flee();
     }
     /// <summary>
-    /// Moves in a random direction and if its too far from where it spawned it begins to move back to the allowed range 
+    /// Moves in a random direction and if its too far from where it spawned it begins to move back to the allowed range
+    /// It will also add a force away from a objects center if it gets inside a range add has a certain layer
     /// </summary>
     IEnumerator Move()
     {
