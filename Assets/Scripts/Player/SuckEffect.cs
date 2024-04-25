@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
-
+using FMOD.Studio;
 public class SuckEffect : MonoBehaviour
 {
     [Header("SuckEffect GameObject")] 
     [SerializeField]private GameObject startSuck;
     [SerializeField]private GameObject endSuck;
     [SerializeField]private GameObject activeSuck;
+
+    [Header("Audio")] 
+    public GameObject weaponAudio;
+    public PlayerAudio playerAudio;
+    private EventInstance playerWeaponInstance;
 
     private bool canStartSuck=true;
     private bool inEndAnim;
@@ -44,6 +49,10 @@ public class SuckEffect : MonoBehaviour
     {
         startSuck.SetActive(true);
         StartCoroutine(WaitForActive());
+        playerWeaponInstance = playerAudio.PlayerWeaponAudio(weaponAudio, playerWeaponInstance, true);
+        //if (!playerWeaponInstance.isValid())
+            
+
     }
     private void EndSuck()
     {
@@ -53,8 +62,12 @@ public class SuckEffect : MonoBehaviour
         endSuck.SetActive(true);
         canStartSuck = false;
         inEndAnim = true;
+        if (playerWeaponInstance.isValid())
+            playerAudio.PlayerWeaponAudio(weaponAudio, playerWeaponInstance, false);
         StartCoroutine(DisableEndSuckAfterDuration());
+        
     }
+
     IEnumerator WaitForActive()
     {
         yield return new WaitForSeconds(1);

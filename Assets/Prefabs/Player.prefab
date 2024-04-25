@@ -697,6 +697,8 @@ MonoBehaviour:
   startSuck: {fileID: 8019231391217264081}
   endSuck: {fileID: 4503388713643698166}
   activeSuck: {fileID: 487985757070434148}
+  weaponAudio: {fileID: 2889302691288689650}
+  playerAudio: {fileID: 11400000, guid: 2ea19d89a3749f4469ea2d0dbddcd39c, type: 2}
 --- !u!1 &968779467979161432
 GameObject:
   m_ObjectHideFlags: 0
