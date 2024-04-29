@@ -321,8 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fadcadb63b33e4aaf6d6b53f8b366b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDatabase: {fileID: 0}
   inventoryFullIndicator: {fileID: 203367873636096804}
-  inventoryCount: {fileID: 3070573447059715738}
+  inventoryCountUI: {fileID: 0}
 --- !u!1 &8101047935429495205
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +336,7 @@ GameObject:
   - component: {fileID: 2323223559566284859}
   - component: {fileID: 5712970624411425862}
   - component: {fileID: 4415028215142986369}
+  - component: {fileID: 5316446269249134412}
   m_Layer: 5
   m_Name: HotBarSlot
   m_TagString: Untagged
@@ -417,3 +419,17 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.7019608}
   m_EffectDistance: {x: 4.8, y: -4.26}
   m_UseGraphicAlpha: 1
+--- !u!114 &5316446269249134412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8101047935429495205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f22347a89a8ce5459c46a1a8840b063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
+  itemAmount: 0

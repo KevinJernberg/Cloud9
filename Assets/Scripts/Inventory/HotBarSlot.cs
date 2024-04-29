@@ -4,5 +4,23 @@ using UnityEngine;
 
 public class HotBarSlot : MonoBehaviour
 {
-    private ItemData currentItem;
+    public ItemData currentItem;
+    public int itemAmount;
+
+
+    public void SetItem(ItemData item)
+    {
+        currentItem = item;
+        itemAmount = default;
+    }
+
+    private void ChangeItemAmount(int amountChanged)
+    {
+        itemAmount += amountChanged;
+    }
+
+    private void SetItemAmount(int amountChanged)
+    {
+        
+    }
 }

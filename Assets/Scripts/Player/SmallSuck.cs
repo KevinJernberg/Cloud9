@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Looks for creatures and sucks them up. At the moment it looks for colliders and not triggers - Linnéa
+///
+/// Changed relevant inventory to the new hotbar Based one - Kevin
 /// </summary>
 public class SmallSuck : MonoBehaviour
 {
@@ -21,7 +23,7 @@ public class SmallSuck : MonoBehaviour
     private void Awake()
     {
         _currentlySuckedCreatures = new List<Rigidbody>();
-        CreatureInventory.SetMaxInventorySpace(maxAmountOfCreatures);
+        Inventory.SetMaxInventorySpace(maxAmountOfCreatures);
     }
 
     private void Update()
@@ -91,7 +93,8 @@ public class SmallSuck : MonoBehaviour
     /// <param name="creature">The rigidbody of the creature to add.</param>
     private void AddToInventory(Rigidbody creature)
     {
-        if(CreatureInventory.AddToInventory(1))
+        ItemData creatureItem = creature.GetComponent<CreatureBehaviour>().creatureItem;
+        if(Inventory.AddToInventory(1, creatureItem))
         {
             _currentlySuckedCreatures.Remove(creature);
             creature.gameObject.SetActive(false);

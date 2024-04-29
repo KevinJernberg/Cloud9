@@ -7,40 +7,38 @@ using UnityEngine.Events;
 
 public class HotBarInventory : MonoBehaviour
 {
-
-    [SerializeField] private ItemDatabase itemDatabase;
     [SerializeField] private GameObject inventoryFullIndicator;
-        
+
+
 
     [SerializeField] private TextMeshProUGUI inventoryCountUI; 
     
     public static UnityAction<int, int> updateInventoryCount;
 
+    private static List<HotBarSlot> hotBarSlots;
+
 
     private void OnEnable()
     {
-        updateInventoryCount += UpdateInventoryStatus;
-        CreatureInventory.AddToInventory(0); //Cursed AF but starts the inventory at the right amount; TODO: Make this more normal and not cursed
-    }
-
-    private void OnDisable()
-    {
-        updateInventoryCount -= UpdateInventoryStatus;
-    }
-
-
-    private void GetHotBarSlots()
-    {
-        
+        updateInventoryCount += SetSlot;
     }
     
-    private void UpdateInventoryStatus(int amount, int id)
+    private void OnDisable()
     {
-        
+        updateInventoryCount -= SetSlot;
     }
 
-    private bool CheckForEmptySpace()
+    private void Start()
     {
-        return false;
+        HotBarSlot[] slots = transform.GetComponentsInChildren<HotBarSlot>();
+        foreach (HotBarSlot slot in slots)
+        {
+            hotBarSlots.Add(slot);
+        }
+    }
+
+    private void SetSlot(int amount, int slot)
+    {
+        
     }
 }

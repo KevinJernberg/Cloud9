@@ -62,7 +62,8 @@ public class CreatureBehaviour : MonoBehaviour
     private List<Transform> Avoid;
 
     private CloudCreatureSpawner connectedSpawner;
-    private CreatureRarity rarity;
+    [NonSerialized]
+    public ItemData creatureItem;
 
     public void Awake(){
         detectionRadius = GetComponent<SphereCollider>();
@@ -214,9 +215,9 @@ public class CreatureBehaviour : MonoBehaviour
         connectedSpawner = spawner;
     }
     
-    public void SetCreatureRarity(CreatureRarity rarity)
+    public void SetCreatureRarity(ItemData creatureRarityItem)
     {
-        this.rarity = rarity;
+        creatureItem = creatureRarityItem;
     }
 	
 	#endregion
