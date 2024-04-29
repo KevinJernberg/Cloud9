@@ -98,6 +98,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeSuckMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""495864e6-58d6-4c46-aa52-7fe09c28d0f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -274,6 +283,17 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b5d88bc-fd41-4ef4-9cad-f736c75b58e7"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeSuckMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1065,6 +1085,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Player_Suck = m_Player.FindAction("Suck", throwIfNotFound: true);
         m_Player_MinigameTest = m_Player.FindAction("MinigameTest", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_ChangeSuckMode = m_Player.FindAction("ChangeSuckMode", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1153,6 +1174,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Suck;
     private readonly InputAction m_Player_MinigameTest;
     private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_ChangeSuckMode;
     public struct PlayerActions
     {
         private @Input m_Wrapper;
@@ -1165,6 +1187,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Suck => m_Wrapper.m_Player_Suck;
         public InputAction @MinigameTest => m_Wrapper.m_Player_MinigameTest;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @ChangeSuckMode => m_Wrapper.m_Player_ChangeSuckMode;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1198,6 +1221,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @ChangeSuckMode.started += instance.OnChangeSuckMode;
+            @ChangeSuckMode.performed += instance.OnChangeSuckMode;
+            @ChangeSuckMode.canceled += instance.OnChangeSuckMode;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1226,6 +1252,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @ChangeSuckMode.started -= instance.OnChangeSuckMode;
+            @ChangeSuckMode.performed -= instance.OnChangeSuckMode;
+            @ChangeSuckMode.canceled -= instance.OnChangeSuckMode;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1494,6 +1523,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnSuck(InputAction.CallbackContext context);
         void OnMinigameTest(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnChangeSuckMode(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

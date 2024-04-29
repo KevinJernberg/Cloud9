@@ -16,6 +16,7 @@ public class SmallSuck : MonoBehaviour
     [SerializeField] private float _suckForce = 10;
     private List<Rigidbody> _currentlySuckedCreatures;
     private bool _sucking;
+    private float collectRadius = 0.3f; 
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class SmallSuck : MonoBehaviour
 
     public void OnSuck(InputAction.CallbackContext context)
     {
-        Debug.Log("Trying to suck");
+        if(!gameObject.activeSelf)return;
         _sucking = context.performed;
     }
 
@@ -59,6 +60,7 @@ public class SmallSuck : MonoBehaviour
     /// <param name="creature">The rigidbody of the creature to check.</param>
     private void CheckIfSucked(Rigidbody creature)
     {
+        
         Vector3 diff = Vector3.Normalize(creature.transform.position - transform.position);
         float dot = Vector3.Dot(diff, transform.forward);
         if (Physics.Raycast(transform.position, diff*dot, out RaycastHit HitInfo, 0.2f))
@@ -71,6 +73,7 @@ public class SmallSuck : MonoBehaviour
         //If the other way seams to unreliable use this way instead.
         /*
         List<Collider> inVicinity = Physics.OverlapSphere(transform.position, collectRadius).ToList();
+        
         for (int i = inVicinity.Count - 1; i >= 0; i--)
         {
             if (inVicinity[i].gameObject.CompareTag("Creature"))
@@ -110,8 +113,6 @@ public class SmallSuck : MonoBehaviour
         other.TryGetComponent(out Rigidbody otherRb);
         if(dot > 0.707 && !_currentlySuckedCreatures.Contains(otherRb))
         {
-            Debug.Log("in cone");
-            
             if(otherRb != null) _currentlySuckedCreatures.Add(otherRb);
         }
         else
@@ -134,6 +135,7 @@ public class SmallSuck : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position, 0.1f);
+        Gizmos.DrawWireSphere(transform.position, collectRadius);
         //Debug.DrawRay(transform.position, diff * dot, Color.yellow, 10f);
         
     }
