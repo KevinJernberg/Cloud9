@@ -25,7 +25,7 @@ public class MinigameCheck : MonoBehaviour
         Physics.Raycast(transform.position, Vector3.forward,out hit, 10f, creaturemask);
         if (hit.transform.gameObject != null)
         {
-         
+        // hit.transform.gameObject.GetComponent<MinigameEngage>().
         }
     }
 }
