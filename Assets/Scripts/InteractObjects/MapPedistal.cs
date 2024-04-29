@@ -34,6 +34,7 @@ public class MapPedistal : MonoBehaviour, IInteract
                 Cursor.lockState = CursorLockMode.Locked;
                 mapUI.SetActive(false);
                 _playerInputComponent.SwitchCurrentActionMap("Player");
+                uIAudio.MapCloseAudio(transform);
             }
         }
     }
