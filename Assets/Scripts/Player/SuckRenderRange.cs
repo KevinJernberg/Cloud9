@@ -22,11 +22,10 @@ public class SuckRenderRange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var hit = Physics.RaycastAll(_transform.position, transform.forward,Mathf.Infinity ,SearchLayers);
-        if (hit.Length > 0)
+        if (Physics.Raycast(_transform.position, transform.forward, out RaycastHit hit ,Mathf.Infinity ,SearchLayers))
         {
-            Debug.Log(hit[0].transform.name);
-            distance = hit[0].distance; 
+            Debug.Log(hit.transform.name);
+            distance = hit.distance; 
             if(distance is < 12f and > 1.75f)
             {
                 SuckCam.farClipPlane = distance*1.25f;
