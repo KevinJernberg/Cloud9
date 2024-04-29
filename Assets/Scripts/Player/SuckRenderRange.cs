@@ -9,7 +9,7 @@ using UnityEngine;
 public class SuckRenderRange : MonoBehaviour
 {
     [SerializeField] private LayerMask SearchLayers;
-
+    [SerializeField] private Transform _transform;
     [SerializeField] private Camera SuckCam;
 
     private float distance;
@@ -22,11 +22,12 @@ public class SuckRenderRange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var hit = Physics.RaycastAll(transform.position, transform.forward);
+        var hit = Physics.RaycastAll(_transform.position, transform.forward,Mathf.Infinity ,SearchLayers);
         if (hit.Length > 0)
         {
+            Debug.Log(hit[0].transform.name);
             distance = hit[0].distance; 
-            if(distance is < 15f and > 2.2f)
+            if(distance is < 12f and > 1.75f)
             {
                 SuckCam.farClipPlane = distance*1.25f;
             }
@@ -34,6 +35,10 @@ public class SuckRenderRange : MonoBehaviour
             {
                 SuckCam.farClipPlane = 15f;
             }
+        }
+        else
+        {
+            SuckCam.farClipPlane = 15f;
         }
         
         
@@ -43,6 +48,6 @@ public class SuckRenderRange : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color= Color.yellow;
-        Gizmos.DrawRay(transform.position,transform.forward*distance);
+        Gizmos.DrawRay(_transform.position,transform.forward*distance);
     }
 }
