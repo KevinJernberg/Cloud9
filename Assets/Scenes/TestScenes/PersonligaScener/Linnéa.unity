@@ -477,6 +477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4177bbaec34cd8c419567a1ebd9b472b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _accelerationSpeed: 1
+  _turnSensitivity: 1
+  maxSpeed: 0
+  onlyTurnWhenDrive: 0
 --- !u!4 &937457739
 Transform:
   m_ObjectHideFlags: 0
@@ -955,12 +959,12 @@ PrefabInstance:
     - target: {fileID: 783641899586264824, guid: f62c1b74012d54e42bcd5546ace6be07,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: 1.26
       objectReference: {fileID: 0}
     - target: {fileID: 783641899586264824, guid: f62c1b74012d54e42bcd5546ace6be07,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.99
+      value: -0.82
       objectReference: {fileID: 0}
     - target: {fileID: 783641899586264824, guid: f62c1b74012d54e42bcd5546ace6be07,
         type: 3}

@@ -9,7 +9,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Tooltip("The players speed.")]
-    [SerializeField] private float _speed = 1;
+    [SerializeField] private float _walkSpeed = 1;
+    [Tooltip("The players sprint speed.")] 
+    [SerializeField]private float _runSpeed = 2;
     [Tooltip("How fast the player should turn.")]
     [SerializeField] private float _turnSpeed = 1;
     [Tooltip("How high you jump.")]
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private float _turnDirection;
     private bool _jumping;
     private Rigidbody _rb;
+    private float _speed;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _feetPos = GetComponent<CapsuleCollider>().height / 2;
         _feetPos += _extraFeetReach;
+        _speed = _walkSpeed;
     }
     private void Update()
     {
@@ -44,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         _rb.velocity =
             transform.TransformDirection(new Vector3(_direction.x * _speed, _direction.y, _direction.z * _speed));
     }
+
+    
     /// <summary>
     /// Checks if the player's standing on the ground or not. 
     /// </summary>
@@ -86,7 +92,14 @@ public class PlayerMovement : MonoBehaviour
             _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
-    
+    /// <summary>
+    /// Changes speed based on if sprinting or not
+    /// </summary>
+    /// <param name="context"></param>
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        _speed = context.performed ? _runSpeed : _walkSpeed;
+    }
     #endregion
 
     private void OnDrawGizmos()
