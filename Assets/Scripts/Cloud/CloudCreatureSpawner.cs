@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 /// Manages the spawning of creatures in clouds
 /// This class also hold information about what kinds of creatures & rarities can spawn
 /// Currently made for 4 rarities - Kevin
+/// Added support for creature rarities in the spawning and randomizing of creatures;
 /// </summary>
 public class CloudCreatureSpawner : MonoBehaviour
 {
@@ -75,20 +76,32 @@ public class CloudCreatureSpawner : MonoBehaviour
     /// This does not spawn the creature
     /// </summary>
     /// <returns>A creature of randomized rarity</returns>
-    private GameObject RandomizeCreature()
+    private GameObject RandomizeCreature(out CreatureRarity rarity)
     {
         float randomValue = Random.Range(0f, 1f);
         
         
         // Chooses rarity based upon randomValue
         if (randomValue < legendarySpawnChance) // Legendary rarity
+        {
+            rarity = CreatureRarity.Legendary;
             return legendaryCreature;
+        }
         else if (randomValue < epicSpawnChance + legendarySpawnChance)  // Epic rarity
+        {
+            rarity = CreatureRarity.Epic;
             return epicCreature;
+        }
         else if (randomValue < rareSpawnChance + epicSpawnChance + legendarySpawnChance)  // Rare rarity
+        {
+            rarity = CreatureRarity.Rare;
             return rareCreature;
+        }
         else  // Common rarity
+        {
+            rarity = CreatureRarity.Common;
             return commonCreature;
+        }
 
     }
     
@@ -98,11 +111,12 @@ public class CloudCreatureSpawner : MonoBehaviour
     /// </summary>
     private void SpawnCreature()
     {
-        GameObject creature = Instantiate(RandomizeCreature(), 
+        GameObject creature = Instantiate(RandomizeCreature(out CreatureRarity creatureRarity), 
             transform.position + Random.insideUnitSphere.ProjectOntoPlane(Vector3.up) * spawnSphereRadius, // ProjectOntoPlane makes every creature spawn on same y level.
             Quaternion.identity);
         
         creature.GetComponent<CreatureBehaviour>().SetSpawner(this);
+        creature.GetComponent<CreatureBehaviour>().SetCreatureRarity(creatureRarity);
         _spawnedCreatures.Add(creature);
     }
     

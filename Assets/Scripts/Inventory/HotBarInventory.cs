@@ -5,14 +5,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SmallSuckInventoryGUI : MonoBehaviour
+public class HotBarInventory : MonoBehaviour
 {
+
+    [SerializeField] private ItemDatabase itemDatabase;
     [SerializeField] private GameObject inventoryFullIndicator;
         
 
-    [SerializeField] private TextMeshProUGUI inventoryCount; 
+    [SerializeField] private TextMeshProUGUI inventoryCountUI; 
     
     public static UnityAction<int, int> updateInventoryCount;
+
 
     private void OnEnable()
     {
@@ -24,11 +27,20 @@ public class SmallSuckInventoryGUI : MonoBehaviour
     {
         updateInventoryCount -= UpdateInventoryStatus;
     }
-    
-    private void UpdateInventoryStatus(int amount, int capacity)
+
+
+    private void GetHotBarSlots()
     {
-        inventoryFullIndicator.SetActive(amount >= capacity);
-        inventoryCount.text = $"{amount} / {capacity}";
+        
+    }
+    
+    private void UpdateInventoryStatus(int amount, int id)
+    {
+        
     }
 
+    private bool CheckForEmptySpace()
+    {
+        return false;
+    }
 }
