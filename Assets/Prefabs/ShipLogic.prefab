@@ -101,14 +101,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 401280562144221275}
     m_Modifications:
-    - target: {fileID: 1058934242, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.208
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934242, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.77
-      objectReference: {fileID: 0}
     - target: {fileID: 1058934243, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
       propertyPath: rb
       value: 
@@ -117,42 +109,6 @@ PrefabInstance:
       propertyPath: ship
       value: 
       objectReference: {fileID: 401280562144221275}
-    - target: {fileID: 1058934243, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934243, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: playerrb
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934243, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: _playerInput
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934244, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_Radius
-      value: 0.7673163
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934244, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934244, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_Center.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934244, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_Center.y
-      value: 0.072446644
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058934244, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_Center.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2027446963, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6010283208953321211, guid: 82666d4753d966c4e9207d945ccc8819,
         type: 3}
       propertyPath: m_Name
@@ -213,8 +169,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2027446963, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
 --- !u!114 &401280563477610370 stripped
 MonoBehaviour:

@@ -312,7 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SearchLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 23
   _transform: {fileID: 6702725413508020422}
   SuckCam: {fileID: 929786381547999538}
 --- !u!1 &783641899586264583
