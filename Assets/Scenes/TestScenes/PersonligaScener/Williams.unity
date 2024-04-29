@@ -147,6 +147,43 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1312083296}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &203573879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203573880}
+  m_Layer: 7
+  m_Name: transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &203573880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203573879}
+  m_LocalRotation: {x: 0.0007854348, y: -0, z: -0, w: 0.9999997}
+  m_LocalPosition: {x: 0.91499996, y: -0.61, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1.4380001}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 298059890}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0.09, y: 0, z: 0}
+--- !u!4 &298059890 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2878199555458596456, guid: f62c1b74012d54e42bcd5546ace6be07,
+    type: 3}
+  m_PrefabInstance: {fileID: 1312083296}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &348227078
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +1035,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 783641898256890236, guid: f62c1b74012d54e42bcd5546ace6be07,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 783641899586264583, guid: f62c1b74012d54e42bcd5546ace6be07,
         type: 3}
       propertyPath: m_Name
@@ -1080,8 +1122,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8125930644980489068, guid: f62c1b74012d54e42bcd5546ace6be07,
         type: 3}
+      propertyPath: transform
+      value: 
+      objectReference: {fileID: 203573880}
+    - target: {fileID: 8125930644980489068, guid: f62c1b74012d54e42bcd5546ace6be07,
+        type: 3}
+      propertyPath: _transform
+      value: 
+      objectReference: {fileID: 203573880}
+    - target: {fileID: 8125930644980489068, guid: f62c1b74012d54e42bcd5546ace6be07,
+        type: 3}
       propertyPath: SearchLayers.m_Bits
-      value: 55
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f62c1b74012d54e42bcd5546ace6be07, type: 3}

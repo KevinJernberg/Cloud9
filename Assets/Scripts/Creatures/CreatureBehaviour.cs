@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 /// <summary>
 ///
 /// Creature class where the creature becomes alert if something comes too close and flees if it doesn't leave in time - William
-/// 
+/// Added support for creature rarity - Kevin
 /// </summary>
 /// <typeparam name="TState"></typeparam> TState is a name for a random state that fulfills the conditions of IStateNode
 
@@ -62,6 +62,7 @@ public class CreatureBehaviour : MonoBehaviour
     private List<Transform> Avoid;
 
     private CloudCreatureSpawner connectedSpawner;
+    private CreatureRarity rarity;
 
     public void Awake(){
         detectionRadius = GetComponent<SphereCollider>();
@@ -211,6 +212,11 @@ public class CreatureBehaviour : MonoBehaviour
     public void SetSpawner(CloudCreatureSpawner spawner)
     {
         connectedSpawner = spawner;
+    }
+    
+    public void SetCreatureRarity(CreatureRarity rarity)
+    {
+        this.rarity = rarity;
     }
 	
 	#endregion

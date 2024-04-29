@@ -19,7 +19,6 @@ public class Cloud
 {
     void function()
     {
-        ICloud.SpawnTable gg = new ICloud.SpawnTable();
         
         //gg.spawnOdds / 
     }
