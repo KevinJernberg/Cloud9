@@ -479,6 +479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapUI: {fileID: 3852271608312238353}
+  _playerInputComponent: {fileID: 0}
+  uIAudio: {fileID: 11400000, guid: 6edf7517b15ff1b41907eade467e7c2e, type: 2}
 --- !u!1 &3852271609108250613
 GameObject:
   m_ObjectHideFlags: 0

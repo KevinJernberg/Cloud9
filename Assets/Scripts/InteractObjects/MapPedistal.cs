@@ -7,6 +7,10 @@ public class MapPedistal : MonoBehaviour, IInteract
 {
     [SerializeField] private GameObject mapUI;
     [SerializeField] private PlayerInput _playerInputComponent;
+    
+    [Header("Audio")] 
+    public UIAudio uIAudio;
+    
     public void Interact()
     {
         ToggleMap();
@@ -18,6 +22,7 @@ public class MapPedistal : MonoBehaviour, IInteract
         Cursor.lockState = CursorLockMode.Confined;
         mapUI.SetActive(!mapUI.activeSelf);
         _playerInputComponent.SwitchCurrentActionMap(mapUI.activeSelf ? "UI" : "Player");
+        uIAudio.MapToggleAudio(transform);
     }
 
     public void OnCloseMap(InputAction.CallbackContext context)
