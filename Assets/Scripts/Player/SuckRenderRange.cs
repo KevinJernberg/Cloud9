@@ -22,23 +22,27 @@ public class SuckRenderRange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("do");
-        var hit = Physics.RaycastAll(transform.position, Vector3.forward, SearchLayers);
-        Debug.Log(hit.Length);
+        var hit = Physics.RaycastAll(transform.position, transform.forward);
         if (hit.Length > 0)
         {
-            
             distance = hit[0].distance; 
+            if(distance is < 15f and > 2.2f)
+            {
+                SuckCam.farClipPlane = distance*1.25f;
+            }
+            else if (distance > 15f)
+            {
+                SuckCam.farClipPlane = 15f;
+            }
         }
         
-        //if(hit[0].distance)
-        //SuckCam.farClipPlane
+        
         
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color= Color.yellow;
-        //Gizmos.DrawRay(transform.position,transform.);
+        Gizmos.DrawRay(transform.position,transform.forward*distance);
     }
 }
