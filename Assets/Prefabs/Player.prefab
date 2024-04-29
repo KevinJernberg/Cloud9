@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 783641899510187569}
   - component: {fileID: 783641899510187570}
   - component: {fileID: 783641899510187573}
+  - component: {fileID: 8125930644980489068}
   m_Layer: 8
   m_Name: SmallSuckLogic
   m_TagString: Untagged
@@ -297,6 +298,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAmountOfCreatures: 8
   _suckForce: 20
+--- !u!114 &8125930644980489068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783641899510187568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ec25fac5934b34e91a1c7777a61338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SearchLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  SuckCam: {fileID: 929786381547999538}
 --- !u!1 &783641899586264583
 GameObject:
   m_ObjectHideFlags: 0
