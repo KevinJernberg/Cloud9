@@ -20,6 +20,9 @@ public class BigSuck : MonoBehaviour
     [Tooltip("The nozzle o the big gun, the point where clouds are sucked towards.")]
     [SerializeField] private Transform _nozzlePosition;
 
+    [Tooltip("The point where the cloud counts as sucked.")]
+    [SerializeField] private float _endSuckRange = 0.2f;
+
     private bool _sucking;
     
     private List<Rigidbody> _inTrigger;
@@ -65,7 +68,7 @@ public class BigSuck : MonoBehaviour
             Rigidbody rb = _inTrigger[i];
             Vector3 diff = Vector3.Normalize(rb.transform.position - _nozzlePosition.position);
             float dot = Vector3.Dot(diff, transform.forward);
-            if (Physics.Raycast(_nozzlePosition.position, -diff*dot, out RaycastHit HitInfo, 0.2f))
+            if (Physics.Raycast(_nozzlePosition.position, -diff*dot, out RaycastHit HitInfo, _endSuckRange))
             {
                 if(HitInfo.transform == rb.transform)
                 {
