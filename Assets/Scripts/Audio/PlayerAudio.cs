@@ -10,6 +10,8 @@ public class PlayerAudio : ScriptableObject
 {
     [SerializeField] 
     private EventReference playerWeapon;
+    [SerializeField] 
+    private EventReference playerFootStep;
 
     public EventInstance PlayerWeaponAudio(GameObject weaponObj, EventInstance playerWeaponInstance, bool weaponSuck)
     {
@@ -29,4 +31,20 @@ public class PlayerAudio : ScriptableObject
 
         return playerWeaponInstance;
     }
+
+    /*public void PlayerFootStepAudio(GameObject footObj, string surface)
+    {
+        EventInstance playerFootstepInstance = RuntimeManager.CreateInstance(playerFootstep);
+        RuntimeManager.AttachInstanceToGameObject(playerFootstepInstance, footObj.transform);
+
+        switch (surface)
+        {
+            case "Wood":
+                playerFootstepInstance.setParameterByName("Surface", 0f);
+                break;
+        }
+
+        playerFootstepInstance.start();
+        playerFootstepInstance.release();
+    }*/
 }
