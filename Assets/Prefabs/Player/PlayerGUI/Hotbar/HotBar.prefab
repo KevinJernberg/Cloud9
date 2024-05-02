@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3702734904545603204}
   - component: {fileID: 7171953571725645336}
   - component: {fileID: 8513296733991081476}
+  - component: {fileID: 5430095597857005292}
   m_Layer: 5
   m_Name: HotBar
   m_TagString: Untagged
@@ -125,6 +126,21 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
+--- !u!114 &5430095597857005292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681967582313585750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92fadcadb63b33e4aaf6d6b53f8b366b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryFullIndicator: {fileID: 0}
+  inventoryCountUI: {fileID: 0}
+  testItem: {fileID: 11400000, guid: 74743270c53f79d4e93f8917f4dd0999, type: 2}
 --- !u!1001 &2019860810347706414
 PrefabInstance:
   m_ObjectHideFlags: 0

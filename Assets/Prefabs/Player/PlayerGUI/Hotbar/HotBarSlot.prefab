@@ -321,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fadcadb63b33e4aaf6d6b53f8b366b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDatabase: {fileID: 0}
-  inventoryFullIndicator: {fileID: 203367873636096804}
+  inventoryFullIndicator: {fileID: 0}
   inventoryCountUI: {fileID: 0}
+  testItem: {fileID: 0}
 --- !u!1 &8101047935429495205
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,5 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f22347a89a8ce5459c46a1a8840b063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentItem: {fileID: 0}
   itemAmount: 0
+  inventoryFullIndicator: {fileID: 0}
+  inventoryCountUI: {fileID: 3070573447059715738}
