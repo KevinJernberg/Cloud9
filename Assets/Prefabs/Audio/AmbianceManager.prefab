@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58498e4b0020a64c8fef803f0137c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipAmbianceEmitter: {fileID: 0}
-  weatherAmbianceEmitter: {fileID: 0}
+  shipAmbianceEmitter: {fileID: 6870865020219580876}
+  weatherAmbianceEmitter: {fileID: 7506164015348175327}
 --- !u!1 &7171065411715257047
 GameObject:
   m_ObjectHideFlags: 0

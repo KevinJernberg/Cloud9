@@ -25,10 +25,8 @@ public static class Inventory
     /// and does not add to inventory.</returns>
     public static bool AddToInventory(int toAddAmount, ItemData item)
     {
-        Debug.Log("1");
         if (item == null)
             return false;
-        Debug.Log(itemSlots.Count);
         foreach (ItemSlot slot in itemSlots)
         {
             // Check if item is in inventory
@@ -49,7 +47,6 @@ public static class Inventory
                 continue;
             slot.item = item;
             slot.itemCount += toAddAmount;
-            Debug.Log("2");
             HotBarInventory.updateInventoryCount?.Invoke();
             return true;
         }

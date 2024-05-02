@@ -25,7 +25,7 @@ public class AmbianceManager : MonoBehaviour
    private StudioEventEmitter shipAmbianceEmitter;
    [SerializeField]
    private StudioEventEmitter weatherAmbianceEmitter;
-   
+
 
    private StudioEventEmitter emitter; // denna emitter är tom och pekar egentligen bara på de andra ambianceemitterna
    private void Awake()
