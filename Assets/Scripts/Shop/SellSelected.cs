@@ -8,9 +8,7 @@ using UnityEngine.EventSystems;
 public class SellSelected : MonoBehaviour
 {
     [SerializeField] private EventSystem system;
-
-    private int selected;
-
+    private int selected = 5;
 
     public void Select(int slot)
     {
@@ -18,7 +16,26 @@ public class SellSelected : MonoBehaviour
     }
     public void Sell()
     {
-        Debug.Log($"Selling for {Inventory.itemSlots[selected].item.sellingPrice}");
-        //Debug.Log($"Sell {selected.name}");
+        //Todo: Make it so that the items gets removed from the inventory and adds the price to a money counter
+        if (selected is < -1 or < 5)
+        {
+            if (Inventory.itemSlots[selected].item != null)
+            {
+                Debug.Log($"Selling for {Inventory.itemSlots[selected].item.sellingPrice* Inventory.itemSlots[selected].itemCount}");
+            }
+        }
+        
+        
+    }
+    public void SellAll()
+    {
+        //Todo: Make it so that the items gets removed from the inventory and adds the price to a money counter
+        for (int i = 0; i < Inventory.itemSlots.Count; i++)
+        {
+            if (Inventory.itemSlots[i].item != null)
+            {
+                Debug.Log($"Selling for {Inventory.itemSlots[i].item.sellingPrice* Inventory.itemSlots[i].itemCount}");
+            }
+        }
     }
 }
