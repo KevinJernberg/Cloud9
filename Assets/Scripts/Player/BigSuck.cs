@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handles the big suck. Looks for clouds, all clouds close enough is sucked towards the big suck.
+/// If clouds are close enough they are destroyed. - Linnéa
+/// </summary>
 public class BigSuck : MonoBehaviour
 {
     ///Det ska finnas en modell som man bär på, det ska gå att switcha mellan smallsuck och bigsuck
@@ -15,6 +19,9 @@ public class BigSuck : MonoBehaviour
 
     [Tooltip("The nozzle o the big gun, the point where clouds are sucked towards.")]
     [SerializeField] private Transform _nozzlePosition;
+
+    [Tooltip("The point where the cloud counts as sucked.")]
+    [SerializeField] private float _endSuckRange = 0.2f;
 
     private bool _sucking;
     
@@ -36,7 +43,9 @@ public class BigSuck : MonoBehaviour
         Debug.Log("Sucking");
         _sucking = context.performed;
     }
-    
+    /// <summary>
+    /// Adds a force towards the suck, then tries to remove them.
+    /// </summary>
     private void Suck()
     {
         foreach (var rb in _inTrigger)
@@ -49,6 +58,9 @@ public class BigSuck : MonoBehaviour
         TryToRemoveCloud();
     }
 
+    /// <summary>
+    /// If cloud is close enough it is destroyed(sucked).
+    /// </summary>
     private void TryToRemoveCloud()
     {
         for (int i = _inTrigger.Count -1; i >= 0; i--)
@@ -56,7 +68,7 @@ public class BigSuck : MonoBehaviour
             Rigidbody rb = _inTrigger[i];
             Vector3 diff = Vector3.Normalize(rb.transform.position - _nozzlePosition.position);
             float dot = Vector3.Dot(diff, transform.forward);
-            if (Physics.Raycast(_nozzlePosition.position, -diff*dot, out RaycastHit HitInfo, 0.2f))
+            if (Physics.Raycast(_nozzlePosition.position, -diff*dot, out RaycastHit HitInfo, _endSuckRange))
             {
                 if(HitInfo.transform == rb.transform)
                 {

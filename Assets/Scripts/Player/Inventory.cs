@@ -23,12 +23,10 @@ public static class Inventory
     /// <param name="item">The type of item to add</param>
     /// <returns>Returns true if inventory is not full, and adds toAdd to the inventory. Returns false if inventory is full
     /// and does not add to inventory.</returns>
-    public static bool AddToInventory(int toAddAmount, ItemData item)
+    public static bool ChangeItemAmount(int amount, ItemData item)
     {
-        Debug.Log("1");
         if (item == null)
             return false;
-        Debug.Log(itemSlots.Count);
         foreach (ItemSlot slot in itemSlots)
         {
             // Check if item is in inventory
@@ -37,7 +35,7 @@ public static class Inventory
             Debug.Log("1.5");
             // Found item, add to count
             //TODO: Check if over stack size
-            slot.itemCount += toAddAmount;
+            slot.itemCount += amount;
             HotBarInventory.updateInventoryCount?.Invoke();
             return true;
         }
@@ -48,8 +46,7 @@ public static class Inventory
             if (slot.item != null)
                 continue;
             slot.item = item;
-            slot.itemCount += toAddAmount;
-            Debug.Log("2");
+            slot.itemCount += amount;
             HotBarInventory.updateInventoryCount?.Invoke();
             return true;
         }

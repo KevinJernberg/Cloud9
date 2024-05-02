@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36206474b9b3f31429dd6e404aaf6c62, type: 3}
-  m_Name: Testitem2
+  m_Name: EpicCreature
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 1002
   itemSprite: {fileID: 0}
-  stackSize: 0
-  sellingPrice: 0
+  stackSize: 1
+  sellingPrice: 50
