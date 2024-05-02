@@ -62,7 +62,7 @@ public class BigSuck : MonoBehaviour
                 {
                     _inTrigger.Remove(rb);
                     Destroy(rb.gameObject);
-                    //SpawnCreatures
+                    
                     Debug.Log("SpawnCreature.");
                 }
             }
@@ -80,7 +80,7 @@ public class BigSuck : MonoBehaviour
     {
         if(!other.gameObject.CompareTag("Cloud"))return;
         Debug.Log("NotInCcone");
-        if(other.TryGetComponent(out Rigidbody rb))_inTrigger.Remove(rb);
+        if(other.TryGetComponent(out Rigidbody rb) && _inTrigger.Contains(rb))_inTrigger.Remove(rb);
     }
 
 }
