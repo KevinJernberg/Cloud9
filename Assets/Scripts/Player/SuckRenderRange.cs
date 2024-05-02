@@ -24,7 +24,7 @@ public class SuckRenderRange : MonoBehaviour
     {
         if (Physics.Raycast(_transform.position, transform.forward, out RaycastHit hit ,Mathf.Infinity ,SearchLayers))
         {
-            Debug.Log(hit.transform.name);
+            
             distance = hit.distance; 
             if(distance is < 12f and > 1.75f)
             {
