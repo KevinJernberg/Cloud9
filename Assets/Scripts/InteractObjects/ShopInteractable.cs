@@ -15,7 +15,8 @@ public class ShopInteractable : MonoBehaviour, IInteract
         if (!InteractedWith)
         {
             _playerInput.SwitchCurrentActionMap("UI");
-            Cursor.lockState = CursorLockMode.Confined;
+            //todo: Change To Confined When doing build
+            Cursor.lockState = CursorLockMode.None;
             InteractedWith = true;
             Shop.SetActive(true);
             Debug.Log("Interact enter");

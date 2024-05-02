@@ -79,6 +79,7 @@ public class CloudCreatureSpawner : MonoBehaviour
         }
     }
 */
+    //TODO: Don't do this in OnDestroy
     private void OnDestroy()
     {
         for (int i = 0; i < amountOfCreaturesToSpawn; i++)
