@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,6 +22,8 @@ public class CloudAreaManager : MonoBehaviour
     private CloudSceneStats _cloudData;
 
     [SerializeField] private GameObject cloudSpawnerPrefab;
+
+    [SerializeField] private GameObject[] clouds;
     
 
     #endregion
@@ -44,7 +47,8 @@ public class CloudAreaManager : MonoBehaviour
     {
         for (int i = 0; i < _cloudData.CloudAmount; i++)
         {
-            Instantiate(cloudSpawnerPrefab, RandomizeCloudPosition(), Quaternion.identity);
+            
+            Instantiate(clouds[Random.Range(0, clouds.Length)], RandomizeCloudPosition(), Quaternion.identity);
         }
     }
 

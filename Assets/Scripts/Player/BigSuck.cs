@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handles the big suck. Looks for clouds, all clouds close enough is sucked towards the big suck.
+/// If clouds are close enough they are destroyed. - Linnéa
+/// </summary>
 public class BigSuck : MonoBehaviour
 {
     ///Det ska finnas en modell som man bär på, det ska gå att switcha mellan smallsuck och bigsuck
@@ -36,7 +40,9 @@ public class BigSuck : MonoBehaviour
         Debug.Log("Sucking");
         _sucking = context.performed;
     }
-    
+    /// <summary>
+    /// Adds a force towards the suck, then tries to remove them.
+    /// </summary>
     private void Suck()
     {
         foreach (var rb in _inTrigger)
@@ -49,6 +55,9 @@ public class BigSuck : MonoBehaviour
         TryToRemoveCloud();
     }
 
+    /// <summary>
+    /// If cloud is close enough it is destroyed(sucked).
+    /// </summary>
     private void TryToRemoveCloud()
     {
         for (int i = _inTrigger.Count -1; i >= 0; i--)
