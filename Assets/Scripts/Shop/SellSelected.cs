@@ -22,6 +22,8 @@ public class SellSelected : MonoBehaviour
             if (Inventory.itemSlots[selected].item != null)
             {
                 Debug.Log($"Selling for {Inventory.itemSlots[selected].item.sellingPrice* Inventory.itemSlots[selected].itemCount}");
+                Inventory.ChangeItemAmount(-Inventory.itemSlots[selected].itemCount, Inventory.itemSlots[selected].item);
+                
             }
         }
         
@@ -35,6 +37,8 @@ public class SellSelected : MonoBehaviour
             if (Inventory.itemSlots[i].item != null)
             {
                 Debug.Log($"Selling for {Inventory.itemSlots[i].item.sellingPrice* Inventory.itemSlots[i].itemCount}");
+                Inventory.ChangeItemAmount(-Inventory.itemSlots[i].itemCount, Inventory.itemSlots[i].item);
+                
             }
         }
     }

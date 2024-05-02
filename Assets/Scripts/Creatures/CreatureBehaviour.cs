@@ -21,6 +21,7 @@ public class CreatureBehaviour : MonoBehaviour
     private CreatureState idleCreatureState = null;
     private CreatureState alertCreatureState = null;
     private CreatureState fleeCreatureState = null;
+    private CreatureState suckedCreatureState = null;
 
     private StateMachine<CreatureState> _stateMachine = null;
     private bool startTimer;
@@ -76,6 +77,7 @@ public class CreatureBehaviour : MonoBehaviour
         idleCreatureState = new IdleState(this, rootCreatureState);
         alertCreatureState = new AlertState(this, rootCreatureState);
         fleeCreatureState = new FleeState(this, rootCreatureState);
+        suckedCreatureState = new SuckedState(this, rootCreatureState);
         _stateMachine = new StateMachine<CreatureState>();
         _stateMachine.InitializeMachine(idleCreatureState);
         
@@ -118,7 +120,9 @@ public class CreatureBehaviour : MonoBehaviour
     #endregion
 
     #region Funktions
-
+    /// <summary>
+    /// Changes the state of the creature to the behaviour it should have when it is being sucked
+    /// </summary>
     public void IsSucked()
     {
         
@@ -252,6 +256,7 @@ public class CreatureBehaviour : MonoBehaviour
         public virtual void Exit(){}
         public virtual void Range(){ParentState.Range();}
         public virtual void Flee(){ParentState.Flee();}
+        public virtual void Sucked(){ParentState.Sucked();}
     }
     
     /// <summary>
@@ -272,6 +277,7 @@ public class CreatureBehaviour : MonoBehaviour
         }
         public override void Range(){Debug.LogError("Range ha reached RootState");}
         public override void Flee(){Debug.LogError("Flee ha reached RootState");}
+        public override void Sucked(){Debug.LogError("Flee ha reached RootState");}
     }
     /// <summary>
     /// The IdleState: Sets the creatures behaviour to its idle state and transitions to alert if "Range" is called when in this state
@@ -297,6 +303,11 @@ public class CreatureBehaviour : MonoBehaviour
         {
             //Debug.Log("IdleState: Exit()"); 
             Creature.idle = false;
+        }
+
+        public override void Sucked()
+        {
+            Creature._stateMachine.Transit(Creature.suckedCreatureState);
         }
     }
     /// <summary>
@@ -328,6 +339,10 @@ public class CreatureBehaviour : MonoBehaviour
         {
             Creature._stateMachine.Transit(Creature.fleeCreatureState);
         }
+        public override void Sucked()
+        {
+            Creature._stateMachine.Transit(Creature.suckedCreatureState);
+        }
     }
     /// <summary>
     /// The FleeState: Sets the creatures behaviour to its alert state.
@@ -350,6 +365,32 @@ public class CreatureBehaviour : MonoBehaviour
         }
         public override void Range()
         {
+        }
+        public override void Sucked()
+        {
+            Creature._stateMachine.Transit(Creature.suckedCreatureState);
+        }
+    }
+    
+    private class SuckedState : CreatureState{
+        
+        public SuckedState(CreatureBehaviour creature, CreatureState parent) : base(creature, parent){}
+
+        public override void Enter()
+        {
+            //Debug.Log("SuckedState: Enter()");
+        }
+
+        public override void Exit()
+        {
+            //Debug.Log("SuckedState: Exit()");
+        }
+        public override void Range()
+        {
+        }
+        public override void Sucked()
+        {
+            Creature._stateMachine.Transit(Creature.fleeCreatureState);
         }
         
     }
