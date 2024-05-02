@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 4249317482114458654}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1518,6 +1518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _suckForce: 10
   _nozzlePosition: {fileID: 9206784229804663054}
+  _endSuckRange: 0.2
 --- !u!4 &966786669756283765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7d985332247e0834fbce609f92bf6c7e,
