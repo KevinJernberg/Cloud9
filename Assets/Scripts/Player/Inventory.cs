@@ -27,15 +27,29 @@ public static class Inventory
     {
         if (item == null)
             return false;
+        if (FindItemSlot(item, out ItemSlot foundItemSlot))
+        {
+            Debug.Log("Yes");
+            foundItemSlot.itemCount += amount;
+            foundItemSlot.item = item;
+            HotBarInventory.updateInventoryCount?.Invoke();
+        }
+
+        return false;
+    }
+
+    private static bool FindItemSlot(ItemData item, out ItemSlot foundSlot)
+    {
+        foundSlot = null;
+        if (item == null)
+            return false;
+        
         foreach (ItemSlot slot in itemSlots)
         {
             // Check if item is in inventory
             if (slot.item != item)
                 continue;
-            // Found item, add to count
-            //TODO: Check if over stack size
-            slot.itemCount += amount;
-            HotBarInventory.updateInventoryCount?.Invoke();
+            foundSlot = slot;
             return true;
         }
         
@@ -44,12 +58,9 @@ public static class Inventory
             // Add new item to slot if needs new slot
             if (slot.item != null)
                 continue;
-            slot.item = item;
-            slot.itemCount += amount;
-            HotBarInventory.updateInventoryCount?.Invoke();
+            foundSlot = slot;
             return true;
         }
-
         return false;
     }
 

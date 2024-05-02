@@ -39,11 +39,14 @@ public class HotBarInventory : MonoBehaviour
 
     private void SetSlots()
     {
+        Debug.Log("yes1.5");
         //TODO: Check if there are 2 many items for slots
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
         {
+            Debug.Log("yes1.6");
             if (Inventory.itemSlots[i].item == null)
                 continue;
+            Debug.Log("yes1.7");
             hotBarSlots[i].SetItem(Inventory.itemSlots[i]);
         }
     }
