@@ -13,6 +13,9 @@ public class BigSuck : MonoBehaviour
     [Tooltip("The force for the suck.")]
     [SerializeField] private float _suckForce = 10;
 
+    [Tooltip("The nozzle o the big gun, the point where clouds are sucked towards.")]
+    [SerializeField] private Transform _nozzlePosition;
+
     private bool _sucking;
     
     private List<Rigidbody> _inTrigger;
@@ -30,6 +33,7 @@ public class BigSuck : MonoBehaviour
     public void OnSuck(InputAction.CallbackContext context)
     {
         if(!gameObject.activeSelf)return;
+        Debug.Log("Sucking");
         _sucking = context.performed;
     }
     
@@ -37,24 +41,26 @@ public class BigSuck : MonoBehaviour
     {
         foreach (var rb in _inTrigger)
         {
-            Vector3 diff = Vector3.Normalize(rb.transform.position - transform.position);
+            Vector3 diff = Vector3.Normalize(rb.transform.position - _nozzlePosition.position);
             float dot = Vector3.Dot(diff, transform.forward);
             
-            rb.AddForce(-diff * (dot * _suckForce), ForceMode.Acceleration);
+            rb.AddForce(diff * (dot * _suckForce), ForceMode.Acceleration);
         }
         TryToRemoveCloud();
     }
 
     private void TryToRemoveCloud()
     {
-        foreach (var rb in _inTrigger)
+        for (int i = _inTrigger.Count -1; i >= 0; i--)
         {
-            Vector3 diff = Vector3.Normalize(rb.transform.position - transform.position);
+            Rigidbody rb = _inTrigger[i];
+            Vector3 diff = Vector3.Normalize(rb.transform.position - _nozzlePosition.position);
             float dot = Vector3.Dot(diff, transform.forward);
-            if (Physics.Raycast(transform.position, diff*dot, out RaycastHit HitInfo, 0.2f))
+            if (Physics.Raycast(_nozzlePosition.position, -diff*dot, out RaycastHit HitInfo, 0.2f))
             {
                 if(HitInfo.transform == rb.transform)
                 {
+                    _inTrigger.Remove(rb);
                     Destroy(rb.gameObject);
                     //SpawnCreatures
                     Debug.Log("SpawnCreature.");
@@ -66,14 +72,15 @@ public class BigSuck : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(!other.gameObject.CompareTag("Cloud"))return;
-        
+        Debug.Log("InCcone");
         if(other.TryGetComponent(out Rigidbody rb))_inTrigger.Add(rb);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if(!other.gameObject.CompareTag("Cloud"))return;
-        
+        Debug.Log("NotInCcone");
         if(other.TryGetComponent(out Rigidbody rb))_inTrigger.Remove(rb);
     }
+
 }

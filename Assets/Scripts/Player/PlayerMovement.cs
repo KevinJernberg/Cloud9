@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         _feetPos = GetComponent<CapsuleCollider>().height / 2;
         _feetPos += _extraFeetReach;
         _speed = _walkSpeed;
