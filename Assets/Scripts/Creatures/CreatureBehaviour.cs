@@ -119,6 +119,13 @@ public class CreatureBehaviour : MonoBehaviour
 
     #region Funktions
 
+    public void IsSucked()
+    {
+        
+    }
+    
+    
+    
     public void Range(){
         _stateMachine.currentState.Range();
     }
