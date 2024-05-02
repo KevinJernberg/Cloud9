@@ -13,7 +13,7 @@ public static class Inventory
 {
     private static int _maxInventorySpace;
     
-    public static List<ItemSlot> itemSlots = new List<ItemSlot>();
+    public static List<ItemSlot> itemSlots = new List<ItemSlot>(){new ItemSlot(),new ItemSlot(),new ItemSlot(),new ItemSlot(),new ItemSlot()};
 
     
     /// <summary>
