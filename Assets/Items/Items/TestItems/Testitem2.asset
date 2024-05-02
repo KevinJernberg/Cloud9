@@ -15,3 +15,4 @@ MonoBehaviour:
   itemID: 0
   itemSprite: {fileID: 0}
   stackSize: 0
+  sellingPrice: 0

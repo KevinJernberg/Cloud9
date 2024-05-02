@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HotBarSlot : MonoBehaviour
 {
     public ItemSlot currentItem;
-    public int itemAmount;
+
+    [SerializeField] private Image itemImage; 
     
-    [SerializeField] private GameObject inventoryFullIndicator;
-    
-    [SerializeField] private TextMeshProUGUI inventoryCountUI; 
+    [SerializeField] private TextMeshProUGUI itemCountText; 
 
 
     public void SetItem(ItemSlot item)
     {
         currentItem = item;
-        itemAmount = item.itemCount;
-        inventoryCountUI.text = $"{item.itemCount}";
+        itemImage.sprite = item.item.itemSprite;
+        itemCountText.text = $"{item.itemCount}";
     }
 
     private void ChangeItemAmount(int amountChanged)
     {
-        itemAmount += amountChanged;
+        itemCountText.text += amountChanged;
     }
 
     private void SetItemAmount(int amountChanged)

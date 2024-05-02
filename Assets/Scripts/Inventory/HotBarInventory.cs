@@ -7,10 +7,7 @@ using UnityEngine.Events;
 
 public class HotBarInventory : MonoBehaviour
 {
-    [SerializeField] private GameObject inventoryFullIndicator;
-    
-    [SerializeField] private TextMeshProUGUI inventoryCountUI; 
-    
+
     public static UnityAction updateInventoryCount;
 
     private static List<HotBarSlot> hotBarSlots = new List<HotBarSlot>();
@@ -36,7 +33,7 @@ public class HotBarInventory : MonoBehaviour
             hotBarSlots.Add(slot);
         }
         
-        Inventory.AddToInventory(10, testItem);
+        Inventory.AddToInventory(4, testItem);
     }
 
     private void SetSlots()
