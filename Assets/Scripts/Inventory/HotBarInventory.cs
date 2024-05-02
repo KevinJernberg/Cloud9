@@ -33,7 +33,7 @@ public class HotBarInventory : MonoBehaviour
             hotBarSlots.Add(slot);
         }
         
-        Inventory.AddToInventory(4, testItem);
+        Inventory.ChangeItemAmount(4, testItem);
     }
 
     private void SetSlots()

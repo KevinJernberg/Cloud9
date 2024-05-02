@@ -94,7 +94,7 @@ public class SmallSuck : MonoBehaviour
     private void AddToInventory(Rigidbody creature)
     {
         ItemData creatureItem = creature.GetComponent<CreatureBehaviour>().creatureItem;
-        if(Inventory.AddToInventory(1, creatureItem))
+        if(Inventory.ChangeItemAmount(1, creatureItem))
         {
             _currentlySuckedCreatures.Remove(creature);
             creature.gameObject.SetActive(false);
