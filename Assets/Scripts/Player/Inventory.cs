@@ -19,10 +19,10 @@ public static class Inventory
     /// <summary>
     /// Adds specific amount to inventory.
     /// </summary>
-    /// <param name="toAddAmount">The amount to add</param>
+    /// <param name="amount">The amount to add</param>
     /// <param name="item">The type of item to add</param>
     /// <returns>Returns true if inventory is not full, and adds toAdd to the inventory. Returns false if inventory is full
-    /// and does not add to inventory.</returns>
+    /// and adds the item if it does not already exist.</returns>
     public static bool ChangeItemAmount(int amount, ItemData item)
     {
         if (item == null)
@@ -32,7 +32,6 @@ public static class Inventory
             // Check if item is in inventory
             if (slot.item != item)
                 continue;
-            Debug.Log("1.5");
             // Found item, add to count
             //TODO: Check if over stack size
             slot.itemCount += amount;

@@ -32,8 +32,9 @@ public class HotBarInventory : MonoBehaviour
         {
             hotBarSlots.Add(slot);
         }
-        
+
         Inventory.ChangeItemAmount(4, testItem);
+        
     }
 
     private void SetSlots()
@@ -41,6 +42,8 @@ public class HotBarInventory : MonoBehaviour
         //TODO: Check if there are 2 many items for slots
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
         {
+            if (Inventory.itemSlots[i].item == null)
+                continue;
             hotBarSlots[i].SetItem(Inventory.itemSlots[i]);
         }
     }
