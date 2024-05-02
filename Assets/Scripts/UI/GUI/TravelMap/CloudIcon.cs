@@ -11,7 +11,13 @@ using Random = UnityEngine.Random;
 /// When icon is pressed the scene changes. - Kevin
 /// </summary>
 public class CloudIcon : MonoBehaviour
+
+
+
 {
+    [Header("Audio")] 
+    public UIAudio uIAudio;
+    
     #region Variable Declaration
 
     private const string CLOUD_AREA_SCENE_NAME = "CloudArena";
@@ -35,6 +41,7 @@ public class CloudIcon : MonoBehaviour
     {
         AreaCache.CloudSpawnData = _areaData;
         SceneManager.LoadScene(CLOUD_AREA_SCENE_NAME);
+        uIAudio.MapSceneChangeAudio(transform);
     }
     
     #endregion

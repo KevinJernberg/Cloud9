@@ -26,3 +26,10 @@ MonoBehaviour:
       Data3: 2090747267
       Data4: 1385374974
     Path: event:/UI/Map/Map_Close
+  mapSceneChange:
+    Guid:
+      Data1: -1112251543
+      Data2: 1087697360
+      Data3: 472201876
+      Data4: 1633654817
+    Path: event:/UI/Map/Map_SceneChange

@@ -10,7 +10,9 @@ public class UIAudio : ScriptableObject
     [SerializeField] 
     private EventReference mapToggle;
     [SerializeField] 
-        private EventReference mapClose;
+    private EventReference mapClose;
+    [SerializeField] 
+    private EventReference mapSceneChange;
     
     public void MapToggleAudio(Transform mapToggleTransform)
     {
@@ -20,5 +22,10 @@ public class UIAudio : ScriptableObject
     public void MapCloseAudio(Transform mapCloseTransform)
     {
         RuntimeManager.PlayOneShot(mapClose, mapCloseTransform.position);
+    }
+
+    public void MapSceneChangeAudio(Transform mapSceneChangeTransform)
+    {
+        RuntimeManager.PlayOneShot(mapSceneChange, mapSceneChangeTransform.position);
     }
 }

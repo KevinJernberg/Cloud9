@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c920e7a322e7e42aa317569f51c128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uIAudio: {fileID: 11400000, guid: 6edf7517b15ff1b41907eade467e7c2e, type: 2}
   cloudAmountText: {fileID: 293499828519636343}
 --- !u!1 &3406460310032963148
 GameObject:
