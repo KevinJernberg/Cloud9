@@ -13,7 +13,7 @@ public static class Inventory
 {
     private static int _maxInventorySpace;
     
-    private static List<ItemSlot> itemSlots = new List<ItemSlot>();
+    public static List<ItemSlot> itemSlots = new List<ItemSlot>();
 
     
     /// <summary>
@@ -25,26 +25,34 @@ public static class Inventory
     /// and does not add to inventory.</returns>
     public static bool AddToInventory(int toAddAmount, ItemData item)
     {
+        Debug.Log("1");
         if (item == null)
             return false;
-            
+        Debug.Log(itemSlots.Count);
         foreach (ItemSlot slot in itemSlots)
         {
+            // Check if item is in inventory
             if (slot.item != item)
                 continue;
-
+            Debug.Log("1.5");
+            // Found item, add to count
+            //TODO: Check if over stack size
             slot.itemCount += toAddAmount;
+            HotBarInventory.updateInventoryCount?.Invoke();
             return true;
         }
+        
         foreach (ItemSlot slot in itemSlots)
         {
-            if (slot.item == null)
+            // Add new item to slot if needs new slot
+            if (slot.item != null)
                 continue;
             slot.item = item;
             slot.itemCount += toAddAmount;
+            Debug.Log("2");
+            HotBarInventory.updateInventoryCount?.Invoke();
+            return true;
         }
-        
-        
 
         return false;
     }

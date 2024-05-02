@@ -13,7 +13,6 @@ public class ItemData : ScriptableObject
     public int itemID;
     public Sprite itemSprite;
     public int stackSize;
+    public int sellingPrice;
 
-
-    
 }

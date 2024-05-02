@@ -8,24 +8,24 @@ using UnityEngine.Events;
 public class HotBarInventory : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryFullIndicator;
-
-
-
+    
     [SerializeField] private TextMeshProUGUI inventoryCountUI; 
     
-    public static UnityAction<int, int> updateInventoryCount;
+    public static UnityAction updateInventoryCount;
 
-    private static List<HotBarSlot> hotBarSlots;
+    private static List<HotBarSlot> hotBarSlots = new List<HotBarSlot>();
 
+
+    [SerializeField] private ItemData testItem;
 
     private void OnEnable()
     {
-        updateInventoryCount += SetSlot;
+        updateInventoryCount += SetSlots;
     }
     
     private void OnDisable()
     {
-        updateInventoryCount -= SetSlot;
+        updateInventoryCount -= SetSlots;
     }
 
     private void Start()
@@ -35,10 +35,16 @@ public class HotBarInventory : MonoBehaviour
         {
             hotBarSlots.Add(slot);
         }
+        
+        Inventory.AddToInventory(10, testItem);
     }
 
-    private void SetSlot(int amount, int slot)
+    private void SetSlots()
     {
-        
+        //TODO: Check if there are 2 many items for slots
+        for (int i = 0; i < Inventory.itemSlots.Count; i++)
+        {
+            hotBarSlots[i].SetItem(Inventory.itemSlots[i]);
+        }
     }
 }
