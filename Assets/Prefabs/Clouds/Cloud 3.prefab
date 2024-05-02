@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7648351451883484477}
   - component: {fileID: -5468987976776224250}
   - component: {fileID: 2253758413640538983}
+  - component: {fileID: -6063655057151022826}
   m_Layer: 9
   m_Name: Cloud 3
   m_TagString: Cloud
@@ -115,3 +116,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6063655057151022826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152812127975118056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1993a66ee8ad34bb1591b70e1bfeae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showSpawnSphere: 1
+  spawnSphereRadius: 2
+  minSpawnDelay: 0.5
+  maxSpawnDelay: 2
+  maxCreatures: 3
+  commonCreature: {fileID: 8159911081057059332, guid: fd2577f26714b08428a6e5d4b81772a0,
+    type: 3}
+  commonSpawnChance: 0.55483323
+  commonCreatureItem: {fileID: 0}
+  rareCreature: {fileID: 673839982074558909, guid: aafec35dc4f2f53459ececf9feb35247,
+    type: 3}
+  rareSpawnChance: 0.29813763
+  rareCreatureItem: {fileID: 0}
+  epicCreature: {fileID: 6427888255289136325, guid: 8140e32ed390fe4478b51399972f2524,
+    type: 3}
+  epicSpawnChance: 0.1150067
+  epicCreatureItem: {fileID: 0}
+  legendaryCreature: {fileID: 876005099431923703, guid: 5669e60768d5daa49be6d32f921ee3eb,
+    type: 3}
+  legendarySpawnChance: 0.032022417
+  legendaryCreatureItem: {fileID: 0}

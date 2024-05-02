@@ -14,6 +14,8 @@ using Random = UnityEngine.Random;
 /// This class also hold information about what kinds of creatures & rarities can spawn
 /// Currently made for 4 rarities - Kevin
 /// Added support for creature rarities in the spawning and randomizing of creatures;
+///
+/// Changed from spawning in update to spawning a set amount of creatures when destroyed - Linnéa
 /// </summary>
 public class CloudCreatureSpawner : MonoBehaviour
 {
@@ -30,10 +32,12 @@ public class CloudCreatureSpawner : MonoBehaviour
     [SerializeField] private float minSpawnDelay;
     [SerializeField] private float maxSpawnDelay;
     private float spawnTimer;
-
+    
 
     [Header("Spawn Creatures & Odds")] 
     [SerializeField] private int maxCreatures;
+    [Tooltip("The amount of creatures to spawn")]
+    [SerializeField] private int amountOfCreaturesToSpawn = 3;
     
     
     //TODO: Combine Creature & SpawnChance to one class, for easier rarity addition
@@ -63,7 +67,7 @@ public class CloudCreatureSpawner : MonoBehaviour
 
 
     #region Gameplay Functions
-    private void Update()
+    /*private void Update()
     {
         spawnTimer -= Time.deltaTime;
         if (spawnTimer < 0)
@@ -73,7 +77,14 @@ public class CloudCreatureSpawner : MonoBehaviour
             spawnTimer = Random.Range(minSpawnDelay, maxSpawnDelay);
         }
     }
-
+*/
+    private void OnDestroy()
+    {
+        for (int i = 0; i < amountOfCreaturesToSpawn; i++)
+        {
+            SpawnCreature();
+        }
+    }
 
     /// <summary>
     /// Manages the randomization of a creature
