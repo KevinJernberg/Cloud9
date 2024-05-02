@@ -14,6 +14,7 @@ public class HotBarInventory : MonoBehaviour
 
 
     [SerializeField] private ItemData testItem;
+    [SerializeField] private ItemData testItem1;
 
     private void OnEnable()
     {
@@ -33,21 +34,27 @@ public class HotBarInventory : MonoBehaviour
             hotBarSlots.Add(slot);
         }
 
-        Inventory.ChangeItemAmount(4, testItem);
-        
+        ResetSlots();
+        Inventory.ChangeItemAmount(5, testItem);
+        Inventory.ChangeItemAmount(2, testItem1);
+
     }
 
     private void SetSlots()
     {
-        Debug.Log("yes1.5");
-        //TODO: Check if there are 2 many items for slots
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
         {
-            Debug.Log("yes1.6");
             if (Inventory.itemSlots[i].item == null)
                 continue;
-            Debug.Log("yes1.7");
             hotBarSlots[i].SetItem(Inventory.itemSlots[i]);
+        }
+    }
+
+    private void ResetSlots()
+    {
+        for (int i = 0; i < Inventory.itemSlots.Count; i++)
+        {
+            hotBarSlots[i].RemoveItem();
         }
     }
 }

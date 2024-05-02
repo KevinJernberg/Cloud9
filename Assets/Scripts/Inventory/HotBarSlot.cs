@@ -15,7 +15,6 @@ public class HotBarSlot : MonoBehaviour
 
     public void SetItem(ItemSlot item)
     {
-        Debug.Log("Yes2");
         if (item.itemCount <= 0)
         {
             RemoveItem();
@@ -31,7 +30,7 @@ public class HotBarSlot : MonoBehaviour
         itemCountText.text += amountChanged;
     }
 
-    private void RemoveItem()
+    public void RemoveItem()
     {
         currentItem = null;
         itemImage.sprite = null;

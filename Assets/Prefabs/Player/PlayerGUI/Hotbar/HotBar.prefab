@@ -138,9 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fadcadb63b33e4aaf6d6b53f8b366b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryFullIndicator: {fileID: 0}
-  inventoryCountUI: {fileID: 0}
   testItem: {fileID: 11400000, guid: 74743270c53f79d4e93f8917f4dd0999, type: 2}
+  testItem1: {fileID: 11400000, guid: a9f37498a94f4794a840728d7323804b, type: 2}
 --- !u!1001 &2019860810347706414
 PrefabInstance:
   m_ObjectHideFlags: 0
