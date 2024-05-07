@@ -66,6 +66,8 @@ public class CreatureBehaviour : MonoBehaviour
     [NonSerialized]
     public ItemData creatureItem;
 
+    public CreatureRarity creatureRarity;
+    
     public void Awake(){
         detectionRadius = GetComponent<SphereCollider>();
         rb = GetComponent<Rigidbody>();
@@ -411,5 +413,12 @@ public class CreatureBehaviour : MonoBehaviour
         }
         
 
+    }
+    public enum CreatureRarity
+    {
+        Common,
+        Rare,
+        Epic,
+        Legendary
     }
 }
