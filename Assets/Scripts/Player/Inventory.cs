@@ -25,11 +25,10 @@ public static class Inventory
     /// and adds the item if it does not already exist.</returns>
     public static bool ChangeItemAmount(int amount, ItemData item)
     {
-        if (item == null)
+        if (item == null || amount == 0)
             return false;
         if (FindItemSlot(item, out ItemSlot foundItemSlot))
         {
-            Debug.Log("Yes");
             foundItemSlot.itemCount += amount;
             foundItemSlot.item = item;
             HotBarInventory.updateInventoryCount?.Invoke();
