@@ -528,7 +528,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4359809729793990980}
+      - m_Target: {fileID: 4359809730013011807}
         m_TargetAssemblyTypeName: SellSelected, Assembly-CSharp
         m_MethodName: SellAll
         m_Mode: 1
@@ -553,6 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   system: {fileID: 0}
+  list: {fileID: 0}
 --- !u!1 &4359809729817164365
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   system: {fileID: 0}
+  list: {fileID: 11400000, guid: c6cccc626a1411b41b54774f1e68f39f, type: 2}
 --- !u!1 &4359809730031567896
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class SellSelected : MonoBehaviour
 {
     [SerializeField] private EventSystem system;
     private int selected = 5;
+    [SerializeField] private ShopingList list;
 
     public void Select(int slot)
     {
@@ -21,10 +22,18 @@ public class SellSelected : MonoBehaviour
         {
             if (Inventory.itemSlots[selected].item != null)
             {
-                Debug.Log($"Selling for {Inventory.itemSlots[selected].item.sellingPrice* Inventory.itemSlots[selected].itemCount}");
-                Inventory.ChangeItemAmount(-Inventory.itemSlots[selected].itemCount, Inventory.itemSlots[selected].item);
+                if (Contain(list.item, Inventory.itemSlots[selected].item))
+                {
+                    Debug.Log($"Selling for {list.sellPrice[Find(list.item,Inventory.itemSlots[selected].item)] * Inventory.itemSlots[selected].itemCount}");
+                    Inventory.ChangeCoinAmount(list.sellPrice[Find(list.item,Inventory.itemSlots[selected].item)] * Inventory.itemSlots[selected].itemCount);
+                    Inventory.ChangeItemAmount(-Inventory.itemSlots[selected].itemCount, Inventory.itemSlots[selected].item);
+                    
+                }
+                else
+                {
+                    Debug.Log($"This shop is not buying: {Inventory.itemSlots[selected].item.name}");
+                }
                 
-                Inventory.ChangeCoinAmount(Inventory.itemSlots[selected].item.sellingPrice * Inventory.itemSlots[selected].itemCount);
             }
         }
         
@@ -33,14 +42,49 @@ public class SellSelected : MonoBehaviour
     public void SellAll()
     {
         //Todo: Make it so that the items gets removed from the inventory and adds the price to a money counter
+        int sellammount = 0;
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
         {
             if (Inventory.itemSlots[i].item != null)
             {
-                Debug.Log($"Selling for {Inventory.itemSlots[i].item.sellingPrice* Inventory.itemSlots[i].itemCount}");
-                Inventory.ChangeItemAmount(-Inventory.itemSlots[i].itemCount, Inventory.itemSlots[i].item);
-                
+                if (Contain(list.item, Inventory.itemSlots[i].item))
+                {
+                    sellammount+=(list.sellPrice[Find(list.item,Inventory.itemSlots[i].item)] * Inventory.itemSlots[i].itemCount);
+                    Inventory.ChangeItemAmount(-Inventory.itemSlots[i].itemCount, Inventory.itemSlots[i].item);
+                }
+                else
+                {
+                    Debug.Log($"This shop is not buying: {Inventory.itemSlots[i].item.name}");
+                }
             }
         }
+        Debug.Log($"Selling  all items for {sellammount}");
+        Inventory.ChangeCoinAmount(sellammount);
+    }
+
+    private bool Contain(ItemData[] original, ItemData item)
+    {
+        for (int i = 0; i < original.Length; i++)
+        {
+            if (original[i] == item)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    private int Find(ItemData[] original, ItemData item)
+    {
+        for (int i = 0; i < original.Length; i++)
+        {
+            if (original[i] == item)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
