@@ -109,9 +109,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Click"",
+                    ""name"": ""ExitMiniGame"",
                     ""type"": ""Button"",
-                    ""id"": ""50004d79-e9ba-444d-9a0e-1f98bb8cd417"",
+                    ""id"": ""ef3f26dc-c7c9-4f9d-9d01-72e7b8e7b6d7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -308,12 +308,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""06c4ddf2-6885-4e7c-b37b-373992a99171"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""b4a30917-ab68-47ab-ae62-4eb9504cc91e"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Click"",
+                    ""action"": ""ExitMiniGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1126,7 +1126,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Player_MinigameTest = m_Player.FindAction("MinigameTest", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_ChangeSuckMode = m_Player.FindAction("ChangeSuckMode", throwIfNotFound: true);
-        m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+        m_Player_ExitMiniGame = m_Player.FindAction("ExitMiniGame", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1217,7 +1217,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MinigameTest;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_ChangeSuckMode;
-    private readonly InputAction m_Player_Click;
+    private readonly InputAction m_Player_ExitMiniGame;
     public struct PlayerActions
     {
         private @Input m_Wrapper;
@@ -1231,7 +1231,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @MinigameTest => m_Wrapper.m_Player_MinigameTest;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @ChangeSuckMode => m_Wrapper.m_Player_ChangeSuckMode;
-        public InputAction @Click => m_Wrapper.m_Player_Click;
+        public InputAction @ExitMiniGame => m_Wrapper.m_Player_ExitMiniGame;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1268,9 +1268,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @ChangeSuckMode.started += instance.OnChangeSuckMode;
             @ChangeSuckMode.performed += instance.OnChangeSuckMode;
             @ChangeSuckMode.canceled += instance.OnChangeSuckMode;
-            @Click.started += instance.OnClick;
-            @Click.performed += instance.OnClick;
-            @Click.canceled += instance.OnClick;
+            @ExitMiniGame.started += instance.OnExitMiniGame;
+            @ExitMiniGame.performed += instance.OnExitMiniGame;
+            @ExitMiniGame.canceled += instance.OnExitMiniGame;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1302,9 +1302,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @ChangeSuckMode.started -= instance.OnChangeSuckMode;
             @ChangeSuckMode.performed -= instance.OnChangeSuckMode;
             @ChangeSuckMode.canceled -= instance.OnChangeSuckMode;
-            @Click.started -= instance.OnClick;
-            @Click.performed -= instance.OnClick;
-            @Click.canceled -= instance.OnClick;
+            @ExitMiniGame.started -= instance.OnExitMiniGame;
+            @ExitMiniGame.performed -= instance.OnExitMiniGame;
+            @ExitMiniGame.canceled -= instance.OnExitMiniGame;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1582,7 +1582,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnMinigameTest(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnChangeSuckMode(InputAction.CallbackContext context);
-        void OnClick(InputAction.CallbackContext context);
+        void OnExitMiniGame(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
