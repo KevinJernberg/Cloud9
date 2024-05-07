@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         _direction = context.ReadValue<Vector3>();
         if(_direction.magnitude > 1) _direction.Normalize();
         _shouldMove = _direction != Vector3.zero;
-        if(_speed == _walkSpeed)
+        if (_speed == _walkSpeed)
         {
             _animator.SetBool("Walking", _shouldMove);
             _animator.SetBool("Running", false);
@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
             _animator.SetBool("Running", _shouldMove);
         }
+       _animator.SetBool("Idle", !_shouldMove);
         
     }
 
