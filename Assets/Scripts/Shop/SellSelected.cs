@@ -24,6 +24,7 @@ public class SellSelected : MonoBehaviour
                 Debug.Log($"Selling for {Inventory.itemSlots[selected].item.sellingPrice* Inventory.itemSlots[selected].itemCount}");
                 Inventory.ChangeItemAmount(-Inventory.itemSlots[selected].itemCount, Inventory.itemSlots[selected].item);
                 
+                Inventory.ChangeCoinAmount(Inventory.itemSlots[selected].item.sellingPrice * Inventory.itemSlots[selected].itemCount);
             }
         }
         
