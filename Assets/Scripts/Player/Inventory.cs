@@ -12,6 +12,8 @@ using UnityEngine.Rendering;
 public static class Inventory
 {
     private static int _maxInventorySpace;
+
+    private static int _coinAmount = 0;
     
     public static List<ItemSlot> itemSlots = new List<ItemSlot>(){new ItemSlot(),new ItemSlot(),new ItemSlot(),new ItemSlot(),new ItemSlot()};
 
@@ -86,6 +88,21 @@ public static class Inventory
         //
         return false;
     }
+
+    /// <summary>
+    /// Changes the amount of coins the player holds
+    /// </summary>
+    /// <param name="amount">The amount of coins, negative amount indicate subtraction</param>
+    /// <returns>False if amount removed is more than the current coin amount, otherwise true</returns>
+    public static bool ChangeCoinAmount(int amount)
+    {
+        if (-amount > _coinAmount)
+            return false;
+        _coinAmount += amount;
+        CoinCounter.updateCoinCount?.Invoke(_coinAmount);
+        return true;
+    }
+
 }
 
 public class ItemSlot
