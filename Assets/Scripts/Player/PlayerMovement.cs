@@ -25,18 +25,24 @@ public class PlayerMovement : MonoBehaviour
     private bool _jumping;
     private Rigidbody _rb;
     private float _speed;
+    private Animator _animator;
+    
+    
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        _animator = GetComponent<Animator>();
         _feetPos = GetComponent<CapsuleCollider>().height / 2;
         _feetPos += _extraFeetReach;
         _speed = _walkSpeed;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if(_shouldMove) Move();
+        
+        Debug.Log(_shouldMove);
     }
 
     /// <summary>
@@ -68,7 +74,19 @@ public class PlayerMovement : MonoBehaviour
     {
         _direction = context.ReadValue<Vector3>();
         if(_direction.magnitude > 1) _direction.Normalize();
-        _shouldMove = context.performed;
+        _shouldMove = _direction != Vector3.zero;
+        if(_speed == _walkSpeed)
+        {
+            _animator.SetBool("Walking", _shouldMove);
+            _animator.SetBool("Running", false);
+        }
+
+        else if (_speed == _runSpeed)
+        {
+            _animator.SetBool("Walking", false);
+            _animator.SetBool("Running", _shouldMove);
+        }
+        
     }
 
     /// <summary>
@@ -98,7 +116,18 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context"></param>
     public void OnSprint(InputAction.CallbackContext context)
     {
-        _speed = context.performed ? _runSpeed : _walkSpeed;
+        _speed = context.ReadValue<float>() > 0.0f ? _runSpeed : _walkSpeed;
+        if(context.ReadValue<float>() > 0.0f && _shouldMove)
+        {
+            _animator.SetBool("Running", true);
+            _animator.SetBool("Walking", false);
+        }
+        else if (_shouldMove)
+        {
+            _animator.SetBool("Running", false);
+            _animator.SetBool("Walking", true);
+        }
+        //_speed = context.performed ? _runSpeed : _walkSpeed;
     }
     #endregion
 
