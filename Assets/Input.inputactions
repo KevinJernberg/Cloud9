@@ -87,9 +87,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Click",
+                    "name": "ExitMiniGame",
                     "type": "Button",
-                    "id": "50004d79-e9ba-444d-9a0e-1f98bb8cd417",
+                    "id": "ef3f26dc-c7c9-4f9d-9d01-72e7b8e7b6d7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -286,12 +286,12 @@
                 },
                 {
                     "name": "",
-                    "id": "06c4ddf2-6885-4e7c-b37b-373992a99171",
-                    "path": "<Mouse>/leftButton",
+                    "id": "b4a30917-ab68-47ab-ae62-4eb9504cc91e",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Click",
+                    "action": "ExitMiniGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
