@@ -35,6 +35,8 @@ public class HotBarInventory : MonoBehaviour
         }
 
         ResetSlots();
+        Inventory.ChangeItemAmount(3, testItem);
+        Inventory.ChangeItemAmount(10, testItem1);
     }
 
     private void SetSlots()
