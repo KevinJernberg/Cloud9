@@ -83,6 +83,7 @@ public static class Inventory
                 itemSlots.Add(new ItemSlot());
             }
             slotAmountUpdated?.Invoke(itemSlots.Count);
+            HotBarInventory.updateInventoryCount?.Invoke();
             return true;
         }
         return false;
