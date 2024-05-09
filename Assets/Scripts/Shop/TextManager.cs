@@ -8,8 +8,19 @@ using UnityEngine;
 public class TextManager : MonoBehaviour
 {
     [SerializeField] private List<TextMeshProUGUI> texts;
+    [SerializeField] private List<TextMeshProUGUI> prices;
+    
+    
+    private void OnEnable()
+    {
+        BuyUpgrade.OnBuy += UpdatePrice;
+    }
 
-    // Start is called before the first frame update
+    private void OnDisable()
+    {
+        BuyUpgrade.OnBuy -= UpdatePrice;
+    }
+    
     void Start()
     {
         float size = texts[0].fontSize;
@@ -25,6 +36,10 @@ public class TextManager : MonoBehaviour
             text.enableAutoSizing = false;
             text.fontSize = size;
         }
-        
+    }
+
+    private void UpdatePrice(int price, int slot)
+    {
+        prices[slot].text = $"{price}$";
     }
 }

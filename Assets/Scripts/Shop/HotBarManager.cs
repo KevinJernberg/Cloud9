@@ -22,7 +22,6 @@ public class HotBarManager : MonoBehaviour
 
     public void UpdateInventorySlots(int slots)
     {
-        Debug.Log(slots);
         for (int i = 0; i < slots; i++)
         {
             if (buttons[i].interactable != true)
