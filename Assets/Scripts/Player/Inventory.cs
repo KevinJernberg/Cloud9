@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 /// <summary>
 /// Inventory for creatures - Linnéa
@@ -11,13 +12,15 @@ using UnityEngine.Rendering;
 /// </summary>
 public static class Inventory
 {
-    private static int _maxInventorySpace;
+    private static int _maxInventorySpace = 5;
 
     private static int _coinAmount = 0;
     
-    public static List<ItemSlot> itemSlots = new List<ItemSlot>(){new ItemSlot(),new ItemSlot(),new ItemSlot(),new ItemSlot(),new ItemSlot()};
+    public static List<ItemSlot> itemSlots = new List<ItemSlot>(){new ItemSlot(),new ItemSlot(),new ItemSlot()};
 
-    
+    public static UnityAction<int> slotAmountUpdated;
+
+
     /// <summary>
     /// Adds specific amount to inventory.
     /// </summary>
@@ -65,29 +68,29 @@ public static class Inventory
         return false;
     }
 
+
     /// <summary>
-    /// Sets the max amount of creatures in inventory, if the value is bigger than the current amount of creatures in inventory.
-    /// If overrideInventory is set to true it sets the inventory space to the value regardless if it is smaller than
-    /// the currently collected creatures amount.
+    /// 
     /// </summary>
-    /// <param name="value">The value to set the inventory to</param>
-    /// <param name="overrideInventory">If true inventory limit is set to value regardless of how many creatures collected</param>
-    /// <returns>True if inventory max is changed, false otherwise</returns>
-    public static bool SetMaxInventorySpace(int value, bool overrideInventory = false)
+    /// <returns>False if there are no more slot spaces, true if size is changed</returns>
+    public static bool AddInventorySlots(int slotAmountToAdd)
     {
-        // if(overrideInventory)
-        // {
-        //     _maxInventorySpace = value;
-        //     return true;
-        // }
-        // if (value > _collectedCreatures)
-        // {
-        //     _maxInventorySpace = value;
-        //     return true;
-        // }
-        //
+        if (itemSlots.Count < _maxInventorySpace)
+        {
+            int slotAmountLeft = slotAmountToAdd > _maxInventorySpace-itemSlots.Count ? _maxInventorySpace-itemSlots.Count : slotAmountToAdd;
+            for (int i = 0; i < slotAmountLeft; i++)
+            {
+                itemSlots.Add(new ItemSlot());
+            }
+            slotAmountUpdated?.Invoke(itemSlots.Count);
+            HotBarInventory.updateInventoryCount?.Invoke();
+            return true;
+        }
         return false;
     }
+
+    
+    public static bool SetMaxInventorySpace(int amount){ return false; }
 
     /// <summary>
     /// Changes the amount of coins the player holds
