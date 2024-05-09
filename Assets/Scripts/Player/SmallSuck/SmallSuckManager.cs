@@ -24,6 +24,10 @@ public class SmallSuckManager : MonoBehaviour
     [SerializeField] private Transform _nozzlePosition;
     [SerializeField] private float _suckNozzleSize = 0.1f;
     [SerializeField] private float _creatureSpinSpeed = 10;
+    [SerializeField] private int _smallAreaPoints = 3;
+    [SerializeField] private int _middleAreaPoints = 2;
+    [SerializeField] private int _bigAreaPoints = 1;
+    [SerializeField] private int _outsideOfAreaPoints = -4;
     
     [Serializable]
     internal class CreatureValue
@@ -63,9 +67,29 @@ public class SmallSuckManager : MonoBehaviour
     private void SuckMiniGame()
     {
         SpinCreature();
-        if(points == 100)WinMiniGame();
+        if(points >= 100)WinMiniGame();
+        else if(points <= 0)LoseMiniGame();
+        points += CheckWhatArea();
     }
-    
+
+    private int CheckWhatArea()
+    {
+        if (_smallSuckArea.InArea)
+        {
+            return _smallAreaPoints;
+        }
+        if (_middleSuckArea.InArea)
+        {
+            return _middleAreaPoints;
+        }
+
+        if (_bigSuckArea.InArea)
+        {
+            return _bigAreaPoints;
+        }
+
+        return _outsideOfAreaPoints;
+    }
 
     private void StartMiniGame()
     {
@@ -109,12 +133,12 @@ public class SmallSuckManager : MonoBehaviour
             }
         }
     }
-    private void SuckCreature()
+    private void SuckCreature(float suckForce)
     {
         Vector3 diff = Vector3.Normalize(_creatureToBeSucked.transform.position - _nozzlePosition.position);
         float dot = Vector3.Dot(diff, transform.forward);
         
-        _creatureToBeSucked.AddForce(diff * (-dot * _suckForce), ForceMode.Acceleration);
+        _creatureToBeSucked.AddForce(diff * (-dot * suckForce), ForceMode.Acceleration);
     }
 
     private void SpinCreature()
@@ -150,6 +174,11 @@ public class SmallSuckManager : MonoBehaviour
     {
         Debug.Log("MiniGameWon");
         _creatureToBeSucked.gameObject.SetActive(false);
+    }
+
+    private void LoseMiniGame()
+    {
+        Debug.Log("MiniGameLost");
     }
 
     private void OnDrawGizmos()

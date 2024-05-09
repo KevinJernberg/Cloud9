@@ -41,8 +41,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if(_shouldMove) Move();
-        
-        Debug.Log(_shouldMove);
     }
 
     /// <summary>
