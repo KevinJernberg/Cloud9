@@ -10,9 +10,7 @@ public class ShipStorage : MonoBehaviour, IInteract
     [SerializeField] private PlayerInput _playerInputComponent;
 
     [SerializeField] private Slider storageCapacitySlider;
-    
-    [SerializeField] private ItemData[] storage = new ItemData[10];
-    
+
 
     [Header("Timings")]
     [SerializeField, Tooltip("The time it takes to start depositing, in seconds")] private float waitTimeUntilStart;
@@ -52,7 +50,7 @@ public class ShipStorage : MonoBehaviour, IInteract
         }
 
         yield return new WaitForSeconds(waitTimeUntilStart);
-        storageCapacitySlider.value = (float)(storage.Length-spaceLeft) / storage.Length;
+        storageCapacitySlider.value = (float)(ShipInventory.storage.Length-spaceLeft) / ShipInventory.storage.Length;
 
         int amountAdded = 0;
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
@@ -68,10 +66,10 @@ public class ShipStorage : MonoBehaviour, IInteract
 
                 yield return new WaitForSeconds(waitTimeBetweenDeposits);
                 Inventory.ChangeItemAmount(-1, (Inventory.itemSlots[i].item));
-                storage[storage.Length - spaceLeft] = Inventory.itemSlots[i].item;
-                Debug.Log($"{CheckStorageAmountLeft()}  {storage.Length}");
+                ShipInventory.storage[ShipInventory.storage.Length - spaceLeft] = Inventory.itemSlots[i].item;
+                Debug.Log($"{CheckStorageAmountLeft()}  {ShipInventory.storage.Length}");
                 amountAdded++;
-                storageCapacitySlider.value = (float)(storage.Length-spaceLeft+1) / storage.Length;
+                storageCapacitySlider.value = (float)(ShipInventory.storage.Length-spaceLeft+1) / ShipInventory.storage.Length;
             }
         }
         yield return new WaitForSeconds(waitTimeAfter);
@@ -84,7 +82,7 @@ public class ShipStorage : MonoBehaviour, IInteract
     private bool CheckIfFull()
     {
         int spaceLeft = CheckStorageAmountLeft();
-        Debug.Log($"SPACE LEFT: {spaceLeft} \n List: {storage[3]}");
+        Debug.Log($"SPACE LEFT: {spaceLeft} \n List: {ShipInventory.storage[3]}");
         if (spaceLeft == 0)
             return true;
         return false;
@@ -93,11 +91,11 @@ public class ShipStorage : MonoBehaviour, IInteract
     private int CheckStorageAmountLeft()
     {
         int amount = 0;
-        for (int i = 0; i < storage.Length; i++)
+        for (int i = 0; i < ShipInventory.storage.Length; i++)
         {
-            if (storage[i] == null)
+            if (ShipInventory.storage[i] == null)
             {
-                amount = storage.Length - (i);
+                amount = ShipInventory.storage.Length - (i);
                 break;
             }
         }
