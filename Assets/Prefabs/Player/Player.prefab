@@ -397,7 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkSpeed: 2
   _runSpeed: 4
-  _turnSpeed: 1
+  _turnSpeed: 0.9
   _jumpForce: 4
   _extraFeetReach: 0.02
 --- !u!114 &783641899586264829
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7832c74cc4bf3e44ea63a5f4c9b576af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turnSensitivity: 1
+  _turnSensitivity: 0.9
   _rotationMin: -85
   _rotationMax: 85
 --- !u!114 &783641899586264830
