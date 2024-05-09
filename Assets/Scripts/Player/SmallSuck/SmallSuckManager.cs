@@ -19,8 +19,8 @@ public class SmallSuckManager : MonoBehaviour
     [Serializable]
     internal class CreatureValue
     {
-        [SerializeField]private CreatureRarity _rarity;
-        public CreatureRarity Rarity => _rarity;
+        [SerializeField]private CreatureBehaviour.CreatureRarity _rarity;
+        public CreatureBehaviour.CreatureRarity Rarity => _rarity;
         
         [SerializeField]private int _value;
         public int Value => _value;
