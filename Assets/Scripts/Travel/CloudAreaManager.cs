@@ -17,11 +17,13 @@ public class CloudAreaManager : MonoBehaviour
 
     [SerializeField, Tooltip("The area where cloud can spawn, represented by a cyan box gizmo")] private bool showCloudSpawnArea;
     [SerializeField] private Vector2 cloudSpawnAreaSize;
+    [SerializeField] private float minimumCloudDistance;
     private Rect _cloudSpawnArea = new Rect();
     
     private CloudSceneStats _cloudData;
 
     [SerializeField] private GameObject cloudSpawnerPrefab;
+    [SerializeField] private GameObject line;
 
     [SerializeField] private GameObject[] clouds;
     
@@ -47,8 +49,25 @@ public class CloudAreaManager : MonoBehaviour
     {
         for (int i = 0; i < _cloudData.CloudAmount; i++)
         {
+            bool foundCloudPosition = false;
+            Vector3 randomizedCloudPosition = RandomizeCloudPosition();
+            for (int j = 0; j < 3; j++)
+            {
+                for (int k = 0; k < clouds.Length; k++)
+                {
+                    foundCloudPosition = Vector3.Distance(randomizedCloudPosition, clouds[k].transform.position) >
+                                         minimumCloudDistance;
+                    if (foundCloudPosition)
+                        break;
+                }
+                if (foundCloudPosition)
+                    break;
+            }
             
-            Instantiate(clouds[Random.Range(0, clouds.Length)], RandomizeCloudPosition(), Quaternion.identity);
+            if (foundCloudPosition)
+                Instantiate(clouds[Random.Range(0, clouds.Length)], RandomizeCloudPosition(), Quaternion.identity);
+            else
+                Debug.Log("Cloud could not spawn");
         }
     }
 
