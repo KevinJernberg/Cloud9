@@ -43,6 +43,7 @@ public class HotBarInventory : MonoBehaviour
     {
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
         {
+            hotBarSlots[i].RemoveItem();
             if (Inventory.itemSlots[i].item == null)
                 continue;
             hotBarSlots[i].SetItem(Inventory.itemSlots[i]);
