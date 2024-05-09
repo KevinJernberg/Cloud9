@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SmallSuckManager : MonoBehaviour
 {
     public static UnityAction<GameObject> MiniGameStarted;
 
     public static UnityAction MiniGameEnded;
+
+    public static UnityAction<GameObject> MiniGameLost;
     //När de blir sucked ska man kalla på creatureBehaviour beingSucked
     //Det kommer finnas 3 olika colliders att hålla koll på, och de kommer att ge olika resultat
     // Start is called before the first frame update
@@ -28,6 +31,8 @@ public class SmallSuckManager : MonoBehaviour
     [SerializeField] private int _middleAreaPoints = 2;
     [SerializeField] private int _bigAreaPoints = 1;
     [SerializeField] private int _outsideOfAreaPoints = -4;
+    [SerializeField] private int _maxPoints = 100;
+    [SerializeField] private Image _warningImage;
     
     [Serializable]
     internal class CreatureValue
@@ -44,10 +49,13 @@ public class SmallSuckManager : MonoBehaviour
     private Rigidbody _creatureToBeSucked;
     private float _nozzleOffset = 0.7f;
     private int points;
+    private bool _loosingPoints;
+    private bool _alreadyLoosingPoints;
 
     private void Awake()
     {
         _smallSuckOriginalPos = transform.localPosition;
+        _warningImage.gameObject.SetActive(false);
     }
 
     ///Frågor:
@@ -67,28 +75,75 @@ public class SmallSuckManager : MonoBehaviour
     private void SuckMiniGame()
     {
         SpinCreature();
-        if(points >= 100)WinMiniGame();
+        if(points >= _maxPoints)WinMiniGame();
         else if(points <= 0)LoseMiniGame();
         points += CheckWhatArea();
+        if(!_loosingPoints)
+        {
+            _warningImage.gameObject.SetActive(false);
+            Debug.Log("Adding points");
+        }
     }
 
     private int CheckWhatArea()
     {
         if (_smallSuckArea.InArea)
         {
+            _loosingPoints = false;
             return _smallAreaPoints;
         }
         if (_middleSuckArea.InArea)
         {
+            _loosingPoints = false;
             return _middleAreaPoints;
         }
 
         if (_bigSuckArea.InArea)
         {
+            _loosingPoints = false;
+            
             return _bigAreaPoints;
         }
 
+        _loosingPoints = true;
+        Debug.Log("loosing points");
+        StartCoroutine(Warning());
         return _outsideOfAreaPoints;
+    }
+
+
+    private IEnumerator Warning()
+    {
+        if (_alreadyLoosingPoints)yield return null;
+        _alreadyLoosingPoints = true;
+        _warningImage.gameObject.SetActive(true);
+        // Run this indefinitely
+        Vector3 maxSize = new Vector3(2,2,2);
+        Vector3 minSIze = new Vector3(0.5f,0.5f,0.5f);
+        float currentSize = _warningImage.transform.localScale.x;
+        float speed = 0.2f;
+        while (_loosingPoints)
+        {
+            
+            // Get bigger for a few seconds
+            while (_warningImage.transform.localScale.x < maxSize.x)
+            {
+                _warningImage.transform.localScale = Vector3.Lerp(_warningImage.transform.localScale, maxSize, speed);
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            // Shrink for a few seconds
+            while (_warningImage.transform.localScale.x > minSIze.x)
+            {
+                _warningImage.transform.localScale = Vector3.Lerp(_warningImage.transform.localScale,minSIze , -speed);
+
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        _alreadyLoosingPoints = false;
+        _warningImage.gameObject.SetActive(false);
     }
 
     private void StartMiniGame()
@@ -108,15 +163,20 @@ public class SmallSuckManager : MonoBehaviour
         MiniGameStarted?.Invoke(_creatureToBeSucked.gameObject);
     }
 
-    public void ExitMiniGame(InputAction.CallbackContext context)
+    public void OnExitMiniGame(InputAction.CallbackContext context)
     {
         if (context.started && _inMiniGame)
         {
-            Debug.Log("Exit minigame");
-            transform.localPosition = _smallSuckOriginalPos;
-            _inMiniGame = false;
-            MiniGameEnded?.Invoke();
+            EndMiniGame();
         }
+    }
+
+    private void EndMiniGame()
+    {
+        Debug.Log("Exit minigame");
+        transform.localPosition = _smallSuckOriginalPos;
+        _inMiniGame = false;
+        MiniGameEnded?.Invoke();
     }
     public void OnClick(InputAction.CallbackContext context)
     {
@@ -156,6 +216,7 @@ public class SmallSuckManager : MonoBehaviour
 
         // invert the newDirection in case user is touching right of movement direction
         if (!left) newDirection *= -1;
+        newDirection -= new Vector3(transform.forward.x, transform.forward.y, transform.forward.z * _suckForce);
 
         // set new direction but keep speed(previously stored magnitude)
         _creatureToBeSucked.AddForce(newDirection * _creatureSpinSpeed, ForceMode.Force);
@@ -174,11 +235,14 @@ public class SmallSuckManager : MonoBehaviour
     {
         Debug.Log("MiniGameWon");
         _creatureToBeSucked.gameObject.SetActive(false);
+        EndMiniGame();
     }
 
     private void LoseMiniGame()
     {
+        MiniGameLost?.Invoke(_creatureToBeSucked.gameObject);
         Debug.Log("MiniGameLost");
+        EndMiniGame();
     }
 
     private void OnDrawGizmos()
