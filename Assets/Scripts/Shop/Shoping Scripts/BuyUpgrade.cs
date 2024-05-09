@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Manages all the upgrade choices for the shop - William
+/// </summary>
 public class BuyUpgrade : MonoBehaviour
 {
     public int suckUpgradeLimit;
