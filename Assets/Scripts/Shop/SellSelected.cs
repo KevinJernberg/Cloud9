@@ -17,7 +17,6 @@ public class SellSelected : MonoBehaviour
     }
     public void Sell()
     {
-        //Todo: Make it so that the items gets removed from the inventory and adds the price to a money counter
         if (selected is < -1 or < 5)
         {
             if (Inventory.itemSlots[selected].item != null)
@@ -41,7 +40,6 @@ public class SellSelected : MonoBehaviour
     }
     public void SellAll()
     {
-        //Todo: Make it so that the items gets removed from the inventory and adds the price to a money counter
         int sellammount = 0;
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
         {
