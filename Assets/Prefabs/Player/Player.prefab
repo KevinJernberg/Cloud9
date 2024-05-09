@@ -268,8 +268,8 @@ Transform:
   m_Children:
   - {fileID: 4525857511153624886}
   - {fileID: 966786669886161125}
-  - {fileID: 966786669852435383}
   - {fileID: 2216192084726285549}
+  - {fileID: 966786669852435383}
   - {fileID: 966786670245371212}
   - {fileID: 966786670743265658}
   m_Father: {fileID: 2878199555458596456}
@@ -327,6 +327,10 @@ MonoBehaviour:
   _creatureValues:
   - _rarity: 0
     _value: 50
+  _smallSuckMinigamePos: {x: 0, y: 0, z: 0}
+  _suckForce: 0
+  _nozzlePosition: {fileID: 0}
+  _suckNozzleSize: 0
 --- !u!1 &783641899586264583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1793,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2af860a0f02dc534b8febdcda623ff91,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2af860a0f02dc534b8febdcda623ff91,
         type: 3}
@@ -2038,7 +2042,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 316a4e9f36d9f6145bb1fa40182a73f8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 316a4e9f36d9f6145bb1fa40182a73f8,
         type: 3}
