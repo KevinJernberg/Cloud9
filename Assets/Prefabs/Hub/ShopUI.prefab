@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 2165857685464774406}
   - component: {fileID: 4615250769171472437}
   - component: {fileID: 6833390574521011486}
-  - component: {fileID: 7506052426958229009}
   m_Layer: 0
   m_Name: ShopManager
   m_TagString: Untagged
@@ -146,22 +145,6 @@ MonoBehaviour:
   - {fileID: 307078286676245404}
   - {fileID: 4137279314293094661}
   - {fileID: 407103206285911653}
---- !u!114 &7506052426958229009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506623928265309136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e3c17f1d63c37479079228f9969e15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SuckPrices: fa000000e8030000
-  TravelPrices: 90010000
-  BackPackPrices: 45010000e8030000
-  ShipSpacePrices: ee020000e2040000
 --- !u!1 &629057352013879401
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +239,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.4
+  m_fontSize: 22.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -658,7 +641,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.25
+  m_fontSize: 29.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -793,7 +776,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.25
+  m_fontSize: 29.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -924,6 +907,7 @@ GameObject:
   - component: {fileID: 3033922606711681216}
   - component: {fileID: 3174485551212396211}
   - component: {fileID: 6286538859906300510}
+  - component: {fileID: 4418175728875407615}
   m_Layer: 0
   m_Name: Button2
   m_TagString: Untagged
@@ -1034,9 +1018,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7506052426958229009}
-        m_TargetAssemblyTypeName: BuyUpgrade, Assembly-CSharp
-        m_MethodName: BuyTravel
+      - m_Target: {fileID: 4418175728875407615}
+        m_TargetAssemblyTypeName: BuyTravel, Assembly-CSharp
+        m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1046,6 +1030,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4418175728875407615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767619425347127141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271efd238029e594682ba374ef529f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3362532516569383868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,6 +1054,7 @@ GameObject:
   - component: {fileID: 8266825881081220062}
   - component: {fileID: 5365943774335179713}
   - component: {fileID: 8548803732382024258}
+  - component: {fileID: 8920880070502943043}
   m_Layer: 0
   m_Name: Button1
   m_TagString: Untagged
@@ -1168,9 +1165,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7506052426958229009}
-        m_TargetAssemblyTypeName: BuyUpgrade, Assembly-CSharp
-        m_MethodName: BuySuck
+      - m_Target: {fileID: 8920880070502943043}
+        m_TargetAssemblyTypeName: BuySuck, Assembly-CSharp
+        m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1180,6 +1177,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8920880070502943043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362532516569383868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad95fc6d1e27744b834321a7667e959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4317938232748218093
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,6 +3616,7 @@ GameObject:
   - component: {fileID: 40424413123708290}
   - component: {fileID: 1941546914801408415}
   - component: {fileID: 2874403735967215004}
+  - component: {fileID: 761308905824066045}
   m_Layer: 0
   m_Name: Button3
   m_TagString: Untagged
@@ -3717,9 +3727,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7506052426958229009}
-        m_TargetAssemblyTypeName: BuyUpgrade, Assembly-CSharp
-        m_MethodName: BuyBackPack
+      - m_Target: {fileID: 761308905824066045}
+        m_TargetAssemblyTypeName: BuyBackpack, Assembly-CSharp
+        m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3729,6 +3739,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &761308905824066045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5638118147620723072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ba1a8b69109ee47972541f8e90e56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5958357007502518817
 GameObject:
   m_ObjectHideFlags: 0
@@ -4371,7 +4393,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.6
+  m_fontSize: 29.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4502,6 +4524,7 @@ GameObject:
   - component: {fileID: 9019753178803592673}
   - component: {fileID: 8302124993688944689}
   - component: {fileID: 6971704117690370265}
+  - component: {fileID: 3649430909319919304}
   m_Layer: 0
   m_Name: Button4
   m_TagString: Untagged
@@ -4612,9 +4635,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7506052426958229009}
-        m_TargetAssemblyTypeName: BuyUpgrade, Assembly-CSharp
-        m_MethodName: BuyShipSpace
+      - m_Target: {fileID: 3649430909319919304}
+        m_TargetAssemblyTypeName: BuyShipSpace, Assembly-CSharp
+        m_MethodName: Buy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4624,3 +4647,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3649430909319919304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182043005433467653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c747deff0147a44b33bf59efb413f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

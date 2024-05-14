@@ -20,9 +20,25 @@ public class BuyUpgrade : MonoBehaviour
     private  int travelUpgradeAmmount;
     private  int backPackUpgradeAmmount;
     private  int shipSpaceUpgradeAmmount;
-    
 
-    public void BuySuck()
+    private void OnEnable()
+    {
+        BuySuck.OnBuy += ShopBuySuck;
+        BuyBackpack.OnBuy += ShopBuyBackpack;
+        BuyTravel.OnBuy += ShopBuyTravel;
+        BuyShipSpace.OnBuy += ShopBuyShipSpace;
+    }
+
+    private void OnDisable()
+    {
+        BuySuck.OnBuy -= ShopBuySuck;
+        BuyBackpack.OnBuy -= ShopBuyBackpack;
+        BuyTravel.OnBuy -= ShopBuyTravel;
+        BuyShipSpace.OnBuy -= ShopBuyShipSpace;
+    }
+
+
+    public void ShopBuySuck()
     {
         //TODO: BetterSuck
         
@@ -43,7 +59,7 @@ public class BuyUpgrade : MonoBehaviour
             Debug.Log("no suck upgrades available");
         }
     }
-    public void BuyTravel()
+    public void ShopBuyTravel()
     {
         //TODO: Travel further
         
@@ -64,7 +80,7 @@ public class BuyUpgrade : MonoBehaviour
             Debug.Log("no travel upgrades available");
         }
     }
-    public void BuyBackPack()
+    public void ShopBuyBackpack()
     {
         if (backPackUpgradeAmmount < BackPackPrices.Count)
         {
@@ -86,7 +102,7 @@ public class BuyUpgrade : MonoBehaviour
         }
         
     }
-    public void BuyShipSpace()
+    public void ShopBuyShipSpace()
     {
         //TODO: Larger ShipStorage
         
