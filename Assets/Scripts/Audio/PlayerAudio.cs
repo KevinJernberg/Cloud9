@@ -11,7 +11,7 @@ public class PlayerAudio : ScriptableObject
     [SerializeField] 
     private EventReference playerWeapon;
     [SerializeField] 
-    private EventReference playerWalk;
+    private EventReference playerWalk, playerRun;
 
     public EventInstance PlayerWeaponAudio(GameObject weaponObj, EventInstance playerWeaponInstance, bool weaponSuck)
     {
@@ -42,9 +42,29 @@ public class PlayerAudio : ScriptableObject
             case "Wood":
                 playerWalkInstance.setParameterByName("Surface", 0f);
                 break;
+            case "Player":
+                break;
         }
 
         playerWalkInstance.start();
         playerWalkInstance.release();
+    }
+    
+    public void PlayerRunAudio(GameObject runObj, string surface)
+    {
+        EventInstance playerRunInstance = RuntimeManager.CreateInstance(playerRun);
+        RuntimeManager.AttachInstanceToGameObject(playerRunInstance, runObj.transform);
+
+        switch (surface)
+        {
+            case "Wood":
+                playerRunInstance.setParameterByName("Surface", 0f);
+                break;
+            case "Player":
+                break;
+        }
+
+        playerRunInstance.start();
+        playerRunInstance.release();
     }
 }

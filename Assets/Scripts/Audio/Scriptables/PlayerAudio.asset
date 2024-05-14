@@ -18,11 +18,18 @@ MonoBehaviour:
       Data2: 1200342730
       Data3: 1345027774
       Data4: 480664694
-    Path: event:/Player/Player_Weapon
+    Path: event:/SFX/Player/Player_Weapon
   playerWalk:
     Guid:
       Data1: -347644396
       Data2: 1183635240
       Data3: -772949120
       Data4: -57308586
-    Path: event:/SFX/Player/Player_Footstep
+    Path: event:/SFX/Player/Player_Walk
+  playerRun:
+    Guid:
+      Data1: -1132270450
+      Data2: 1081012778
+      Data3: -358169975
+      Data4: -1511678575
+    Path: event:/SFX/Player/Player_Run
