@@ -15,6 +15,10 @@ public class SellSelected : MonoBehaviour
     {
         selected = slot;
     }
+    
+    /// <summary>
+    /// Sells the 
+    /// </summary>
     public void Sell()
     {
         if (selected is < -1 or < 5)

@@ -37,6 +37,7 @@ public static class Inventory
             foundItemSlot.itemCount += amount;
             foundItemSlot.item = item;
             HotBarInventory.updateInventoryCount?.Invoke();
+            HotBarManager.UpdateShopSlots?.Invoke(itemSlots.Count);
         }
 
         return false;

@@ -20,7 +20,11 @@ public class BuyUpgrade : MonoBehaviour
     private  int travelUpgradeAmmount;
     private  int backPackUpgradeAmmount;
     private  int shipSpaceUpgradeAmmount;
-
+    
+    
+    /// <summary>
+    /// Subscribes and unsubscribes to events that activates the shopping
+    /// </summary>
     private void OnEnable()
     {
         BuySuck.OnBuy += ShopBuySuck;
@@ -37,7 +41,9 @@ public class BuyUpgrade : MonoBehaviour
         BuyShipSpace.OnBuy -= ShopBuyShipSpace;
     }
 
-
+    /// <summary>
+    /// Checks if there is a available upgrade, if you have enough money and buys it if you have 
+    /// </summary>
     public void ShopBuySuck()
     {
         //TODO: BetterSuck
@@ -47,6 +53,7 @@ public class BuyUpgrade : MonoBehaviour
             if (Inventory.ChangeCoinAmount(-SuckPrices[suckUpgradeAmmount]))
             {
                 Debug.Log("bought suck");
+                
                 suckUpgradeAmmount++;
                 OnBuy?.Invoke(SuckPrices[suckUpgradeAmmount],0);
             }
@@ -69,6 +76,7 @@ public class BuyUpgrade : MonoBehaviour
             if (Inventory.ChangeCoinAmount(-TravelPrices[travelUpgradeAmmount]))
             {
                 Debug.Log("bought travel");
+                
                 travelUpgradeAmmount++;
                 OnBuy?.Invoke(TravelPrices[travelUpgradeAmmount],1);
             }

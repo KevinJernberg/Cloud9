@@ -18,11 +18,13 @@ public class HotBarInventory : MonoBehaviour
 
     private void OnEnable()
     {
+        BuyBackpack.OnBuy += SetSlots;
         updateInventoryCount += SetSlots;
     }
     
     private void OnDisable()
     {
+        BuyBackpack.OnBuy -= SetSlots;
         updateInventoryCount -= SetSlots;
     }
 
@@ -35,6 +37,8 @@ public class HotBarInventory : MonoBehaviour
         }
 
         ResetSlots();
+        
+        //TODO: Remove Temp add items on these lower lines
         Inventory.ChangeItemAmount(3, testItem);
         Inventory.ChangeItemAmount(10, testItem1);
     }
@@ -43,11 +47,18 @@ public class HotBarInventory : MonoBehaviour
     {
         for (int i = 0; i < Inventory.itemSlots.Count; i++)
         {
+            hotBarSlots[i].gameObject.SetActive(true);
             hotBarSlots[i].RemoveItem();
             if (Inventory.itemSlots[i].item == null)
                 continue;
             hotBarSlots[i].SetItem(Inventory.itemSlots[i]);
         }
+        for (int i = Inventory.itemSlots.Count; i < hotBarSlots.Count; i++)
+        {
+            hotBarSlots[i].gameObject.SetActive(false);
+        }
+        
+        HotBarManager.UpdateShopSlots?.Invoke(Inventory.itemSlots.Count);
     }
 
     private void ResetSlots()
