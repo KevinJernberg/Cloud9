@@ -48,6 +48,7 @@ public class BuyUpgrade : MonoBehaviour
             {
                 Debug.Log("bought suck");
                 suckUpgradeAmmount++;
+                OnBuy?.Invoke(SuckPrices[suckUpgradeAmmount],0);
             }
             else
             {
@@ -69,6 +70,7 @@ public class BuyUpgrade : MonoBehaviour
             {
                 Debug.Log("bought travel");
                 travelUpgradeAmmount++;
+                OnBuy?.Invoke(TravelPrices[travelUpgradeAmmount],1);
             }
             else
             {
@@ -111,7 +113,9 @@ public class BuyUpgrade : MonoBehaviour
             if (Inventory.ChangeCoinAmount(-ShipSpacePrices[shipSpaceUpgradeAmmount]))
             {
                 Debug.Log("bought ShipStorage");
+                ShipInventory.ExpandInventory(1);
                 shipSpaceUpgradeAmmount++;
+                OnBuy?.Invoke(ShipSpacePrices[shipSpaceUpgradeAmmount],3);
             }
             else
             {

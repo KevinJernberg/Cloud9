@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6773498016616496259}
   - component: {fileID: 6773498016616496256}
   - component: {fileID: 6773498016616496257}
+  - component: {fileID: 1937124866220373786}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -113,3 +114,19 @@ MonoBehaviour:
   InteractedWith: 0
   _playerInput: {fileID: 0}
   Shop: {fileID: 0}
+--- !u!114 &1937124866220373786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773498016616496262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e3c17f1d63c37479079228f9969e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SuckPrices: fa000000e8030000
+  TravelPrices: 90010000
+  BackPackPrices: 45010000e8030000
+  ShipSpacePrices: ee020000e2040000
