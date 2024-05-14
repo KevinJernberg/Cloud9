@@ -18,18 +18,18 @@ MonoBehaviour:
       Data2: 1169811087
       Data3: 1230505144
       Data4: -997791942
-    Path: event:/UI/Map/Map_Toggle
+    Path: event:/SFX/UI/Map/Map_Toggle
   mapClose:
     Guid:
       Data1: -1238426796
       Data2: 1213726220
       Data3: 2090747267
       Data4: 1385374974
-    Path: event:/UI/Map/Map_Close
+    Path: event:/SFX/UI/Map/Map_Close
   mapSceneChange:
     Guid:
       Data1: -1112251543
       Data2: 1087697360
       Data3: 472201876
       Data4: 1633654817
-    Path: event:/UI/Map/Map_SceneChange
+    Path: event:/SFX/UI/Map/Map_SceneChange
