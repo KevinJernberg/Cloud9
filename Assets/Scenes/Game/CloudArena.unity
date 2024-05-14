@@ -493,6 +493,11 @@ PrefabInstance:
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 275973197}
+    - target: {fileID: 2012742641101611564, guid: 889dbff915a227d48928df93953efa4e,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3775669379943677299, guid: 889dbff915a227d48928df93953efa4e,
         type: 3}
       propertyPath: m_AnchorMax.x

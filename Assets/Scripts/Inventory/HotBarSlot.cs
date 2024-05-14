@@ -32,8 +32,10 @@ public class HotBarSlot : MonoBehaviour
 
     public void RemoveItem()
     {
-        currentItem = null;
-        itemImage.sprite = null;
+        if (currentItem != null)
+            currentItem = null;
+        if (itemImage != null)
+            itemImage.sprite = null;
         itemCountText.text = $"0";
     }
 }
