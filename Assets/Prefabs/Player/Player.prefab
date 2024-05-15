@@ -398,6 +398,8 @@ MonoBehaviour:
   _turnSpeed: 0.2
   _jumpForce: 4
   _extraFeetReach: 0.02
+  jumpAudio: {fileID: 783641899586264583}
+  playerAudio: {fileID: 11400000, guid: 2ea19d89a3749f4469ea2d0dbddcd39c, type: 2}
 --- !u!114 &783641899586264829
 MonoBehaviour:
   m_ObjectHideFlags: 0

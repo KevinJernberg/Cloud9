@@ -33,3 +33,10 @@ MonoBehaviour:
       Data3: -358169975
       Data4: -1511678575
     Path: event:/SFX/Player/Player_Run
+  playerJump:
+    Guid:
+      Data1: -748508546
+      Data2: 1097325177
+      Data3: -1764217700
+      Data4: -1557828766
+    Path: event:/SFX/Player/Player_Jump

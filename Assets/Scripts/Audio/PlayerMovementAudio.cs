@@ -39,7 +39,7 @@ public class PlayerMovementAudio : MonoBehaviour
     
     public void PlayerRunAudio()
     {
-        var ray = Physics.RaycastAll(new Vector3(playerWalk.transform.position.x,playerWalk.transform.position.y+0.5f,playerWalk.transform.position.z), Vector3.down,  2);
+        var ray = Physics.RaycastAll(new Vector3(playerRun.transform.position.x,playerRun.transform.position.y+0.5f,playerRun.transform.position.z), Vector3.down,  2);
         int temp=0;
         if (ray.Length > 0)
         {
@@ -53,7 +53,7 @@ public class PlayerMovementAudio : MonoBehaviour
                     }
                 }
             }
-            playerAudio.PlayerRunAudio(playerWalk, ray[temp].transform.tag);
+            playerAudio.PlayerRunAudio(playerRun, ray[temp].transform.tag);
         }
         
     }

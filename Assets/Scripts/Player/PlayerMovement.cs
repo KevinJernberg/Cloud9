@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private float _speed;
     private Animator _animator;
+    [Header("Audio")] 
+    public GameObject jumpAudio;
+    public PlayerAudio playerAudio;
+    //private EventInstance playerJumpInstance;
     
     
 
@@ -61,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, _feetPos);
+        
     }
     #region InputRelated
     /// <summary>
@@ -107,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
         if(context.started && IsGrounded())
         {
             _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            playerAudio.PlayerJumpAudio(jumpAudio);
         }
     }
     /// <summary>

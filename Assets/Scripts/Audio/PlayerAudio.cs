@@ -10,8 +10,11 @@ public class PlayerAudio : ScriptableObject
 {
     [SerializeField] 
     private EventReference playerWeapon;
+
     [SerializeField] 
-    private EventReference playerWalk, playerRun;
+    private EventReference playerWalk, playerRun,playerJump;
+
+    
 
     public EventInstance PlayerWeaponAudio(GameObject weaponObj, EventInstance playerWeaponInstance, bool weaponSuck)
     {
@@ -66,5 +69,10 @@ public class PlayerAudio : ScriptableObject
 
         playerRunInstance.start();
         playerRunInstance.release();
+    }
+
+    public void PlayerJumpAudio(GameObject jumpObj)
+    {
+        RuntimeManager.PlayOneShotAttached(playerJump,jumpObj);
     }
 }
