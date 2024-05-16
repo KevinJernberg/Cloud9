@@ -110,6 +110,10 @@ PrefabInstance:
       propertyPath: ship
       value: 
       objectReference: {fileID: 401280562144221275}
+    - target: {fileID: 1058934243, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
+      propertyPath: canDrive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1412789421, guid: 82666d4753d966c4e9207d945ccc8819, type: 3}
       propertyPath: m_Layer
       value: 2

@@ -12,27 +12,30 @@ public class RudderController : MonoBehaviour, IInteract
     [SerializeField] public Rigidbody rb;
     [SerializeField] public Rigidbody playerrb;
     [HideInInspector]public bool InteractedWith;
+    public bool canDrive;
 
     public void Interact()
     {
-        if (!InteractedWith)
+        if (canDrive)
         {
-            _playerInput.SwitchCurrentActionMap("Ship");
-            player.SetParent(ship);
-            playerrb.isKinematic = true;
-            rb.isKinematic = false;
-            InteractedWith = true;
-            Debug.Log("Interact enter");
+            if (!InteractedWith)
+            {
+                _playerInput.SwitchCurrentActionMap("Ship");
+                player.SetParent(ship);
+                playerrb.isKinematic = true;
+                rb.isKinematic = false;
+                InteractedWith = true;
+                Debug.Log("Interact enter");
+            }
+            else
+            {
+                _playerInput.SwitchCurrentActionMap("Player");
+                player.SetParent(null);
+                playerrb.isKinematic = false;
+                rb.isKinematic = true;
+                InteractedWith = false;
+                Debug.Log("Interact exit");
+            }
         }
-        else
-        {
-            _playerInput.SwitchCurrentActionMap("Player");
-            player.SetParent(null);
-            playerrb.isKinematic = false;
-            rb.isKinematic = true;
-            InteractedWith = false;
-            Debug.Log("Interact exit");
-        }
-        
     }
 }
