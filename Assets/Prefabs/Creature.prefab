@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 685900271876219344}
   - component: {fileID: 685900271876219345}
   - component: {fileID: 685900271876220460}
+  - component: {fileID: 3681948861331067631}
   m_Layer: 6
   m_Name: Creature
   m_TagString: Creature
@@ -130,6 +131,7 @@ MonoBehaviour:
   normal: {fileID: 2100000, guid: 9e7b190e654e7d645bda077f3c3549ed, type: 2}
   alert: {fileID: 2100000, guid: e3ff232d36f310c49ba91923cc249375, type: 2}
   flee: {fileID: 2100000, guid: a3cd5a55a9af6ed4a8bec893dc6472de, type: 2}
+  creatureRarity: 0
 --- !u!54 &685900271876220460
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,3 +148,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &3681948861331067631
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685900271876219346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
