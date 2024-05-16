@@ -29,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private bool _grounded;
     [Header("Audio")] 
+    public GameObject landAudio;
     public GameObject jumpAudio;
     public PlayerAudio playerAudio;
-    
     //private EventInstance playerJumpInstance;
-    
+     //private EventInstance playerLandInstance;
     
 
     private void Awake()
@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             if (currentGrounded)
             {
                 //Landing
-                //TODO: Play Landing Sound
+                //playerAudio.PlayerLandAudio(landAudio,);
             }
         }
 
