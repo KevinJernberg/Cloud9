@@ -67,7 +67,7 @@ public class CloudAreaManager : MonoBehaviour
             if (foundCloudPosition)
                 Instantiate(clouds[Random.Range(0, clouds.Length)], RandomizeCloudPosition(), Quaternion.identity);
             else
-                Debug.Log("Cloud could not spawn");
+                Debug.LogWarning("Cloud could not spawn");
         }
     }
 

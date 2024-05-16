@@ -207,13 +207,6 @@ public class SmallSuckManager : MonoBehaviour
         if (context.ReadValue<float>() != 0.0f)_tryToFind = true;
         else _tryToFind = false;
     }
-    private void SuckCreature(float suckForce)
-    {
-        Vector3 diff = Vector3.Normalize(_creatureToBeSucked.transform.position - _nozzlePosition.position);
-        float dot = Vector3.Dot(diff, transform.forward);
-        
-        _creatureToBeSucked.AddForce(diff * (-dot * suckForce), ForceMode.Acceleration);
-    }
 
     private void SpinCreature()
     {
@@ -249,6 +242,9 @@ public class SmallSuckManager : MonoBehaviour
     {
         Debug.Log("MiniGameWon");
         _creatureToBeSucked.gameObject.SetActive(false);
+        CreatureBehaviour be = _creatureToBeSucked.GetComponent<CreatureBehaviour>();
+        Debug.Log(be.creatureItem);
+        Inventory.ChangeItemAmount(1, be.creatureItem);
         EndMiniGame();
     }
 

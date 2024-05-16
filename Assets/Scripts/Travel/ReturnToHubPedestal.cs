@@ -42,7 +42,6 @@ public class ReturnToHubPedestal : MonoBehaviour, IInteract
     }
     public void CloseMap()
     {
-        Debug.Log("close");
         Cursor.lockState = CursorLockMode.Locked;
         mapUI.SetActive(false);
         _playerInputComponent.SwitchCurrentActionMap("Player");
@@ -51,7 +50,6 @@ public class ReturnToHubPedestal : MonoBehaviour, IInteract
 
     public void ReturnToHub()
     {
-        Debug.Log("return");
 
         SceneManager.LoadScene(HUB_SCENE_NAME);
     }

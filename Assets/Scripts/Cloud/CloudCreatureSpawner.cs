@@ -133,9 +133,8 @@ public class CloudCreatureSpawner : MonoBehaviour
         GameObject creature = Instantiate(RandomizeCreature(out ItemData creatureItem), 
             transform.position + Random.insideUnitSphere.ProjectOntoPlane(Vector3.up) * spawnSphereRadius, // ProjectOntoPlane makes every creature spawn on same y level.
             Quaternion.identity);
-        
-        creature.GetComponent<CreatureBehaviour>().SetSpawner(this);
-        creature.GetComponent<CreatureBehaviour>().SetCreatureRarity(creatureItem);
+        CreatureBehaviour creatureScript = creature.GetComponent<CreatureBehaviour>();
+        creatureScript.SetCreatureRarity(creatureItem);
         _spawnedCreatures.Add(creature);
     }
     
