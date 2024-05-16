@@ -27,7 +27,6 @@ public class HotBarManager : MonoBehaviour
     {
         for (int i = 0; i < slots; i++)
         {
-            Debug.Log("a");
             buttons[i].gameObject.SetActive(true);
             if (buttons[i].interactable != true)
             {
@@ -36,7 +35,6 @@ public class HotBarManager : MonoBehaviour
         }
         for (int i = slots; i < buttons.Count; i++)
         {
-            Debug.Log("b");
             buttons[i].gameObject.SetActive(false);
         }
         
