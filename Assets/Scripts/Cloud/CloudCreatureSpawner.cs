@@ -95,7 +95,7 @@ public class CloudCreatureSpawner : MonoBehaviour
     /// This does not spawn the creature
     /// </summary>
     /// <returns>A creature of randomized rarity</returns>
-    private GameObject RandomizeCreature(out ItemData creatureItem)
+    private GameObject RandomizeCreature()
     {
         float randomValue = Random.Range(0f, 1f);
         
@@ -103,22 +103,18 @@ public class CloudCreatureSpawner : MonoBehaviour
         // Chooses rarity based upon randomValue
         if (randomValue < legendarySpawnChance) // Legendary rarity
         {
-            creatureItem = legendaryCreatureItem;
             return legendaryCreature;
         }
         else if (randomValue < epicSpawnChance + legendarySpawnChance)  // Epic rarity
         {
-            creatureItem = epicCreatureItem;
             return epicCreature;
         }
         else if (randomValue < rareSpawnChance + epicSpawnChance + legendarySpawnChance)  // Rare rarity
         {
-            creatureItem = rareCreatureItem;
             return rareCreature;
         }
         else  // Common rarity
         {
-            creatureItem = commonCreatureItem;
             return commonCreature;
         }
 
@@ -130,11 +126,10 @@ public class CloudCreatureSpawner : MonoBehaviour
     /// </summary>
     private void SpawnCreature()
     {
-        GameObject creature = Instantiate(RandomizeCreature(out ItemData creatureItem), 
+        GameObject creature = Instantiate(RandomizeCreature(), 
             transform.position + Random.insideUnitSphere.ProjectOntoPlane(Vector3.up) * spawnSphereRadius, // ProjectOntoPlane makes every creature spawn on same y level.
             Quaternion.identity);
         CreatureBehaviour creatureScript = creature.GetComponent<CreatureBehaviour>();
-        creatureScript.SetCreatureRarity(creatureItem);
         _spawnedCreatures.Add(creature);
     }
     

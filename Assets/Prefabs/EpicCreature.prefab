@@ -14,6 +14,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e6ce9e503919e3d49a13b4c93d23cc6a, type: 2}
     - target: {fileID: 685900271876219345, guid: 8d78f8cf825c1154ea06dde0abd24970,
         type: 3}
+      propertyPath: creatureItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 258bf2378610ab34fa3f24308d64c735,
+        type: 2}
+    - target: {fileID: 685900271876219345, guid: 8d78f8cf825c1154ea06dde0abd24970,
+        type: 3}
       propertyPath: creatureRarity
       value: 2
       objectReference: {fileID: 0}

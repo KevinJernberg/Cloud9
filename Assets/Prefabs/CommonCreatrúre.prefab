@@ -7,10 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 685900271876219345, guid: 8d78f8cf825c1154ea06dde0abd24970,
+        type: 3}
+      propertyPath: creatureItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 74743270c53f79d4e93f8917f4dd0999,
+        type: 2}
     - target: {fileID: 685900271876219346, guid: 8d78f8cf825c1154ea06dde0abd24970,
         type: 3}
       propertyPath: m_Name
-      value: Creature
+      value: "CommonCreatr\xFAre"
       objectReference: {fileID: 0}
     - target: {fileID: 685900271876220461, guid: 8d78f8cf825c1154ea06dde0abd24970,
         type: 3}

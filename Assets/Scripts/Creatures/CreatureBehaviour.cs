@@ -63,7 +63,6 @@ public class CreatureBehaviour : MonoBehaviour
     private List<Transform> Avoid;
 
     private CloudCreatureSpawner connectedSpawner;
-    [NonSerialized]
     public ItemData creatureItem;
 
     public CreatureRarity creatureRarity;
@@ -229,10 +228,6 @@ public class CreatureBehaviour : MonoBehaviour
         connectedSpawner = spawner;
     }
     
-    public void SetCreatureRarity(ItemData creatureRarityItem)
-    {
-        creatureItem = creatureRarityItem;
-    }
 	
 	#endregion
 
