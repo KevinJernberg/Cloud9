@@ -27,9 +27,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private float _speed;
     private Animator _animator;
+    private bool _grounded;
     [Header("Audio")] 
     public GameObject jumpAudio;
     public PlayerAudio playerAudio;
+    
     //private EventInstance playerJumpInstance;
     
     
@@ -65,8 +67,19 @@ public class PlayerMovement : MonoBehaviour
     /// <returns></returns>
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, _feetPos);
-        
+        bool currentGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, _feetPos);
+        if (!_grounded)
+        {
+            if (currentGrounded)
+            {
+                //Landing
+                //TODO: Play Landing Sound
+            }
+        }
+
+        _grounded = currentGrounded;
+        return _grounded;
+
     }
     #region InputRelated
     /// <summary>

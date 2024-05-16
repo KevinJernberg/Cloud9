@@ -82,6 +82,8 @@ public class CloudCreatureSpawner : MonoBehaviour
     //TODO: Don't do this in OnDestroy
     private void OnDestroy()
     {
+        if (!gameObject.scene.isLoaded)
+            return;
         for (int i = 0; i < amountOfCreaturesToSpawn; i++)
         {
             SpawnCreature();

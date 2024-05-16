@@ -50,7 +50,7 @@ public class CloudAreaManager : MonoBehaviour
         {
             bool foundCloudPosition = false;
             Vector3 randomizedCloudPosition = RandomizeCloudPosition();
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 10; j++)
             {
                 for (int k = 0; k < clouds.Length; k++)
                 {

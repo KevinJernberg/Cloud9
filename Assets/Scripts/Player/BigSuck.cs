@@ -58,9 +58,10 @@ public class BigSuck : MonoBehaviour
     {
         foreach (var rb in _inTrigger)
         {
-            Vector3 diff = Vector3.Normalize(rb.transform.position - _nozzlePosition.position);
-            float dot = Vector3.Dot(diff, transform.forward);
+            Vector3 diff = Vector3.Normalize(_nozzlePosition.position - rb.transform.position);
+            float dot = Mathf.Max(0, Vector3.Dot(diff, transform.up * -1)); //TODO: The transform is rotated 90 degrees in the x angle, thus the forward goes down and the up is the correct "forward angle". Change this to forward if the angle is changed
             
+            Debug.Log($"{diff} \n {dot}");
             rb.AddForce(diff * (dot * _suckForce), ForceMode.Acceleration);
         }
     }
