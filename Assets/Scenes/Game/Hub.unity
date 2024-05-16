@@ -537,6 +537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "CommonCreatr\xFAre"
       objectReference: {fileID: 0}
+    - target: {fileID: 8159911081057059334, guid: fd2577f26714b08428a6e5d4b81772a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8159911081057060347, guid: fd2577f26714b08428a6e5d4b81772a0,
         type: 3}
       propertyPath: m_RootOrder
@@ -1168,25 +1173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1370521824 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8159911081057059332, guid: fd2577f26714b08428a6e5d4b81772a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 461278512}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &1370521831
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370521824}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1497016877
 PrefabInstance:
   m_ObjectHideFlags: 0
