@@ -32,7 +32,6 @@ public class ShipMovement : MonoBehaviour
         {
             transform.Rotate(0, _turnDirection * _turnSensitivity* Time.deltaTime, 0);
             _rb.AddForce(transform.TransformDirection(_direction) * (_accelerationSpeed*maxSpeed), ForceMode.Acceleration);
-            Debug.Log(_rb.velocity.magnitude);
             if (_rb.velocity.magnitude > maxSpeed)
                 _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, maxSpeed);
             if (_rb.velocity.magnitude < minSpeed)
