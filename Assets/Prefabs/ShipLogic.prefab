@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4177bbaec34cd8c419567a1ebd9b472b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _accelerationSpeed: 1
-  _turnSensitivity: 12
-  maxSpeed: 4
+  _accelerationSpeed: 0.3
+  _turnSensitivity: 15
+  maxSpeed: 17
+  minSpeed: 5
   onlyTurnWhenDrive: 1
 --- !u!65 &401280562144221273
 BoxCollider:

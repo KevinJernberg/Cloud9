@@ -16,6 +16,7 @@ public class ShipMovement : MonoBehaviour
     [Tooltip("How fast you accelerate.")] [SerializeField] private float _accelerationSpeed = 1;
     [Tooltip("How fast you can turn around.")] [SerializeField] private float _turnSensitivity = 1;
     [Tooltip("The maximum speed the rigidbody can have when fleeing")][SerializeField] private float maxSpeed;
+    [Tooltip("The minimum speed the rigidbody can have when fleeing")][SerializeField] private float minSpeed;
     
     [Header("Temporary")]
     [Tooltip("If True the ship will only be able to turn when it is driven forward")][SerializeField] private bool onlyTurnWhenDrive;
@@ -30,10 +31,12 @@ public class ShipMovement : MonoBehaviour
         if (_moving)
         {
             transform.Rotate(0, _turnDirection * _turnSensitivity* Time.deltaTime, 0);
-            _rb.AddForce(transform.TransformDirection(_direction) * (_accelerationSpeed), ForceMode.Acceleration);
-            
+            _rb.AddForce(transform.TransformDirection(_direction) * (_accelerationSpeed*maxSpeed), ForceMode.Acceleration);
+            Debug.Log(_rb.velocity.magnitude);
             if (_rb.velocity.magnitude > maxSpeed)
                 _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, maxSpeed);
+            if (_rb.velocity.magnitude < minSpeed)
+                _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, minSpeed);
         }
 
     }
@@ -59,7 +62,7 @@ public class ShipMovement : MonoBehaviour
         }
         
         
-        _moving = context.performed;
+        _moving = !context.canceled;
     }
     void OnDrawGizmos()
     {

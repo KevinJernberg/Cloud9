@@ -408,16 +408,6 @@ PrefabInstance:
       propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 401280562144221272, guid: 889dbff915a227d48928df93953efa4e,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 401280562144221272, guid: 889dbff915a227d48928df93953efa4e,
-        type: 3}
-      propertyPath: _turnSensitivity
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 401280562144221275, guid: 889dbff915a227d48928df93953efa4e,
         type: 3}
       propertyPath: m_RootOrder
