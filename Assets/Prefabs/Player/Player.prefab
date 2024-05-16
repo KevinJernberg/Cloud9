@@ -2244,7 +2244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c8979fc5ab8474092ddac83a872194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _suckForce: 10
+  _suckForce: 5
   _nozzlePosition: {fileID: 9206784229804663054}
   _endSuckRange: 0.2
 --- !u!4 &966786669756283765 stripped
