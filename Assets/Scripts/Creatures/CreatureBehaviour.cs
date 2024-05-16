@@ -360,6 +360,7 @@ public class CreatureBehaviour : MonoBehaviour
             //Debug.Log("FleeState: Enter()");
             Creature.meshRenderer.material = Creature.flee;
             Creature.maxSpeed = Creature.fleemaxSpeed;
+            Creature.idle = false;
             Creature.SetPos();
         }
 
@@ -386,6 +387,7 @@ public class CreatureBehaviour : MonoBehaviour
             Creature.meshRenderer.material = Creature.normal;
             Creature.maxSpeed=Creature.idlemaxSpeed;
             Creature.idle = true;
+            Creature.BeginFlee = false;
             Creature.StopTimer();
         }
 
