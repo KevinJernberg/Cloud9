@@ -210,7 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ddcc8a1392553478565dcaa9b90cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showCloudSpawnArea: 1
+  showCloudSpawnArea: 0
+  ship: {fileID: 878969365}
   cloudSpawnAreaSize: {x: 100, y: 100}
   minimumCloudDistance: 10
   cloudSpawnerPrefab: {fileID: 2064888709406690990, guid: 881088f8d41e584439c0de51f88c9eaf,
@@ -269,6 +270,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4177bbaec34cd8c419567a1ebd9b472b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &878969365 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 401280562144221275, guid: 889dbff915a227d48928df93953efa4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1807836636}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &927493482
 GameObject:
   m_ObjectHideFlags: 0

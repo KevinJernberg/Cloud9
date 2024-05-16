@@ -16,6 +16,7 @@ public class CloudAreaManager : MonoBehaviour
     private const float CLOUD_SPAWN_HEIGHT = 2f;
 
     [SerializeField, Tooltip("The area where cloud can spawn, represented by a cyan box gizmo")] private bool showCloudSpawnArea;
+    [SerializeField, Tooltip("The ships transform, used to not spawn clouds top of it")] private Transform ship;
     [SerializeField] private Vector2 cloudSpawnAreaSize;
     [SerializeField] private float minimumCloudDistance;
     private Rect _cloudSpawnArea = new Rect();
@@ -60,6 +61,7 @@ public class CloudAreaManager : MonoBehaviour
                     if (foundCloudPosition)
                         break;
                 }
+                foundCloudPosition = Vector3.Distance(randomizedCloudPosition,ship.position) > minimumCloudDistance;
                 if (foundCloudPosition)
                     break;
             }
