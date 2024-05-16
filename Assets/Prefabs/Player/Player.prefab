@@ -313,7 +313,13 @@ MonoBehaviour:
   _startMiniGameRange: 10
   _creatureValues:
   - _rarity: 0
-    _value: 50
+    _value: 35
+  - _rarity: 1
+    _value: 25
+  - _rarity: 2
+    _value: 15
+  - _rarity: 3
+    _value: 10
   _smallSuckMinigamePos: {x: 0.22, y: -0.7, z: 1.55}
   _suckForce: 0.3
   _nozzlePosition: {fileID: 2327771287363343734}
@@ -399,6 +405,7 @@ MonoBehaviour:
   _turnSpeed: 0.2
   _jumpForce: 4
   _extraFeetReach: 0.02
+  landAudio: {fileID: 0}
   jumpAudio: {fileID: 783641899586264583}
   playerAudio: {fileID: 11400000, guid: 2ea19d89a3749f4469ea2d0dbddcd39c, type: 2}
 --- !u!114 &783641899586264829
