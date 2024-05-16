@@ -9,7 +9,6 @@ public class InventoryAdder : MonoBehaviour
 
     public void AddItem()
     {
-        Debug.Log(randomItems[Random.Range(0, randomItems.Count)].itemID);
         Inventory.ChangeItemAmount(3, randomItems[Random.Range(0, randomItems.Count)]);
     }
     public void ChangeCoins(int amount)
