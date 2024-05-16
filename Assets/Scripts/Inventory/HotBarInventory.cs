@@ -10,7 +10,7 @@ public class HotBarInventory : MonoBehaviour
 
     public static UnityAction updateInventoryCount;
 
-    private static List<HotBarSlot> hotBarSlots = new List<HotBarSlot>();
+    private List<HotBarSlot> hotBarSlots = new List<HotBarSlot>();
 
 
     [SerializeField] private ItemData testItem;
