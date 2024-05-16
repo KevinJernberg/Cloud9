@@ -345,6 +345,7 @@ public class CreatureBehaviour : MonoBehaviour
         public override void Sucked()
         {
             Creature._stateMachine.Transit(Creature.suckedCreatureState);
+            Debug.Log("GÅR TILL SUCK");
         }
     }
     /// <summary>
@@ -381,16 +382,26 @@ public class CreatureBehaviour : MonoBehaviour
 
         public override void Enter()
         {
-            //Debug.Log("SuckedState: Enter()");
+            Debug.Log("SuckedState: Enter()");
+            Creature.meshRenderer.material = Creature.normal;
+            Creature.maxSpeed=Creature.idlemaxSpeed;
+            Creature.idle = true;
+            Creature.StopTimer();
         }
 
         public override void Exit()
         {
-            //Debug.Log("SuckedState: Exit()");
+            Debug.Log("SuckedState: Exit()");
         }
         public override void Range()
         {
         }
+
+        public override void Flee()
+        {
+            
+        }
+
         public override void Sucked()
         {
             Creature._stateMachine.Transit(Creature.fleeCreatureState);

@@ -35,6 +35,14 @@ public class BigSuck : MonoBehaviour
     private void Update()
     {
         if(_sucking)Suck();
+        else
+        {
+            foreach (var cloud in _inTrigger)
+            {
+                cloud.velocity = Vector3.zero;
+            }
+        }
+        TryToRemoveCloud();
     }
 
     public void OnSuck(InputAction.CallbackContext context)
@@ -55,7 +63,6 @@ public class BigSuck : MonoBehaviour
             
             rb.AddForce(diff * (dot * _suckForce), ForceMode.Acceleration);
         }
-        TryToRemoveCloud();
     }
 
     /// <summary>
@@ -68,6 +75,7 @@ public class BigSuck : MonoBehaviour
             Rigidbody rb = _inTrigger[i];
             Vector3 diff = Vector3.Normalize(rb.transform.position - _nozzlePosition.position);
             float dot = Vector3.Dot(diff, transform.forward);
+            Debug.DrawRay(_nozzlePosition.position, -diff*dot, Color.blue, 10);
             if (Physics.Raycast(_nozzlePosition.position, -diff*dot, out RaycastHit HitInfo, _endSuckRange))
             {
                 if(HitInfo.transform == rb.transform)

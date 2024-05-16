@@ -23,8 +23,6 @@ public class CloudAreaManager : MonoBehaviour
     
     private CloudSceneStats _cloudData;
 
-    [SerializeField] private GameObject cloudSpawnerPrefab;
-    [SerializeField] private GameObject line;
 
     [SerializeField] private GameObject[] clouds;
     

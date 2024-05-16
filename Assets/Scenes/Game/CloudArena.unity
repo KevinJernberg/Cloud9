@@ -303,9 +303,6 @@ MonoBehaviour:
   ship: {fileID: 878969365}
   cloudSpawnAreaSize: {x: 100, y: 100}
   minimumCloudDistance: 10
-  cloudSpawnerPrefab: {fileID: 2064888709406690990, guid: 881088f8d41e584439c0de51f88c9eaf,
-    type: 3}
-  line: {fileID: 0}
   clouds:
   - {fileID: 20697746721354106, guid: 819fc84bc60e65d4ab109acd261ee958, type: 3}
   - {fileID: 199405787993437485, guid: 343f1dc49ca93114787abf586a5962ab, type: 3}
@@ -979,6 +976,11 @@ PrefabInstance:
     - target: {fileID: 8527944584051964561, guid: f62c1b74012d54e42bcd5546ace6be07,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573644128694221767, guid: f62c1b74012d54e42bcd5546ace6be07,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

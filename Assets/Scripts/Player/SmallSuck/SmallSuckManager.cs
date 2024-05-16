@@ -51,6 +51,7 @@ public class SmallSuckManager : MonoBehaviour
     private int points;
     private bool _loosingPoints;
     private bool _alreadyLoosingPoints;
+    private bool _tryToFind;
 
     private void Awake()
     {
@@ -70,6 +71,7 @@ public class SmallSuckManager : MonoBehaviour
     private void FixedUpdate()
     {
         if (_inMiniGame)SuckMiniGame();
+        else if (!_inMiniGame && _tryToFind)TryToFindCreature();
     }
 
     private void SuckMiniGame()
@@ -150,14 +152,17 @@ public class SmallSuckManager : MonoBehaviour
     {
         Debug.Log("Start Mini game");
         _inMiniGame = true;
-        CreatureBehaviour.CreatureRarity creatureRarity = _creatureToBeSucked.GetComponent<CreatureBehaviour>().creatureRarity;
+        CreatureBehaviour creatureRarity = _creatureToBeSucked.GetComponent<CreatureBehaviour>();
+        creatureRarity.IsSucked();
         for (int i = 0; i < _creatureValues.Length; i++)
         {
-            if (_creatureValues[i].Rarity == creatureRarity)
+            if (_creatureValues[i].Rarity == creatureRarity.creatureRarity)
             {
                 points = _creatureValues[i].Value;
                 break;
             }
+            points = 50;
+            
         }
         transform.localPosition = _smallSuckMinigamePos;
         MiniGameStarted?.Invoke(_creatureToBeSucked.gameObject);
@@ -174,24 +179,33 @@ public class SmallSuckManager : MonoBehaviour
     private void EndMiniGame()
     {
         Debug.Log("Exit minigame");
+        StopCoroutine(Warning());
+        _creatureToBeSucked.GetComponent<CreatureBehaviour>().IsSucked();
         transform.localPosition = _smallSuckOriginalPos;
         _inMiniGame = false;
+        _loosingPoints = false;
+        _warningImage.gameObject.SetActive(false);
         MiniGameEnded?.Invoke();
+    }
+
+    private void TryToFindCreature()
+    {
+        Debug.Log("Trying to find creature");
+        Ray ray = Camera.main.ScreenPointToRay (Mouse.current.position.ReadValue());
+        Debug.DrawRay(Mouse.current.position.ReadValue(), ray.direction, Color.green, 10);
+        if (Physics.Raycast (ray, out RaycastHit hit, _startMiniGameRange, ~_layersToIgnore)) {
+            if(hit.transform.CompareTag("Creature"))
+            {
+                hit.transform.TryGetComponent(out _creatureToBeSucked);
+                StartMiniGame();
+            }
+        }
     }
     public void OnClick(InputAction.CallbackContext context)
     {
         if(!gameObject.activeSelf)return;
-        if (context.started && !_inMiniGame)
-        {
-            Ray ray = Camera.main.ScreenPointToRay (Mouse.current.position.ReadValue());
-            if (Physics.Raycast (ray, out RaycastHit hit, _startMiniGameRange, ~_layersToIgnore)) {
-                if(hit.transform.CompareTag("Creature"))
-                {
-                    hit.transform.TryGetComponent(out _creatureToBeSucked);
-                    StartMiniGame();
-                }
-            }
-        }
+        if (context.ReadValue<float>() != 0.0f)_tryToFind = true;
+        else _tryToFind = false;
     }
     private void SuckCreature(float suckForce)
     {
