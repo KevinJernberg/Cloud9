@@ -12,7 +12,7 @@ public class PlayerAudio : ScriptableObject
     private EventReference playerWeapon;
 
     [SerializeField] 
-    private EventReference playerWalk, playerRun,playerJump;
+    private EventReference playerWalk, playerRun, playerLand,playerJump;
 
     
 
@@ -69,6 +69,24 @@ public class PlayerAudio : ScriptableObject
 
         playerRunInstance.start();
         playerRunInstance.release();
+    }
+    
+    public void PlayerLandAudio(GameObject landObj, string surface)
+    {
+        EventInstance playerLandInstance = RuntimeManager.CreateInstance(playerLand);
+        RuntimeManager.AttachInstanceToGameObject(playerLandInstance, landObj.transform);
+
+        switch (surface)
+        {
+            case "Wood":
+                playerLandInstance.setParameterByName("Surface", 0f);
+                break;
+            case "Player":
+                break;
+        }
+
+        playerLandInstance.start();
+        playerLandInstance.release();
     }
 
     public void PlayerJumpAudio(GameObject jumpObj)

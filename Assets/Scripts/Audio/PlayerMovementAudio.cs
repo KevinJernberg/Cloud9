@@ -12,7 +12,6 @@ public class PlayerMovementAudio : MonoBehaviour
     public PlayerAudio playerAudio;
     private EventInstance playerWalkInstance;
     private EventInstance playerRunInstance;
-    
 
 
     public void PlayerWalkAudio()
@@ -57,6 +56,8 @@ public class PlayerMovementAudio : MonoBehaviour
         }
         
     }
+    
+    
     private void OnDrawGizmos()
     {
         Gizmos.color=Color.red;
