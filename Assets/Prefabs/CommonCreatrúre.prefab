@@ -7,25 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< Updated upstream
     - target: {fileID: 685900271876219345, guid: 8d78f8cf825c1154ea06dde0abd24970,
         type: 3}
       propertyPath: creatureItem
       value: 
       objectReference: {fileID: 11400000, guid: 74743270c53f79d4e93f8917f4dd0999,
         type: 2}
-=======
-    - target: {fileID: 685900271876219344, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: m_Radius
-      value: 700
-      objectReference: {fileID: 0}
-    - target: {fileID: 685900271876219345, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: normal
-      value: 
-      objectReference: {fileID: 2100000, guid: c322d51dc8e7f4643bebda87f43fc158, type: 2}
->>>>>>> Stashed changes
     - target: {fileID: 685900271876219346, guid: 8d78f8cf825c1154ea06dde0abd24970,
         type: 3}
       propertyPath: m_Name
@@ -35,21 +22,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 685900271876220461, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 685900271876220461, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 685900271876220461, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 685900271876220461, guid: 8d78f8cf825c1154ea06dde0abd24970,
         type: 3}
@@ -101,21 +73,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 685900271876220461, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 685900271876220462, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 5559092303326048658, guid: 9b69e3d3543792245982d6f9ab4a946d,
-        type: 3}
-    - target: {fileID: 685900271876220463, guid: 8d78f8cf825c1154ea06dde0abd24970,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c322d51dc8e7f4643bebda87f43fc158, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d78f8cf825c1154ea06dde0abd24970, type: 3}
