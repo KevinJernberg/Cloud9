@@ -84,6 +84,7 @@ public class CreatureBehaviour : MonoBehaviour
         _stateMachine.InitializeMachine(idleCreatureState);
         
     }
+    
 
     #region Triggers
 
@@ -127,7 +128,7 @@ public class CreatureBehaviour : MonoBehaviour
     /// </summary>
     public void IsSucked()
     {
-        
+        _stateMachine.currentState.Sucked();
     }
     
     
