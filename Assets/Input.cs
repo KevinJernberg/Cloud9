@@ -74,12 +74,12 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Suck"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""964cbbbf-c50a-44a9-9c60-e02bef16f1ec"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""MinigameTest"",

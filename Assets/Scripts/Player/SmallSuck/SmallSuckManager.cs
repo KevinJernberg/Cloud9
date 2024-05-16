@@ -12,7 +12,6 @@ public class SmallSuckManager : MonoBehaviour
 
     public static UnityAction MiniGameEnded;
 
-    public static UnityAction<GameObject> MiniGameLost;
     //När de blir sucked ska man kalla på creatureBehaviour beingSucked
     //Det kommer finnas 3 olika colliders att hålla koll på, och de kommer att ge olika resultat
     // Start is called before the first frame update
@@ -33,6 +32,7 @@ public class SmallSuckManager : MonoBehaviour
     [SerializeField] private int _outsideOfAreaPoints = -4;
     [SerializeField] private int _maxPoints = 100;
     [SerializeField] private Image _warningImage;
+    [SerializeField] private Image _progressbar;
     
     [Serializable]
     internal class CreatureValue
@@ -71,15 +71,17 @@ public class SmallSuckManager : MonoBehaviour
     private void FixedUpdate()
     {
         if (_inMiniGame)SuckMiniGame();
-        else if (!_inMiniGame && _tryToFind)TryToFindCreature();
+        if (!_inMiniGame && _tryToFind)TryToFindCreature();
     }
 
     private void SuckMiniGame()
     {
         SpinCreature();
+        Debug.Log($"POINTS: {points}");
         if(points >= _maxPoints)WinMiniGame();
         else if(points <= 0)LoseMiniGame();
         points += CheckWhatArea();
+        _progressbar.fillAmount = points / 100;
         if(!_loosingPoints)
         {
             _warningImage.gameObject.SetActive(false);
@@ -165,6 +167,7 @@ public class SmallSuckManager : MonoBehaviour
             
         }
         transform.localPosition = _smallSuckMinigamePos;
+        _progressbar.gameObject.SetActive(true);
         MiniGameStarted?.Invoke(_creatureToBeSucked.gameObject);
     }
 
@@ -178,11 +181,12 @@ public class SmallSuckManager : MonoBehaviour
 
     private void EndMiniGame()
     {
+        _inMiniGame = false;
         Debug.Log("Exit minigame");
         StopCoroutine(Warning());
+        _progressbar.gameObject.SetActive(false);
         _creatureToBeSucked.GetComponent<CreatureBehaviour>().IsSucked();
         transform.localPosition = _smallSuckOriginalPos;
-        _inMiniGame = false;
         _loosingPoints = false;
         _warningImage.gameObject.SetActive(false);
         MiniGameEnded?.Invoke();
@@ -228,15 +232,7 @@ public class SmallSuckManager : MonoBehaviour
         // set new direction but keep speed(previously stored magnitude)
         _creatureToBeSucked.AddForce(newDirection * _creatureSpinSpeed, ForceMode.Force);
     }
-
-    private void CheckIfSucked()
-    {
-        Collider[] toCheck = Physics.OverlapSphere(_nozzlePosition.position, _suckNozzleSize);
-        foreach (var creature in toCheck)
-        {
-            if(creature.transform.gameObject == _creatureToBeSucked.gameObject)creature.gameObject.SetActive(false);
-        }
-    }
+    
 
     private void WinMiniGame()
     {
@@ -250,7 +246,6 @@ public class SmallSuckManager : MonoBehaviour
 
     private void LoseMiniGame()
     {
-        MiniGameLost?.Invoke(_creatureToBeSucked.gameObject);
         Debug.Log("MiniGameLost");
         EndMiniGame();
     }
