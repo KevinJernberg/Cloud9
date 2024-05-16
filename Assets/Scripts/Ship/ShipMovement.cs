@@ -23,7 +23,7 @@ public class ShipMovement : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Update()
